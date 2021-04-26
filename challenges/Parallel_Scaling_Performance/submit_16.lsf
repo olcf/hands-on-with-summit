@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J 16_omp
+#BSUB -o 16_omp.%J
+#BSUB -e 16_omp.%J
+
+export OMP_NUM_THREADS=16
+
+jsrun -n1 -c16 -a1 -bpacked:16 ./run

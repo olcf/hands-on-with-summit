@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -J add_vec_cpu
+#BSUB -o add_vec_cpu.%J
+#BSUB -nnodes 1
+#BSUB -W 10
+
+date
+
+jsrun -n1 -c1 -g1 -a1 ./run

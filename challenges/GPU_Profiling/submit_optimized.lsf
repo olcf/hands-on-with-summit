@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -J profiling_optimized
+#BSUB -o profiling_output_optimized.%J
+#BSUB -nnodes 1
+#BSUB -W 15
+
+module purge
+module reset
+module load gcc
+module load cuda
+module load nsight-systems
+
+date
+
+cp ./matrix_sums_optimized /gpfs/wolf/gen153/scratch/${USER}
+cd /gpfs/wolf/gen153/scratch/${USER}
+
+jsrun -n1 -c1 -g1 -a1 nsys profile --stats=true --force-overwrite=true -o profile_data_optimized ./matrix_sums_optimized
+
+cp profil* $LS_SUBCWD

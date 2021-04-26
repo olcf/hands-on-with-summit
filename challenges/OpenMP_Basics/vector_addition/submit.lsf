@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -J vec_add_test
+#BSUB -o vec_add_test.%J
+#BSUB -nnodes 1
+#BSUB -W 10
+
+date
+echo " " 
+
+export OMP_NUM_THREADS=4
+
+jsrun -n1 -c42 -a1 -bpacked:42 ./vec_add

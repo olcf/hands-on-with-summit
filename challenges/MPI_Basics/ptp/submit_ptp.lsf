@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J ptp_hello
+#BSUB -o ptp_hello.%J
+#BSUB -e ptp_hello.%J
+
+
+jsrun -n 2 -c 1 ./run
+~                               

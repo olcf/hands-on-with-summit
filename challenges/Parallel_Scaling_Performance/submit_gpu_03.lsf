@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#BSUB -P GEN153
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J 03_gpu
+#BSUB -o 03_gpu.%J
+#BSUB -e 03_gpu.%J
+
+export OMP_NUM_THREADS=3
+
+jsrun --smpiargs="none" -n1 -c3 -a1 -g3 -bpacked:3 ./run
