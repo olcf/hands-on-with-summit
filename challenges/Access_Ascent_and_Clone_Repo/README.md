@@ -21,13 +21,13 @@ In order to continue with the other challenges, you will need to `clone` a copy 
 
 ```
 $ cd /ccsopen/home/username
-$ git clone https://github.com/olcf/cse21-hands-on-with-summit.git
+$ git clone https://github.com/olcf/hands-on-with-summit.git
 ```
 You can list the files in your current directory to see the repository directory: 
 
 ```
 [username@login1.ascent ~]$ ls
-cse21-hands-on-with-summit
+hands-on-with-summit
 ```
 
 > NOTE: `git` itself is different than GitHub. It is a tool that developers install locally to manage version control and interact with remote code-hosting sites like GitHub.
@@ -35,7 +35,7 @@ cse21-hands-on-with-summit
 Now move into that directory:
 
 ```
-$ cd cse21-hands-on-with-summit
+$ cd hands-on-with-summit
 ```
 
 Congratulations! You've completed your first challenge and can now move on to other [challenges](../). Feel free to jump around to the ones you find most interesting.
