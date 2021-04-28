@@ -1,4 +1,4 @@
-# Welcome to the SIAM CSE21 Hands-On with Summit session!
+# Welcome to Hands-On with Summit!
 
 
 ### What is Summit?
