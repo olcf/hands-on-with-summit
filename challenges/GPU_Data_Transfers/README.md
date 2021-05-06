@@ -23,7 +23,7 @@ The `vector_addition.cu` code is well documented with comments, but the basic ou
 Before getting started, you'll need to make sure you're in the `GPU_Data_Transfers/` directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/GPU_Data_Transfers/
+$ cd ~/hands-on-with-summit/challenges/GPU_Data_Transfers/
 ```
 
 There are two places in the `vector_addition.cu` code (identified with the word `TODO`) where data transfers must be added. Find these two places and add in the necessary data transfers by looking up the `cudaMemcpy` API call (use a Google search for this).
