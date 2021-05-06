@@ -40,7 +40,11 @@ Take a look through the `grep` manual page by running `man grep`. You'll find th
 $ grep -Hin "password" ./demo.txt
 ./demo.txt:6:PasswordIsHelloWorld
 ```
+Once you have identified the passwords, go ahead and use them to open the two pdf documents in this directory. First, you must transfer the files to your personal computer. This can be accomplished by downloading them directly from git, using the `scp` command, or transfering them with Globus. If you are familiar with Globus you can use the NCCS Open DTN endpoint to access your home directory on Ascent. For `scp`, try the example command on a terminal on your own computer to transfer a file from Ascent to the current directory. (Read more about transferring data [here](https://docs.olcf.ornl.gov/data/transferring.html).) 
 
+```
+$ scp username@opendtn.ccs.ornl.gov:/ccsopen/home/username/path/to/file.ext .
+```
 
 #### A word on relevancy to HPC...
 

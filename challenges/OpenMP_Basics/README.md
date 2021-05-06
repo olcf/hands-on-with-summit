@@ -83,7 +83,7 @@ The `default` clause allows you to set the default value of privacy for variable
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/OpenMP_Basics/hello_world
+$ cd ~/hands-on-with-summit/challenges/OpenMP_Basics/hello_world
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):
@@ -242,7 +242,7 @@ The version of the code included in this directory already has the directives ab
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/OpenMP_Basics/vector_addition
+$ cd ~/hands-on-with-summit/challenges/OpenMP_Basics/vector_addition
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):

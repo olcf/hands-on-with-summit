@@ -28,7 +28,7 @@ Next, you will need to find the PGI compiler flag needed to compile the code wit
 First, make sure you're in the `Find_the_Compiler_Flag` directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/Find_the_Compiler_Flag
+$ cd ~/hands-on-with-summit/challenges/Find_the_Compiler_Flag
 ```
 
 Ok, if you haven't done so already, go find the compiler flag...

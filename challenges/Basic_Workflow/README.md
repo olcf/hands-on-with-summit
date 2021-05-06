@@ -32,7 +32,7 @@ $ module load pgi
 Now that you've set up your programming environment for the code used in this challenge, you can go ahead and compile the code. First, make sure you're in the `Basic_Workflow/` directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/Basic_Workflow
+$ cd ~/hands-on-with-summit/challenges/Basic_Workflow
 ```
 
 > NOTE: The path above assumes you cloned the repo in your `/ccsopen/home/username` directory.
