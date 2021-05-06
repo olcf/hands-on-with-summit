@@ -13,7 +13,7 @@ We won't be submitting any new jobs here, but rather looking at others that have
 (See the `bhist` manual page by running `man bhist` for a full list of command options.)
 
 ## Let's try to answer...
-1. How many jobs were completed on Ascent between 00:00 (midnight) on February 22, 2021 and 23:59 on February 26, 2021?
+1. How many jobs were completed on Ascent between 00:00 (midnight) on April 22, 2021 and 23:59 on April 26, 2021?
 
 2. How many unique users did the jobs from question 1 belong to?
 
