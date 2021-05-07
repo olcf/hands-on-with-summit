@@ -9,7 +9,7 @@ In high-performance computing, "scaling" refers to how the performance of a para
 First, you'll need to make sure you're in the `Parallel_Scaling_Performance/` directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/Parallel_Scaling_Performance
+$ cd ~/hands-on-with-summit/challenges/Parallel_Scaling_Performance
 ```
 
 Next, load the PGI compiler and CUDA Toolkit:
