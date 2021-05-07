@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN153
+#BSUB -P GEN158
 #BSUB -J profiling_optimized
 #BSUB -o profiling_output_optimized.%J
 #BSUB -nnodes 1

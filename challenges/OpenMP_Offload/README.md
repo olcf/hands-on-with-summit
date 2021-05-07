@@ -230,7 +230,7 @@ To truly take advantage of the GPU, we'll need to add the `teams`, `distribute`,
 First, makes sure you're in the `OpenMP_Offload` challenge directory:
 
 ```bash
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/OpenMP_Offload
+$ cd ~/hands-on-with-summit/challenges/OpenMP_Offload
 ```
 
 Then load the following modules:
