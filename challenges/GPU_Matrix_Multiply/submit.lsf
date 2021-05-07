@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN153
+#BSUB -P GEN158
 #BSUB -J dgemm
 #BSUB -o dgemm.%J
 #BSUB -nnodes 1

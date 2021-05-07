@@ -9,7 +9,7 @@ In this challenge, you will be given a program that initilizes two matrices with
 Before getting started, you'll need to make sure you're in the `GPU_Matrix_Multiply/` directory:
 
 ```
-$ cd ~/CSE21_HandsOn_with_Summit/challenges/GPU_Matrix_Multiply/
+$ cd ~/hands-on-with-summit/challenges/GPU_Matrix_Multiply/
 ```
 
 Look in the code `cpu_gpu_dgemm.c` and find the `TODO` section and add in the `cublasDgemm` call.
