@@ -83,9 +83,9 @@ When the MPI_Init function is called, all of MPI's global and internal variables
 
 Now it is your turn. Use the outline to help find and enter the missing MPI function in mpi_hello.c. To do this: 
 
-1. Go to CSE21_HandsOn_with_Summit/challenges/MPI_Basics/hello/ .
+1. Go to hands-on-with-summit/challenges/MPI_Basics/hello/ .
 ```
-$ cd CSE21_HandsOn_with_Summit/challenges/MPI_Basics/hello/
+$ cd hands-on-with-summit/challenges/MPI_Basics/hello/
 
 ```
 2. Use your favorite editor to find and enter the missing MPI function in mpi_hello.c. For example
@@ -299,9 +299,9 @@ int main(int argc, char ** argv)
 To do this challenge: 
 1. Determine the missing arguments. 
 
-2. Go to CSE21_HandsOn_with_Summit/challenges/MPI_Basics/ptp/. 
+2. Go to hands-on-with-summit/challenges/MPI_Basics/ptp/. 
 ```
-$ cd CSE21_HandsOn_with_Summit/challenges/MPI_Basics/ptp/
+$ cd hands-on-with-summit/challenges/MPI_Basics/ptp/
 
 ```
 3. Edit the Receive function in ptp.c with your A, B and C arguments. 
@@ -403,7 +403,7 @@ int main(int argc, char **argv)
 To find this code: 
 
 ```
-$ cd CSE21_HandsOn_with_Summit/challenges/MPI_basics/bcast/mpi_bcast.c
+$ cd hands-on-with-summit/challenges/MPI_basics/bcast/mpi_bcast.c
 ```
 
 To compile it:
