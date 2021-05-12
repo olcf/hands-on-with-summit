@@ -14,8 +14,8 @@ module load nsight-systems
 
 date
 
-cp ./matrix_sums_optimized /gpfs/wolf/gen153/scratch/${USER}
-cd /gpfs/wolf/gen153/scratch/${USER}
+cp ./matrix_sums_optimized /gpfs/wolf/gen158/scratch/${USER}
+cd /gpfs/wolf/gen158/scratch/${USER}
 
 jsrun -n1 -c1 -g1 -a1 nsys profile --stats=true --force-overwrite=true -o profile_data_optimized ./matrix_sums_optimized
 
