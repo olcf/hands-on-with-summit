@@ -172,12 +172,12 @@ If you wanted to run with 10 ranks, you would change the jsrun line in the submi
 from
 
 ```
-jsrun -n 4 -c 1 ./run
+jsrun -n1 -c4 -a4./run
 ```
 to
 
 ```
-jsrun -n 10 -c 1 ./run
+jsrun -n1 -c4 -a10 ./run
 ```
 
 We mention this because a nice feature of MPI programs that are structured like this, is that the user can change the size of the problem from the submit file without making changes in the code that would require it to be recompiled.
@@ -317,7 +317,7 @@ $ make
 5. Submit the job. 
 
 ```
-$ submit_ptp.lsf
+$ bsub submit_ptp.lsf
 ```
 
 If your code ran correctly, you will see:
