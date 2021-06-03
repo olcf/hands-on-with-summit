@@ -317,7 +317,7 @@ $ make
 5. Submit the job. 
 
 ```
-$ submit_ptp.lsf
+$ bsub submit_ptp.lsf
 ```
 
 If your code ran correctly, you will see:

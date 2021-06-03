@@ -8,4 +8,4 @@
 #BSUB -e hello.%J
 
 
-jsrun -n1 -c4 -a4 ./run
+jsrun -n 4 -c 1 ./run
