@@ -14,7 +14,7 @@ Summit, located at [Oak Ridge National Laboratory](https://www.ornl.gov/) in Oak
 Here you will find the [session agenda](agenda.md) along with various resources
 to help get you up and running on Summit. We'll take a deep look at the
 system's design, discuss how research teams write programs for and run
-workloads on Summit, and you'll get to run your own. The session is guided by
+workloads on Summit, and you'll get to run on your own. The session is guided by
 hands-on [***challenges***](challenges). 
 
 The [first challenge](./challenges/Access_Ascent_and_Clone_Repo) is to
@@ -36,6 +36,5 @@ reference materials outside of what's provided in this repository.
 <hr>
 <br>
 <p align="center">
-  <a href="https://www.siam.org/conferences/cm/conference/cse21"><img src="./images/CSE21_logo_500X105.png" width="400" alt="CSE21"></a><br><br>
   <a href="https://www.olcf.ornl.gov/"><img src="./images/olcf_logo.png" width="400" alt="Oak Ridge Leadership Computing Facility"></a>
 </p>
