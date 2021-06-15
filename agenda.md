@@ -8,3 +8,4 @@
 | Hands-On Challenges                                  | 1:55 PM - 3:55 PM |
 | Closing Remarks                                      | 3:55 PM - 4:00 PM |
 
+After the closing, you will have additional time to finish your exercies until Midnight on Tuesday, June 22. 
