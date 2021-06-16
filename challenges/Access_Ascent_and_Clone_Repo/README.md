@@ -6,7 +6,7 @@ Please follow the instructions below to login to OLCF's Ascent compute system an
 ## Step 1: Use the username and password that you setup for Ascent to login. 
 
 ```
-ssh username@login1.ascent.olcf.ornl.gov
+ssh <username>@login1.ascent.olcf.ornl.gov
 ```
 
 Once you have successfully logged in to Ascent, you can move on to Step 2.
@@ -23,10 +23,10 @@ In order to continue with the other challenges, you will need to `clone` a copy 
 $ cd /ccsopen/home/username
 $ git clone https://github.com/olcf/hands-on-with-summit.git
 ```
-You can list the files in your current directory to see the repository directory: 
+Now you can list the files in your current directory to see the repository directory: 
 
 ```
-[username@login1.ascent ~]$ ls
+$ ls
 hands-on-with-summit
 ```
 
