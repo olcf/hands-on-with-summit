@@ -161,6 +161,7 @@ If it succeeded, you should see the following output in the mpi_hello. output fi
 
 ```
 Hello from rank 3 of 4 total
+Hello from rank 2 of 4 total
 Hello from rank 1 of 4 total
 Hello from rank 0 of 4 total
 ```
