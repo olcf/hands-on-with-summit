@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN158
+#BSUB -P GEN164
 #BSUB -W 10
 #BSUB -nnodes 1
 #BSUB -J 16_omp
