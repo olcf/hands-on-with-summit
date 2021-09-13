@@ -272,7 +272,7 @@ int main(int argc, char ** argv)
   /*---------------------------------------*/
 
   if (rank == 0) {
-    strcpy(message, "hello");
+    strcpy(message, "hello!");
     MPI_Send(&message, 6, MPI_CHAR, 1, ntag, MPI_COMM_WORLD);
   }
 
