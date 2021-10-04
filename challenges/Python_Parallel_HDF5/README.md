@@ -1,0 +1,226 @@
+# Python: Parallel HDF5
+
+Scientific simulations generate large amounts of data on Summit (about 100 Terabytes per day).
+Because of how large some datafiles may be, it is important that writing and reading these files is done as fast as possible.
+Less time spent doing input/output (I/O) leaves more time for advancing a simulation or analyzing data.
+
+One of the most utilized file types is the Hierarchical Data Format (HDF), specifically the HDF5 format.
+[HDF5](https://www.hdfgroup.org/solutions/hdf5/) is designed to manage large amounts of data and is built for fast I/O processing and storage.
+An HDF5 file is a container for two kinds of objects: "datasets", which are array-like collections of data, and "groups", which are folder-like containers that hold datasets and other groups.
+
+There are various tools that allow users to interact with HDF5 data, but we will be focusing on [h5py](https://docs.h5py.org/en/stable/) -- a Python interface to the HDF5 library.
+H5py provides a simple interface to exploring and manipulating HDF5 data as if they were Python dictionaries or NumPy arrays.
+For example, you can extract specific variables through slicing, manipulate the shapes of datasets, and even write completely new datasets from external NumPy arrays.
+
+Both HDF5 and h5py can be compiled with MPI support, which allows you to optimize your HDF5 I/O in parallel.
+MPI support in Python is accomplished through the [mpi4py](https://mpi4py.readthedocs.io/en/stable/) package, which provides complete Python bindings for MPI.
+Building h5py against mpi4py allows you to write to an HDF5 file using multiple parallel processes, which can be helpful for users handling large datasets in Python.
+H5Py is available after loading the default Python module on Summit, but it has not been built with parallel support.
+
+This hands-on challenge will teach you how to build a personal, parallel-enabled version of h5py on Summit and how to write an HDF5 file in parallel using mpi4py and h5py.
+
+Our plan for building parallel h5py is to:
+* Create a new virtual environment using conda
+* Install mpi4py from source
+* Install h5py from source
+* Test our build with a Python script
+
+## Setting up the environment
+
+Building h5py from source is highly sensitive to the current environment variables set in your profile.
+Because of this, it is extremely important that all the modules we plan to load are done in the correct order, so that all the environment variables are set correctly.
+First, we will unload all the current modules that you may have previously loaded on Summit and then immediately load the default modules:
+
+```
+$ module purge
+$ module load DefApps
+```
+
+Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py), and the python module (allows us to create a new conda environment):
+
+```
+$ module load gcc
+$ module load hdf5
+$ module load python
+```
+
+Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
+
+```
+$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit python=3.8
+```
+
+After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
+
+```
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+```
+
+Due to the specific nature of conda on Summit, we will be using `source activate` instead of `conda activate` to activate our new environment:
+
+```
+$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
+```
+
+The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment. 
+If you check with `conda env list`, you should see that the `*` marker is next to your new environment, which means that it is currently active:
+
+```
+$ conda env list
+
+# conda environments:
+#
+                      *  /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
+base                     /sw/summit/python/3.8/anaconda3/2020.07-rhel8
+```
+
+## Installing mpi4py
+
+Now that we have a fresh conda environment, we will next install mpi4py from source into our new environment.
+To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:
+
+```
+$ MPICC="mpicc -shared" pip install --no-binary=mpi4py mpi4py
+```
+
+The `MPICC` flag ensures that you are using the correct C wrapper for MPI on the system.
+Building from source typically takes longer than a simple `conda install`, so the download and installation may take a couple minutes.
+If everything goes well, you should see a "Successfully installed mpi4py" message.
+
+## Installing h5py
+
+Next, we will install h5py from source.
+Because h5py depends on NumPy, we will install an optimized version of the NumPy package first using `conda install`:
+
+```
+$ conda install -c defaults --override-channels numpy
+```
+
+The `-c defaults --override-channels` flags ensure that conda will search for NumPy only on the "defaults" channel, which is typically where optimized NumPy is available.
+Installing NumPy in this manner results in a NumPy that is built against linear algebra libraries, which performs operations much faster.
+
+Next, we are finally ready to install h5py from source:
+
+```
+$ HDF5_MPI="ON" CC=gcc pip install --no-binary=h5py h5py
+```
+
+The `HDF5_MPI` flag is the key to telling pip to build h5py with parallel support, while the `CC` flag makes sure that we are using the correct C wrapper.
+This installation will take much longer than both the mpi4py and NumPy installations (5+ minutes if the system is slow).
+When the installation finishes, you will see a "Successfully installed h5py" message.
+
+## Testing parallel h5py
+
+Now for the fun part, testing to see if our build was truly successful.
+We will test our build by trying to write an HDF5 file in parallel using 42 MPI tasks.
+First, let's launch an interactive batch job:
+
+```
+$ bsub -W 0:15 -nnodes 1 -P <YOUR_PROJECT_ID> -Is $SHELL
+```
+
+This will submit a 15-minute interactive job to the queue.
+Once the batch job makes its way through the queue, you will then be ready to start running your tests.
+
+Once you are in your interactive session, change directories to your GPFS scratch area and copy over the scripts:
+
+```
+$ cd /gpfs/alpine/<YOUR_PROJECT_ID>/scratch/<YOUR_USER_ID>
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hello_mpi.py .
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
+```
+
+Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py":
+
+```
+$ jsrun -n1 -r1 -a42 -c42 python3 hello_mpi.py
+```
+
+This will run the script with 42 MPI tasks and you should see output similar to:
+
+```
+Hello from MPI rank 21 !
+Hello from MPI rank 23 !
+Hello from MPI rank 28 !
+Hello from MPI rank 40 !
+Hello from MPI rank 0 !
+Hello from MPI rank 1 !
+Hello from MPI rank 32 !
+.
+.
+.
+```
+
+If you see this, great, it means that mpi4py was built successfully in your environment.
+
+Finally, let's see if we can get these tasks to write to an HDF5 file in parallel using the "hdf5_parallel.py" script:
+
+```python
+# hdf5_parallel.py
+from mpi4py import MPI
+import h5py
+
+comm = MPI.COMM_WORLD      # Use the world communicator
+mpi_rank = comm.Get_rank() # The process ID (integer 0-41 for a 42-process job)
+mpi_size = comm.Get_size() # Total amount of ranks
+
+with h5py.File('output.h5', 'w', driver='mpio', comm=MPI.COMM_WORLD) as f:
+    dset = f.create_dataset('test', (42,), dtype='i')
+    dset[mpi_rank] = mpi_rank
+
+comm.Barrier()
+
+if (mpi_rank == 0):
+    print('42 MPI ranks have finished writing!')
+```
+
+The MPI tasks are going to write to a file named "output.h5", which contains a dataset called "test" that is of size 42 (assigned to the "dset" variable in Python).
+Each MPI task is going to assign their rank value to the "dset" array in Python, so we should end up with a dataset that contains 0-41 in ascending order.
+
+Time to execute "hdf5_parallel.py":
+
+```
+$ jsrun -n1 -r1 -a42 -c42 python3 hdf5_parallel.py
+
+42 MPI ranks have finished writing!
+```
+
+Provided there are no errors, you should see the above output and there should be a new file called "output.h5" in your directory.
+To see explicitly that the MPI tasks did their job, you can use the `h5dump` command to view the dataset named "test" in output.h5:
+
+```
+$ h5dump output.h5
+
+HDF5 "output.h5" {
+GROUP "/" {
+   DATASET "test" {
+      DATATYPE  H5T_STD_I32LE
+      DATASPACE  SIMPLE { ( 42 ) / ( 42 ) }
+      DATA {
+      (0): 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+      (19): 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+      (35): 35, 36, 37, 38, 39, 40, 41
+      }
+   }
+}
+}
+```
+
+If you see the above output, then congratulations you just built parallel h5py on Summit!
+Now you can use one of the fastest computers in the world to write parallel HDF5 files in Python!
+
+## Additional Resources
+
+* [h5py Documentation](https://docs.h5py.org/en/stable/)
+* [mpi4py Documentation](https://mpi4py.readthedocs.io/en/stable/)
+* [HDF5 Support Page](https://portal.hdfgroup.org/display/HDF5/HDF5)
