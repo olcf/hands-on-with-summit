@@ -15,9 +15,9 @@ For example, you can extract specific variables through slicing, manipulate the 
 Both HDF5 and h5py can be compiled with MPI support, which allows you to optimize your HDF5 I/O in parallel.
 MPI support in Python is accomplished through the [mpi4py](https://mpi4py.readthedocs.io/en/stable/) package, which provides complete Python bindings for MPI.
 Building h5py against mpi4py allows you to write to an HDF5 file using multiple parallel processes, which can be helpful for users handling large datasets in Python.
-H5Py is available after loading the default Python module on Summit, but it has not been built with parallel support.
+H5Py is available after loading the default Python module on either Summit or Ascent, but it has not been built with parallel support.
 
-This hands-on challenge will teach you how to build a personal, parallel-enabled version of h5py on Summit and how to write an HDF5 file in parallel using mpi4py and h5py.
+This hands-on challenge will teach you how to build a personal, parallel-enabled version of h5py and how to write an HDF5 file in parallel using mpi4py and h5py.
 
 Our plan for building parallel h5py is to:
 * Create a new virtual environment using conda
@@ -29,12 +29,15 @@ Our plan for building parallel h5py is to:
 
 Building h5py from source is highly sensitive to the current environment variables set in your profile.
 Because of this, it is extremely important that all the modules we plan to load are done in the correct order, so that all the environment variables are set correctly.
-First, we will unload all the current modules that you may have previously loaded on Summit and then immediately load the default modules:
+First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules:
 
 ```
+$ conda deactivate
 $ module purge
 $ module load DefApps
 ```
+
+The `conda deactivate` command is only necessary if you have a conda environment already active (i.e., having the Python module loaded), but no harm will come from executing the command if that does not apply to you.
 
 Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py), and the python module (allows us to create a new conda environment):
 
@@ -47,7 +50,7 @@ $ module load python
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit python=3.8
+$ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent python=3.8
 ```
 
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
@@ -59,17 +62,17 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
+#     $ conda activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
 #
 # To deactivate an active environment, use
 #
 #     $ conda deactivate
 ```
 
-Due to the specific nature of conda on Summit, we will be using `source activate` instead of `conda activate` to activate our new environment:
+Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```
-$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
+$ source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment. 
@@ -80,8 +83,8 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/summit/h5pympi-summit
-base                     /sw/summit/python/3.8/anaconda3/2020.07-rhel8
+                      *  /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+base                     /sw/ascent/python/3.6/anaconda3/5.3.0
 ```
 
 ## Installing mpi4py
@@ -106,8 +109,8 @@ Because h5py depends on NumPy, we will install an optimized version of the NumPy
 $ conda install -c defaults --override-channels numpy
 ```
 
-The `-c defaults --override-channels` flags ensure that conda will search for NumPy only on the "defaults" channel, which is typically where optimized NumPy is available.
-Installing NumPy in this manner results in a NumPy that is built against linear algebra libraries, which performs operations much faster.
+The `-c defaults --override-channels` flags ensure that conda will search for NumPy only on the "defaults" channel.
+Installing NumPy in this manner results in an optimized NumPy that is built against linear algebra libraries, which performs operations much faster.
 
 Next, we are finally ready to install h5py from source:
 
@@ -135,7 +138,7 @@ Once the batch job makes its way through the queue, you will then be ready to st
 Once you are in your interactive session, change directories to your GPFS scratch area and copy over the scripts:
 
 ```
-$ cd /gpfs/alpine/<YOUR_PROJECT_ID>/scratch/<YOUR_USER_ID>
+$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hello_mpi.py .
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
 ```
@@ -216,8 +219,7 @@ GROUP "/" {
 }
 ```
 
-If you see the above output, then congratulations you just built parallel h5py on Summit!
-Now you can use one of the fastest computers in the world to write parallel HDF5 files in Python!
+If you see the above output, then congratulations you have used one of the fastest computers in the world to write a parallel HDF5 file in Python!
 
 ## Additional Resources
 
