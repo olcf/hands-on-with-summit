@@ -28,16 +28,17 @@ Our plan for building parallel h5py is to:
 ## Setting up the environment
 
 Building h5py from source is highly sensitive to the current environment variables set in your profile.
-Because of this, it is extremely important that all the modules we plan to load are done in the correct order, so that all the environment variables are set correctly.
+Because of this, it is extremely important that all the modules and conda environments we plan to load are done in the correct order, so that all the environment variables are set correctly.
 First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules:
 
 ```
-$ conda deactivate
+$ source deactivate_envs.sh
 $ module purge
 $ module load DefApps
 ```
 
-The `conda deactivate` command is only necessary if you have a conda environment already active (i.e., having the Python module loaded), but no harm will come from executing the command if that does not apply to you.
+The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
+The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
 Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py), and the python module (allows us to create a new conda environment):
 
