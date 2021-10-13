@@ -32,6 +32,7 @@ Because of this, it is extremely important that all the modules and conda enviro
 First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules:
 
 ```
+$ cd ~/hands-on-with-summit/challenges/Python_Parallel_HDF5
 $ source deactivate_envs.sh
 $ module purge
 $ module load DefApps
