@@ -67,7 +67,7 @@ Python 3.6.6
 
 ## Creating a new environment
 
-For this challenge, we are going to install an older version of Python.
+For this challenge, we are going to install a newer version of Python.
 
 To do so, we will create a new environment using the `conda create` command:
 
@@ -172,7 +172,7 @@ $ cd ~/hands-on-with-summit/challenges/Python_Conda_Basics/
 $ python3 hello.py
 
 Hello from Python 3.7.11!
-You are using NumPy 1.21.2
+You are using NumPy 1.20.3
 ```
 
 Congratulations, you have just created your own Python environment and ran on one of the fastest computers in the world!
@@ -201,7 +201,7 @@ Congratulations, you have just created your own Python environment and ran on on
 
 * Adding known environment locations:
 
-    For a conda environment to callable by a "name", it must be installed in one of the `envs_dirs` directories.
+    For a conda environment to be callable by a "name", it must be installed in one of the `envs_dirs` directories.
     The list of known directories can be seen by executing:
     ```
     $ conda config --show envs_dirs
