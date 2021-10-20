@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN164
+#BSUB -P GEN168
 #BSUB -J add_vec_cpu
 #BSUB -o add_vec_cpu.%J
 #BSUB -nnodes 1
