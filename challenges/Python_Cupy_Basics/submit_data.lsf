@@ -1,0 +1,19 @@
+#!/bin/bash
+#BSUB -P <YOUR_PROJECT_ID>
+#BSUB -W 00:05
+#BSUB -nnodes 1
+#BSUB -J cupy_xfer
+#BSUB -o cupy_xfer.%J.out
+#BSUB -e cupy_xfer.%J.err
+
+cd $LSB_OUTDIR
+date
+
+module load gcc/7.4.0
+module load cuda/11.0.2
+module load python
+
+source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/cupy-ascent
+export CUPY_CACHE_DIR="${MEMBERWORK}/<YOUR_PROJECT_ID>/.cupy/kernel_cache"
+
+jsrun -n1 -g3 python3 data_transfer.py
