@@ -54,7 +54,7 @@ $ module load python
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent python=3.8
+$ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent python=3.8
 ```
 
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
@@ -66,7 +66,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+#     $ conda activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
 #
 # To deactivate an active environment, use
 #
@@ -76,7 +76,7 @@ Executing transaction: done
 Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```
-$ source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+$ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment. 
@@ -87,7 +87,7 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+                      *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
 base                     /sw/ascent/python/3.6/anaconda3/5.3.0
 ```
 
