@@ -57,6 +57,9 @@ Loading the python module puts us in a "base" conda environment, but we need to 
 $ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent python=3.8
 ```
 
+> NOTE: As noted in [Conda Basics](../Python_Conda_Basics), it is highly recommended to create new environments in the "Project Home" directory.
+> However, due to the limited disk quota and potential number of training participants on Ascent, we will be creating our environment in the "User Home" directory.
+
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
 
 ```
