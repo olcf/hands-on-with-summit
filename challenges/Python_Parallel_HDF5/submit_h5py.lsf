@@ -1,0 +1,18 @@
+#!/bin/bash
+#BSUB -P <YOUR_PROJECT_ID>
+#BSUB -W 00:05
+#BSUB -nnodes 1
+#BSUB -J h5py
+#BSUB -o h5py.%J.out
+#BSUB -e h5py.%J.err
+
+cd $LSB_OUTDIR
+date
+
+module load gcc
+module load hdf5
+module load python
+
+source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+
+jsrun -n1 -r1 -a42 -c42 python3 hdf5_parallel.py

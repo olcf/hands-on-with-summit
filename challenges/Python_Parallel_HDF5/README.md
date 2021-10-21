@@ -1,6 +1,6 @@
 # Python: Parallel HDF5
 
-Scientific simulations generate large amounts of data on Summit (about 100 Terabytes per day).
+Scientific simulations generate large amounts of data on Summit (about 100 Terabytes per day for some applications).
 Because of how large some datafiles may be, it is important that writing and reading these files is done as fast as possible.
 Less time spent doing input/output (I/O) leaves more time for advancing a simulation or analyzing data.
 
@@ -9,17 +9,18 @@ One of the most utilized file types is the Hierarchical Data Format (HDF), speci
 An HDF5 file is a container for two kinds of objects: "datasets", which are array-like collections of data, and "groups", which are folder-like containers that hold datasets and other groups.
 
 There are various tools that allow users to interact with HDF5 data, but we will be focusing on [h5py](https://docs.h5py.org/en/stable/) -- a Python interface to the HDF5 library.
-H5py provides a simple interface to exploring and manipulating HDF5 data as if they were Python dictionaries or NumPy arrays.
+h5py provides a simple interface to exploring and manipulating HDF5 data as if they were Python dictionaries or NumPy arrays.
 For example, you can extract specific variables through slicing, manipulate the shapes of datasets, and even write completely new datasets from external NumPy arrays.
 
 Both HDF5 and h5py can be compiled with MPI support, which allows you to optimize your HDF5 I/O in parallel.
 MPI support in Python is accomplished through the [mpi4py](https://mpi4py.readthedocs.io/en/stable/) package, which provides complete Python bindings for MPI.
 Building h5py against mpi4py allows you to write to an HDF5 file using multiple parallel processes, which can be helpful for users handling large datasets in Python.
-H5Py is available after loading the default Python module on either Summit or Ascent, but it has not been built with parallel support.
+h5Py is available after loading the default Python module on either Summit or Ascent, but it has not been built with parallel support.
 
 This hands-on challenge will teach you how to build a personal, parallel-enabled version of h5py and how to write an HDF5 file in parallel using mpi4py and h5py.
 
 Our plan for building parallel h5py is to:
+
 * Create a new virtual environment using conda
 * Install mpi4py from source
 * Install h5py from source
@@ -29,7 +30,8 @@ Our plan for building parallel h5py is to:
 
 Building h5py from source is highly sensitive to the current environment variables set in your profile.
 Because of this, it is extremely important that all the modules and conda environments we plan to load are done in the correct order, so that all the environment variables are set correctly.
-First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules:
+First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+Assuming you cloned the repository in your home directory:
 
 ```
 $ cd ~/hands-on-with-summit/challenges/Python_Parallel_HDF5
@@ -117,10 +119,10 @@ Installing NumPy in this manner results in an optimized NumPy that is built agai
 Next, we are finally ready to install h5py from source:
 
 ```
-$ HDF5_MPI="ON" CC=gcc pip install --no-binary=h5py h5py
+$ HDF5_MPI="ON" CC=mpicc pip install --no-binary=h5py h5py
 ```
 
-The `HDF5_MPI` flag is the key to telling pip to build h5py with parallel support, while the `CC` flag makes sure that we are using the correct C wrapper.
+The `HDF5_MPI` flag is the key to telling pip to build h5py with parallel support, while the `CC` flag makes sure that we are using the correct C wrapper for MPI.
 This installation will take much longer than both the mpi4py and NumPy installations (5+ minutes if the system is slow).
 When the installation finishes, you will see a "Successfully installed h5py" message.
 
@@ -128,30 +130,28 @@ When the installation finishes, you will see a "Successfully installed h5py" mes
 
 Now for the fun part, testing to see if our build was truly successful.
 We will test our build by trying to write an HDF5 file in parallel using 42 MPI tasks.
-First, let's launch an interactive batch job:
 
-```
-$ bsub -W 0:15 -nnodes 1 -P <YOUR_PROJECT_ID> -Is $SHELL
-```
-
-This will submit a 15-minute interactive job to the queue.
-Once the batch job makes its way through the queue, you will then be ready to start running your tests.
-
-Once you are in your interactive session, change directories to your GPFS scratch area and copy over the scripts:
+First, change directories to your GPFS scratch area and copy over the python and batch scripts:
 
 ```
 $ cd $MEMBERWORK/<YOUR_PROJECT_ID>
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hello_mpi.py .
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_hello.lsf .
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_h5py.lsf .
 ```
 
-Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py":
+Make sure to edit both "submit_hello.lsf" and "submit_h5py.lsf" to replace any instances of `YOUR_PROJECT_ID` and `YOUR_USER_ID`.
+
+Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py".
+To do so, we will be submitting a job to the batch queue with "submit_hello.lsf":
 
 ```
-$ jsrun -n1 -r1 -a42 -c42 python3 hello_mpi.py
+$ bsub -L $SHELL submit_hello.lsf
 ```
 
-This will run the script with 42 MPI tasks and you should see output similar to:
+Once the batch job makes its way through the queue, it will run the "hello_mpi.py" script with 42 MPI tasks.
+If mpi4py is working properly, in `mpi4py.<JOB_ID>.out` you should see output similar to:
 
 ```
 Hello from MPI rank 21 !
@@ -192,15 +192,13 @@ if (mpi_rank == 0):
 The MPI tasks are going to write to a file named "output.h5", which contains a dataset called "test" that is of size 42 (assigned to the "dset" variable in Python).
 Each MPI task is going to assign their rank value to the "dset" array in Python, so we should end up with a dataset that contains 0-41 in ascending order.
 
-Time to execute "hdf5_parallel.py":
+Time to execute "hdf5_parallel.py" by submitting "submit_h5py.lsf" to the batch queue:
 
 ```
-$ jsrun -n1 -r1 -a42 -c42 python3 hdf5_parallel.py
-
-42 MPI ranks have finished writing!
+$ bsub -L $SHELL submit_h5py.lsf
 ```
 
-Provided there are no errors, you should see the above output and there should be a new file called "output.h5" in your directory.
+Provided there are no errors, you should see "42 MPI ranks have finished writing!" in the `h5py.<JOB_ID>.out` output file, and there should be a new file called "output.h5" in your directory.
 To see explicitly that the MPI tasks did their job, you can use the `h5dump` command to view the dataset named "test" in output.h5:
 
 ```
