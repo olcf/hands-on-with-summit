@@ -13,6 +13,6 @@ module load gcc
 module load hdf5
 module load python
 
-source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/h5pympi-ascent
+source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
 
 jsrun -n1 -r1 -a42 -c42 python3 hello_mpi.py
