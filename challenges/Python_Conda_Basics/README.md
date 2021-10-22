@@ -78,8 +78,9 @@ $ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/asce
 The "-p" flag specifies the desired path and name of your new virtual environment. 
 Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your $HOME directory.
 
-> NOTE: It is highly recommended to create new environments in the `/ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>` directory.
-It is also recommended, for convenience, that you use environment names that indicate the hostname, as virtual environments created on one system will not necessarily work on others.
+> NOTE: It is highly recommended to create new environments in the "Project Home" directory (on Ascent, this is `/ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>`).
+> This space avoids purges, allows for potential collaboration within your project, and works better with the compute nodes.
+> It is also recommended, for convenience, that you use environment names that indicate the hostname, as virtual environments created on one system will not necessarily work on others.
 
 After executing the `conda create` command, you will be prompted to install "the following NEW packages" -- type "y" then hit Enter/Return.
 Downloads of the fresh packages will start and eventually you should see something similar to:
@@ -184,11 +185,11 @@ Congratulations, you have just created your own Python environment and ran on on
     It is not recommended to try to install new packages into the base environment.
     Instead, you can clone the base environment for yourself and install packages into the clone.
     To clone an environment, you must use the `--clone <env_to_clone>` flag when creating a new conda environment.
-    An example for cloning the base environment on Ascent is provided below:
+    An example for cloning the base environment into your $HOME directory on Ascent is provided below:
 
     ```
-    $ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/baseclone-ascent --clone base
-    $ source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/baseclone-ascent
+    $ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/baseclone-ascent --clone base
+    $ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/baseclone-ascent
     ```
 
 * Deleting an environment:

@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P <YOUR_PROJECT_ID>
+#BSUB -P GEN168
 #BSUB -W 00:05
 #BSUB -nnodes 1
 #BSUB -J h5py
@@ -13,6 +13,6 @@ module load gcc
 module load hdf5
 module load python
 
-source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
+source activate $HOME/.conda/envs/h5pympi-ascent
 
 jsrun -n1 -r1 -a42 -c42 python3 hdf5_parallel.py

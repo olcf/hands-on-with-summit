@@ -144,8 +144,6 @@ $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_hello.lsf .
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_h5py.lsf .
 ```
 
-Make sure to edit both "submit_hello.lsf" and "submit_h5py.lsf" to replace any instances of `YOUR_PROJECT_ID` and `YOUR_USER_ID`.
-
 Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py".
 To do so, we will be submitting a job to the batch queue with "submit_hello.lsf":
 
