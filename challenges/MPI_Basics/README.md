@@ -191,7 +191,7 @@ We'll dive a little deeper into understanding MPI functions as we explore Point 
 Point to Point communication is one way you can finely control how you divide work between processors. Point to Point routines involve two and only two processes. One process explicitly initiates a send operation and one process explicitly initiates a receive operation.
 
 
-In the code that you will work with for this part of the challenge, Process 0 will send a message "Hello!" to process 1. The two new MPI functions we will use to accomplish this will be MPI_Send and MPI_Recv. We will also need the MPI_Comm_rank function that you just learned about to get the ranks of the processes from the communicator. 
+In the code that you will work with for this part of the challenge, Process 0 will send a message "hello!" to process 1. The two new MPI functions we will use to accomplish this will be MPI_Send and MPI_Recv. We will also need the MPI_Comm_rank function that you just learned about to get the ranks of the processes from the communicator. 
 
 Below is the MPI_Send function. It is used to send a message from one process to another process. 
 
@@ -206,7 +206,7 @@ In this function:
 
 * count - Number of elements to send. For example, if you are going to send a message that has 6 data elements of type datatype, the value for count would be 6. 
 
-* datatype - This is the MPI datatype of each element in the send buffer. There are built-in data types for all intrinsic C types: MPI_INT, MPI_FLOAT, MPI_DOUBLE, MPI_CHAR, etc. If you wanted to send "hello" from process 0 to process 1, you would use a datatype of MPI_CHAR. 
+* datatype - This is the MPI datatype of each element in the send buffer. There are built-in data types for all intrinsic C types: MPI_INT, MPI_FLOAT, MPI_DOUBLE, MPI_CHAR, etc. If you wanted to send "hello!" from process 0 to process 1, you would use a datatype of MPI_CHAR. 
 
 * Dest - Rank of destination. This is the ID of where the message will go. 
 
@@ -236,12 +236,12 @@ In this case the function's arguments mean:
 
 This functions returns after receive buffer is ready to reuse. 
 
-Here is the code ptp.c, where process 0 will send the message "hello" to process 1. The receive function has three missing arguments labeled A, B. and C. 
+Here is the code ptp.c, where process 0 will send the message "hello!" to process 1. The receive function has three missing arguments labeled A, B. and C. 
 Your challenge is to use the arguments in the send function and the function definitions above to fill in the missing arguments. 
 
 Some of the questions to help you:
 Why does the MPI_Send function say that the message has 6 elements?
-Why datatype is "hello" ? 
+Why datatype is "hello!" ? 
 Where is the message going? 
 
 ```bash
@@ -324,7 +324,7 @@ $ bsub submit_ptp.lsf
 If your code ran correctly, you will see:
 
 ```
-Process 1 : hello
+Process 1 : hello!
 ```
 
  If you want to know more about point to point communication, see: [https://computing.llnl.gov/tutorials/mpi/](https://computing.llnl.gov/tutorials/mpi/). We also want to credit the [National Institute for Computational Sciences](https://www.nics.tennessee.edu/mpi-tutorial) for the idea for this example and you can find more send and receive challenges on their page.
