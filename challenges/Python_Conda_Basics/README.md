@@ -75,6 +75,7 @@ To do so, we will create a new environment using the `conda create` command:
 $ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/py3711-ascent python=3.7.11
 ```
 
+The directory structure is case sensitive, so be sure to insert "<YOUR_PROJECT_ID>" as lowercase.
 The "-p" flag specifies the desired path and name of your new virtual environment. 
 Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your $HOME directory.
 
