@@ -75,8 +75,9 @@ To do so, we will create a new environment using the `conda create` command:
 $ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/py3711-ascent python=3.7.11
 ```
 
+The "-p" flag specifies the desired path and name of your new virtual environment.
 The directory structure is case sensitive, so be sure to insert "<YOUR_PROJECT_ID>" as lowercase.
-The "-p" flag specifies the desired path and name of your new virtual environment. 
+Directories will be created if they do not exist already (provided you have write-access in that location).
 Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your $HOME directory.
 
 > NOTE: It is highly recommended to create new environments in the "Project Home" directory (on Ascent, this is `/ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>`).
@@ -215,7 +216,8 @@ Congratulations, you have just created your own Python environment and ran on on
     $ conda config --append envs_dirs /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent
     ```
     This will create a `.condarc` file in your $HOME directory if you do not have one already, which will now contain this new envs_dirs location.
-    This will now enable you to use the `--name env_name` flag when using conda commands, instead of having to use the `-p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/env_name` flag and specifying the full path to the environment.
+    This will now enable you to use the `--name env_name` flag when using conda commands for environments stored in that specific directory, instead of having to use the `-p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/env_name` flag and specifying the full path to the environment.
+    For example, you can do `source activate py3711-ascent` instead of `source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/py3711-ascent`.
 
 ## <a name="refs"></a>Additional Resources
 
