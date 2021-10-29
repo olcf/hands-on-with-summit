@@ -124,7 +124,7 @@ Congratulations, you just installed CuPy on Ascent!
 ## Getting Started With CuPy
 
 > NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
-> However, if you logged out after finishing the previous section, you must `module load python` and activate your CuPy conda environment before moving on.
+> However, if you logged out after finishing the previous section, you must load the cuda and python modules followed by activating your CuPy conda environment before moving on.
 
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using CuPy in their user guide under the [CuPy Basics](https://docs.cupy.dev/en/stable/user_guide/basic.html) section.
@@ -186,7 +186,6 @@ To get a total number of devices that you can access, use the `getDeviceCount` f
 4
 ```
 
-Unless run with a specific `jsrun -g <NUMBER_OF_GPUS>` command, the launch node has 4 GPUs that CuPy can find.
 The current device can be switched using `cupy.cuda.Device(<DEVICE_ID>).use()`:
 
 ```python
@@ -320,7 +319,7 @@ print(x_gpu_2.device, ':', x_gpu_2)
 print('CPU: ', x_cpu)
 ```
 
-The goal of the above script is to calculate `x + x^2 + x^3` after calculating `x^2` and `x^3` on separate GPUs.
+The goal of the above script is to calculate `x + x^2 + x^3` on the CPU after calculating `x^2` and `x^3` on separate GPUs.
 To do so, the working script initializes `x` on GPU 0, then make copies on both GPU 1 and GPU 2.
 After all of the GPUs finish their calculations, the CPU then computes the final sum of all the arrays.
 However, running the above script will result in errors, so it is your mission to figure out how to fix it.
@@ -328,6 +327,7 @@ Specifically, there are three lines that need fixing in this script (marked by t
 
 Your challenge is to apply the necessary function calls on the three "TO-DO" lines to transfer the data between the GPUs and CPUs properly.
 Some of the questions to help you: What function do I use to pass arrays to a GPU? What function do I use to pass arrays to a CPU?
+Also, you can use the error messages to your advantage, they will give you hints as well.
 If you're having trouble, you can check `data_transfer_solution.py`.
 
 To do this challenge:
@@ -339,7 +339,7 @@ To do this challenge:
     $ vi data_transfer.py
     ```
 
-3. Submit a job:
+3. Submit a job (the `-L $SHELL` flag is necessary):
 
     ```
     $ bsub -L $SHELL submit_data.lsf
@@ -440,7 +440,7 @@ The exact numbers may be slightly different, but you should see a speedup factor
 Switching to `float32` was easier on memory for the GPU, which improved the time further.
 Things are even better when we look at "GPU float32 restructured time", which represents an additional factor of 4 speedup when compared to "GPU float32 time".
 Overall, using CuPy and restructuring the data led to a speedup factor of >20 when compared to traditional NumPy!
-This factor would diminish with smaller datasets, but represents what CuPy is capable of.
+This factor would diminish with smaller datasets, but represents what CuPy is capable of at this scale.
 
 You have now discovered what CuPy can provide!
 Now you can try speeding up your own codes by swapping CuPy and NumPy where you can.
