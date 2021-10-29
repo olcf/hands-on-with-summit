@@ -6,7 +6,7 @@ One of these packages is [CuPy](https://cupy.dev/), a NumPy/SciPy-compatible arr
 
 CuPy is a library that implements NumPy arrays on NVIDIA GPUs by utilizing CUDA Toolkit libraries like cuBLAS, cuRAND, cuSOLVER, cuSPARSE, cuFFT, cuDNN and NCCL.
 Although optimized NumPy is a significant step up from Python in terms of speed, performance is still limited by the CPU (especially at larger data sizes) -- this is where CuPy comes in.
-Because CuPy’s interface is nearly a mirror of NumPy, it acts as a replacement to run existing NumPy/SciPy code on NVIDIA CUDA platforms, which helps speed up calculations further.
+Because CuPy's interface is nearly a mirror of NumPy, it acts as a replacement to run existing NumPy/SciPy code on NVIDIA CUDA platforms, which helps speed up calculations further.
 CuPy supports most of the array operations that NumPy provides, including array indexing, math, and transformations.
 Most operations provide an immediate speed-up out of the box, and some operations are sped up by over a factor of 100 (see CuPy benchmark timings below, from the [Single-GPU CuPy Speedups](https://medium.com/rapids-ai/single-gpu-cupy-speedups-ea99cbbb0cbb) article).
 
@@ -17,6 +17,7 @@ Most operations provide an immediate speed-up out of the box, and some operation
 Because each Ascent compute node has 6 NVIDIA V100 GPUs, we will be able to take full advantage of CuPy's capabilities on the system, providing significant speedups over NumPy-written code.
 
 In this challenge, you will:
+
 * Learn how to install CuPy into a custom conda environment
 * Learn the basics of CuPy
 * Apply what you've learned in a debugging challenge
@@ -47,8 +48,11 @@ $ module load python
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/cupy-ascent python=3.9
+$ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent python=3.9
 ```
+
+> NOTE: As noted in [Conda Basics](../Python_Conda_Basics), it is highly recommended to create new environments in the "Project Home" directory.
+> However, due to the limited disk quota and potential number of training participants on Ascent, we will be creating our environment in the "User Home" directory.
 
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
 
@@ -59,7 +63,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/cupy-ascent
+#     $ conda activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
 #
 # To deactivate an active environment, use
 #
@@ -69,7 +73,7 @@ Executing transaction: done
 Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```
-$ source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/cupy-ascent
+$ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicates that you are currently using that specific conda environment.
@@ -80,7 +84,7 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/cupy-ascent
+                      *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
 base                     /sw/ascent/python/3.6/anaconda3/5.3.0
 ```
 
@@ -121,29 +125,11 @@ Congratulations, you just installed CuPy on Ascent!
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using CuPy in their user guide under the [CuPy Basics](https://docs.cupy.dev/en/stable/user_guide/basic.html) section.
 We will be following this walkthrough on Ascent.
-It is not necessary to follow along with these prompts on Ascent, but is encouraged so that you are able to get hands-on experience before running the challenge scripts.
-To follow along, you must submit an interactive batch job on Ascent:
-
-```
-$ bsub -W 0:30 -nnodes 1 -P <YOUR_PROJECT_ID> -Is $SHELL
-```
+This is done to illustrate the basics, but participants should **NOT** explicitly follow along (as resources are limited on Ascent and interactive jobs will clog up the queue).
+The syntax below assumes being in a Python shell with access to 4 GPUs.
 
 > NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
-> However, if you logged out after finishing the previous section, you must activate your CuPy conda environment before moving on.
-
-After getting an interactive session, launch an interactive Python shell:
-
-```
-$ python3
-Python 3.9.7 (default, Sep 16 2021, 16:03:39) 
-[GCC 7.3.0] :: Anaconda, Inc. on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
-```
-
-> NOTE: We will be doing small-scale tests.
-> Remember, at larger scales both your performance and your fellow users' performance will suffer if you do not run on the compute nodes.
-> It is always highly recommended to run on the compute nodes (through the use of a batch job or interactive batch job with `jsrun`).
+> However, if you logged out after finishing the previous section, you must `module load python` and activate your CuPy conda environment before moving on.
 
 As is the standard with NumPy being imported as "np", CuPy is often imported in a similar fashion:
 
@@ -270,7 +256,6 @@ This can result in some GPU operations finishing before some CPU operations.
 As CuPy streams are out of the scope of this challenge, you can find additional information in the [CuPy User Guide](https://docs.cupy.dev/en/stable/user_guide/index.html).
 
 Congratulations, you now know some of the basics of CuPy!
-If you followed along in an interactive job, make sure to exit your interactive batch job with `exit` or kill your job with `bkill <JOB_ID>`.
 
 Now let's apply what you've learned.
 
@@ -280,6 +265,8 @@ Before asking for a compute node, let's change into our scratch directory and co
 
 ```
 $ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ mkdir cupy_test
+$ cd cupy_test
 $ cp ~/hands-on-with-summit/challenges/Python_Cupy_Basics/*.py .
 $ cp ~/hands-on-with-summit/challenges/Python_Cupy_Basics/*.lsf .
 ```
@@ -346,15 +333,19 @@ To do this challenge:
 
 1. Determine the missing functions on the three "TO-DO" lines.
 2. Use your favorite editor to enter the missing functions into `data_transfer.py`. For example:
+
     ```
     $ vi data_transfer.py
     ```
-3. Edit `submit_data.lsf` and modify instances of `<YOUR_PROJECT_ID>` and `<YOUR_USER_ID>`.
-4. Submit the job:
+
+3. Submit a job:
+
     ```
     $ bsub -L $SHELL submit_data.lsf
     ```
-5. If you fixed the script, you should see the below output in `cupy_xfer.<JOB_ID>.out` after the job completes:
+
+4. If you fixed the script, you should see the below output in `cupy_xfer.<JOB_ID>.out` after the job completes:
+
     ```python
     <CUDA Device 0> done
     <CUDA Device 1> done
@@ -377,6 +368,7 @@ More specifically, let's see how much faster CuPy can be than NumPy on Ascent.
 You won't need to fix any errors; this is mainly a demonstration on what CuPy is capable of.
 
 There are a few things to consider when running on GPUs, which also apply to using CuPy:
+
 * Higher precision means higher cost (time and space)
 * The structuring of your data is important
 * The larger the data, the better for GPUs (but needs careful planning)
@@ -392,8 +384,8 @@ import time as tp
 
 A      = np.random.rand(3000,3000) # NumPy rand
 G      = cp.random.rand(3000,3000) # CuPy rand
-G32    = cp.random.rand(3000,3000,dtype=cp.float32) # Switch datatype to float32 instead of 64 (default)
-G32_9k = cp.random.rand(9000,1000,dtype=cp.float32) # Restructure matrix
+G32    = cp.random.rand(3000,3000,dtype=cp.float32) # Create float32 matrix instead of float64 (default)
+G32_9k = cp.random.rand(9000,1000,dtype=cp.float32) # Create float32 matrix of a different shape
 
 t1 = tp.time()
 np.linalg.svd(A) # NumPy Singular Value Decomposition
@@ -424,12 +416,11 @@ First, NumPy is timed for a 3000x3000 dimension matrix.
 Then, a 3000x3000 matrix in CuPy is timed.
 As you will see shortly, the use of CuPy will result in a major performance boost when compared to NumPy, even though the matrices are structured the same way.
 This is improved upon further by switching the data type to `float32` from `float64` (the default).
-Lastly, the matrix is restructured to be 9000x1000, which contains the same number of elements, just rearranged.
+Lastly, a 9000x1000 matrix is timed, which contains the same number of elements as the original matrix, just rearranged.
 Although you may not expect it, the restructuring results in a big performance boost as well.
 
 Let's see the boosts explicitly by running the `timings.py` script.
-First, just like with `submit_data.lsf`, you will need to modify `submit_timings.lsf` to include your relevant project and user IDs.
-After doing so, you are ready to submit the job:
+To do so, you must submit `submit_timings.lsf` to the queue:
 
 ```
 $ bsub -L $SHELL submit_timings.lsf

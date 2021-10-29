@@ -5,8 +5,8 @@ import time as tp
 
 A      = np.random.rand(3000,3000) # NumPy rand
 G      = cp.random.rand(3000,3000) # CuPy rand
-G32    = cp.random.rand(3000,3000,dtype=cp.float32) # Switch datatype to float32 instead of 64 (default)
-G32_9k = cp.random.rand(9000,1000,dtype=cp.float32) # Restructure matrix
+G32    = cp.random.rand(3000,3000,dtype=cp.float32) # Create float32 matrix instead of float64 (default)
+G32_9k = cp.random.rand(9000,1000,dtype=cp.float32) # Create float32 matrix of a different shape
 
 t1 = tp.time()
 np.linalg.svd(A) # NumPy Singular Value Decomposition
