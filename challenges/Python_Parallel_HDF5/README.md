@@ -138,6 +138,8 @@ First, change directories to your GPFS scratch area and copy over the python and
 
 ```
 $ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ mkdir h5py_test
+$ cd h5py_test
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hello_mpi.py .
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
 $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_hello.lsf .
