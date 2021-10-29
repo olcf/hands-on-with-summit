@@ -124,7 +124,7 @@ Congratulations, you just installed CuPy on Ascent!
 ## Getting Started With CuPy
 
 > NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
-> However, if you logged out after finishing the previous section, you must load the cuda and python modules followed by activating your CuPy conda environment before moving on.
+> However, if you logged out after finishing the previous section, you must load the "cuda/11.0.2" and "python" modules followed by activating your CuPy conda environment before moving on.
 
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using CuPy in their user guide under the [CuPy Basics](https://docs.cupy.dev/en/stable/user_guide/basic.html) section.
@@ -327,7 +327,7 @@ Specifically, there are three lines that need fixing in this script (marked by t
 
 Your challenge is to apply the necessary function calls on the three "TO-DO" lines to transfer the data between the GPUs and CPUs properly.
 Some of the questions to help you: What function do I use to pass arrays to a GPU? What function do I use to pass arrays to a CPU?
-Also, you can use the error messages to your advantage, they will give you hints as well.
+Also, you can use the error messages to your advantage (they will give you hints as well).
 If you're having trouble, you can check `data_transfer_solution.py`.
 
 To do this challenge:
