@@ -25,7 +25,8 @@ In this challenge, you will:
 
 ## Installing CuPy
 
-First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules:
+First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+Assuming you cloned the repository in your home directory:
 
 ```
 $ cd ~/hands-on-with-summit/challenges/Python_Cupy_Basics
@@ -122,14 +123,14 @@ Congratulations, you just installed CuPy on Ascent!
 
 ## Getting Started With CuPy
 
+> NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
+> However, if you logged out after finishing the previous section, you must `module load python` and activate your CuPy conda environment before moving on.
+
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using CuPy in their user guide under the [CuPy Basics](https://docs.cupy.dev/en/stable/user_guide/basic.html) section.
 We will be following this walkthrough on Ascent.
 This is done to illustrate the basics, but participants should **NOT** explicitly follow along (as resources are limited on Ascent and interactive jobs will clog up the queue).
 The syntax below assumes being in a Python shell with access to 4 GPUs.
-
-> NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
-> However, if you logged out after finishing the previous section, you must `module load python` and activate your CuPy conda environment before moving on.
 
 As is the standard with NumPy being imported as "np", CuPy is often imported in a similar fashion:
 
