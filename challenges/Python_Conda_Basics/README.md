@@ -78,7 +78,7 @@ $ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/asce
 The "-p" flag specifies the desired path and name of your new virtual environment.
 The directory structure is case sensitive, so be sure to insert "<YOUR_PROJECT_ID>" as lowercase.
 Directories will be created if they do not exist already (provided you have write-access in that location).
-Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your $HOME directory.
+Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your `$HOME` directory.
 
 > NOTE: It is highly recommended to create new environments in the "Project Home" directory (on Ascent, this is `/ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>`).
 > This space avoids purges, allows for potential collaboration within your project, and works better with the compute nodes.
@@ -187,7 +187,7 @@ Congratulations, you have just created your own Python environment and ran on on
     It is not recommended to try to install new packages into the base environment.
     Instead, you can clone the base environment for yourself and install packages into the clone.
     To clone an environment, you must use the `--clone <env_to_clone>` flag when creating a new conda environment.
-    An example for cloning the base environment into your $HOME directory on Ascent is provided below:
+    An example for cloning the base environment into your `$HOME` directory on Ascent is provided below:
 
     ```
     $ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/baseclone-ascent --clone base
@@ -209,15 +209,95 @@ Congratulations, you have just created your own Python environment and ran on on
     ```
     $ conda config --show envs_dirs
     ```
-    On Ascent, the default location is your $HOME directory.
+    On Ascent, the default location is your `$HOME` directory.
     If you plan to frequently create environments in a different location than the default (such as `/ccsopen/proj/...`), then there is an option to add directories to the `envs_dirs` list.
     To do so, you must execute:
     ```
     $ conda config --append envs_dirs /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent
     ```
-    This will create a `.condarc` file in your $HOME directory if you do not have one already, which will now contain this new envs_dirs location.
+    This will create a `.condarc` file in your `$HOME` directory if you do not have one already, which will now contain this new envs_dirs location.
     This will now enable you to use the `--name env_name` flag when using conda commands for environments stored in that specific directory, instead of having to use the `-p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/env_name` flag and specifying the full path to the environment.
     For example, you can do `source activate py3711-ascent` instead of `source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/py3711-ascent`.
+
+## Quick-Reference Commands
+
+* List environments:
+
+    ```
+    $ conda env list
+    ```
+
+* List installed packages in current environment:
+
+    ```
+    $ conda list
+    ```
+
+* Creating an environment with Python version X.Y:
+
+    For a **specific path**:
+
+    ```
+    $ conda create -p /path/to/your/my_env python=X.Y
+    ```
+
+    For a **specific name**:
+
+    ```
+    $ conda create -n my_env python=X.Y
+    ```
+       
+* Deleting an environment:
+
+    For a **specific path**:
+
+    ```
+    $ conda env remove -p /path/to/your/my_env
+    ```
+
+    For a **specific name**:
+
+    ```
+    $ conda env remove -n my_env
+    ```
+
+* Copying an environment:
+
+    For a **specific path**:
+
+    ```
+    $ conda create -p /path/to/new_env --clone old_env
+    ```
+
+    For a **specific name**:
+
+    ```
+    $ conda create -n new_env --clone old_env
+    ```
+       
+* Activating/Deactivating an environment:
+
+    ```
+    $ source activate my_env
+    $ source deactivate # deactivates the current environment
+    ```
+
+* Installing/Uninstalling packages:
+
+    Using **conda**:
+
+    ```
+    $ conda install package_name
+    $ conda remove package_name
+    ```
+
+    Using **pip**:
+
+    ```
+    $ pip install package_name
+    $ pip uninstall package_name
+    $ pip install --no-binary=package_name package_name # builds from source
+    ```
 
 ## <a name="refs"></a>Additional Resources
 
