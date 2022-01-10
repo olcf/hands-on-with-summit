@@ -14,7 +14,7 @@ The three files
 
 contain the hidden passwords, but it's up to you to find them! 
 
-The passwords can be found by matching the string "passsword" or a representation of it using non-alphabetic characters. Think about how people may use 0s in place of Os, or @ instead of A. For example, consider the following lines of text from a file `demo.txt`:
+The passwords can be found by matching the string "password" or a representation of it using non-alphabetic characters. Think about how people may use 0s in place of Os, or @ instead of A. For example, consider the following lines of text from a file `demo.txt`:
 
 ```
 Qd2ciwv2UqRHazew1cIg
