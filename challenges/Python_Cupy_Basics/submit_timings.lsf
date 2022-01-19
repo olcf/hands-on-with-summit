@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P GEN168
+#BSUB -P GEN171
 #BSUB -W 00:05
 #BSUB -nnodes 1
 #BSUB -J cupy_timings
@@ -14,6 +14,6 @@ module load cuda/11.0.2
 module load python
 
 source activate $HOME/.conda/envs/cupy-ascent
-export CUPY_CACHE_DIR="${MEMBERWORK}/gen168/.cupy/kernel_cache"
+export CUPY_CACHE_DIR="${MEMBERWORK}/gen171/.cupy/kernel_cache"
 
 jsrun -n1 -g1 python3 timings.py

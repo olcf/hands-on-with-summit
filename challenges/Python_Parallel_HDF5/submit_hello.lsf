@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P GEN168
+#BSUB -P GEN171
 #BSUB -W 00:05
 #BSUB -nnodes 1
 #BSUB -J mpi4py

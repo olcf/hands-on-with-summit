@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN168
+#BSUB -P GEN171
 #BSUB -J hello_test
 #BSUB -o hello_test.%J
 #BSUB -nnodes 1

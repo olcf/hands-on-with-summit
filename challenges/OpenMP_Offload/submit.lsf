@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN168
+#BSUB -P GEN171
 #BSUB -J mat_mul
 #BSUB -o matmul.%J
 #BSUB -nnodes 1
