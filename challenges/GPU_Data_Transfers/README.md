@@ -2,7 +2,7 @@
 
 When writing a code to be run on a hybrid compute system (i.e., one with both CPUs and GPUs) such as Summit, you must consider that the CPU and GPU are separate processors with separate memory associated with them. As such, when running a program on this kind of system, control shifts between the CPU and GPU throughout the code and (because of the separate memory) data must be passed back and forth between the two processors as needed.
 
-In this challenge, you will learn how to perform these data transfers with a simple CUDA vector addition program. The only parts of the code that are missing are the data transfers between CPU and GPU. Your task will be to look up the `cudaMemcpy` API call and add in the required data transfers.
+In this challenge, you will learn how to perform these data transfers with a simple CUDA vector addition program. Your task will be to add in missing arguments to the 3 `cudaMemcpy` API calls (functions used to transfer data between CPU and GPU) so data will be transferred correctly between the CPU (host) and GPU (device). To do so, you will need to look up the `cudaMemcpy` API in NVIDIA's CUDA Runtime API documentation (link below). 
 
 ## Basic Outline of the Code
 
@@ -26,9 +26,11 @@ Before getting started, you'll need to make sure you're in the `GPU_Data_Transfe
 $ cd ~/hands-on-with-summit/challenges/GPU_Data_Transfers/
 ```
 
-There are two places in the `vector_addition.cu` code (identified with the word `TODO`) where data transfers must be added. Find these two places and add in the necessary data transfers by looking up the `cudaMemcpy` API call (use a Google search for this).
+There are two places in the `vector_addition.cu` code (identified with the word `TODO`) where missing arguments will need to be added to the `cudaMemcpy` API calls. Find these two places and add in the missing arguments by looking up the `cudaMemcpy` API call to know which arguments to add. Use [this link](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__MEMORY.html#group__CUDART__MEMORY_1gc263dbe6574220cc776b45438fc351e8) to the NVIDIA Documentation on the `cudaMemcpy` routine to learn how to use the routine.
 
 > NOTE: You will not need to edit any files other than `vector_addition.cu`.
+
+> NOTE: An Application Programming Interface (API) routine/call should just be thought of as a pre-existing function that can be called from within our program.
 
 ## Compile and Run the Program
 

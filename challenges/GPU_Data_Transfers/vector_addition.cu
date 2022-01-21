@@ -38,13 +38,14 @@ int main()
 	}
 
 	/* Copy data from host arrays A and B to device arrays d_A and d_B - */
-
-	/***********************************************/
-	/* TODO: Look up cudaMemcpy API and...         */
-	/*  Copy data from A to d_A                    */
-	/*  Copy data from B to d_B                    */
-	/***********************************************/
-
+    /* TODO: Look up cudaMemcpy API and..                                */
+    /*  Replace the ?s in the cudaMemcpy calls below with the correct    */
+    /*  arguments to                                                     */
+    /*     - copy host array A to device array d_A                       */
+    /*     - copy host array B to device array d_B                       */
+    /* ----------------------------------------------------------------- */
+    cudaMemcpy(?, ?, bytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(?, ?, bytes, cudaMemcpyHostToDevice);
 
 	/* -------------------------------------------------------------------
 	Set execution configuration parameters
@@ -58,12 +59,12 @@ int main()
 	add_vectors<<< blk_in_grid, thr_per_blk >>>(d_A, d_B, d_C);
 
 	/* Copy data from device array d_C to host array C ----------------- */
-
-	/***********************************************/
-	/* TODO: Look up cudaMemcpy API and...         */
-	/*	Copy data from d_C to C                    */
-	/***********************************************/
-
+    /* TODO: Look up cudaMemcpy API and...                               */
+    /*  Replace the ?s in the cudaMemcpy call below with the correct     */
+    /*  arguments to                                                     */
+    /*     - copy device array d_C to host array C                       */
+    /* ----------------------------------------------------------------- */
+    cudaMemcpy(?, ?, bytes, cudaMemcpyDeviceToHost);
 
 	/* Verify results -------------------------------------------------- */
 	for(int i=0; i<N; i++)
