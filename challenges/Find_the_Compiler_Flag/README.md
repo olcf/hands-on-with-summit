@@ -3,6 +3,8 @@ OpenACC is a directive-based approach to programming for GPUs. Instead of using 
 
 In this challenge, you will need to find the compiler flag that enables GPU support in a simple OpenACC vector addition program. The single `#pragma acc parallel loop` (which is the hint to the compiler) line is the only change needed to make this a GPU code. But without the correct compiler flag, that line will be ignored and a CPU-only executable will be created. 
 
+> NOTE: Compilers flags are optional arguments that can be given to a compiler when compiling a program.
+
 ## Step 1: Set Up the Programming Environment
 
 In order to run the provided OpenACC code, we will need to modify our programming environment. First, we will change the compiler to PGI:
@@ -32,7 +34,7 @@ $ cd ~/hands-on-with-summit/challenges/Find_the_Compiler_Flag
 ```
 
 Ok, if you haven't done so already, go find the compiler flag...
-Ok, now that you think you found the correct compiler flag, add it to the end of the `CFLAGS = -Minfo=all` line in the Makefile. Then, compile the code:
+Ok, now that you think you found the correct compiler flag, add it to the end of the `CFLAGS = -Minfo=all` line in the Makefile (make sure to include a space after `-Minfo=all` and the compiler flag you just found). Then, compile the code:
 
 ```
 $ make
