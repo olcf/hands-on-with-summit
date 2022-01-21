@@ -74,7 +74,7 @@ The `private` clause declares a variable to be "private" to each thread in a par
 default(none)
 ```
 
-The `default` clause allows you to set the default value of privacy for variables. If set to `default(shared)`, then all variables will be assumed shared - but can be overridden by a separate `private` clause for specific variables. The default could also be set to e.g., `default(private)`. But many programmers prefer to set `default(none)` so that all variables must be manually declared as `shared`, `private` or otherwise.
+The `default` clause allows you to set the default value of privacy for variables. If set to `default(shared)`, then all variables will be assumed shared - but can be overridden by a separate `private` clause for specific variables. The default could also be set to e.g., `default(private)`. But many programmers prefer to set `default(none)` so that all variables must be manually declared as `shared`, `private`, or otherwise.
 
 ### Compile and Run the Code
 
