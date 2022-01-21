@@ -4,8 +4,6 @@ OpenMP is programming model that allows you to write parallel code for multi-cor
 
 In this challenge, we will explore the very basics of the [OpenMP Application Program Interface (OpenMP API)](https://www.openmp.org/specifications/), which consists of a collection of compiler directives, library routines, and environment variables. In the examples below, we will insert compiler directives into the code to tell the compiler how the program should be executed in parallel, and we will also use a couple of API functions and environment variables along the way.
 
-> NOTE: If you wanted to use 2 (or more) compute nodes to cooperatively solve a problem, you would need to consider that each compute node has its own pool of 512 GB of memory - so you would need a way of passing data (e.g., an array of values) back and forth between the 2 distinct memories. This is an example of a distributed-memory system and requires a distributed-memory programming model, such as MPI (Message Passing Interface).
-
 ## Example Program 1: Hello, World!
 
 To begin exploring OpenMP, we'll use a simple hello world program:
@@ -49,7 +47,7 @@ Inside the curly braces, we have
 ```c
 num_threads = omp_get_num_threads();  // Find the number of OpenMP threads spawned
 thread_id = omp_get_thread_num();     // Find a specific OpenMP thread's ID
-virtual_core  = sched_getcpu();       // Find the hardware thread the OpenMP thread ran on
+virtual_core  = sched_getcpu();       // Find the virtual core the OpenMP thread ran on
 ```
 
 `omp_get_num_threads()` and `omp_get_thread_num()` are two of the OpenMP API functions. They are used to determine the total number of OpenMP threads spawned inside the parallel region and a specific OpenMP thread's ID, respectively. In order to use these API calls, you need to include the `#include <omp.h>` header file. `sched_getcpu()` returns the ID of the virtual CPU core the OpenMP thread runs on - but this is **NOT** part of OpenMP.
