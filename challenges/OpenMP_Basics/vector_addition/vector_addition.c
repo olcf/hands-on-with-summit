@@ -48,6 +48,10 @@ int main()
     printf("Number of OpenMP threads: %03d\n", num_threads);
     printf("Elapsed Time (s)        : %.06f\n", stop - start);	
 
+    free(A);
+    free(B);
+    free(C);
+
     return 0;
 }
 
