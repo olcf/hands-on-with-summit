@@ -40,7 +40,7 @@ Ok, now that you think you found the correct compiler flag, add it to the end of
 $ make
 ```
 
-If you added the correct flag, you should see evidence of it in the output from the compiler:
+If you added the correct flag, you should see evidence of it in the output from the compiler (i.e., the acc and copyout/copyin lines):
 
 ```
 main:
