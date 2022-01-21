@@ -19,7 +19,7 @@ $ module load cuda
 
 ## Step 2: Find the Necessary Compiler Flag
 
-Next, you will need to find the PGI compiler flag needed to compile the code with OpenACC-support. To do so, you can either search within the [Summit User Guide](https://docs.olcf.ornl.gov/systems/summit_user_guide.html#) or the [PGI documentation](https://www.pgroup.com/resources/docs/19.10/openpower/index.htm). 
+Next, you will need to find the PGI compiler flag needed to compile the code with OpenACC-support. To do so, you can either search within the [Summit User Guide](https://docs.olcf.ornl.gov/systems/summit_user_guide.html#), within the [PGI documentation](https://www.pgroup.com/resources/docs/19.10/openpower/index.htm), or just Google "PGI OpenACC compiler flag". Being able to use on-line resources to find e.g., compiler flags is often a necessary task in HPC.
 
 > NOTE: Compiler flags differ between different compilers so make sure you find the correct flag for the **PGI compiler**.
 
