@@ -2,6 +2,7 @@
 
 The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. 
 
+
 MPI can be used in conjunction with threading and accelerators. For example, you might use MPI to pass work between compute nodes and then use threads or accelerators to divide work among the different processing elements on the node. 
 
 This challenge will explore an MPI hello-world and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node. 
@@ -23,9 +24,9 @@ A good refence for learning more about MPI is [MPI: A Message-Passing Interface 
 </center>
 <br>
 
+                                                       
                                                         
-                                                        
-The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator.
+The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. All MPI ranks run the same code. The programmer must use logic, based on the MPI rank's ID,to differentiate the code paths. 
 
 <br>
 <center>
@@ -241,8 +242,8 @@ Your challenge is to use the arguments in the send function and the function def
 
 Some of the questions to help you:
 Why does the MPI_Send function say that the message has 6 elements?
-Why datatype is "hello!" ? 
-Where is the message going? 
+What datatype is "hello!" ? 
+Where is the message coming from? 
 
 ```bash
 #include <stdio.h>
