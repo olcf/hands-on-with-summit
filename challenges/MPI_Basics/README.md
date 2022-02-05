@@ -26,7 +26,7 @@ A good refence for learning more about MPI is [MPI: A Message-Passing Interface 
 
                                                        
                                                         
-The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. All MPI ranks run the same code. The programmer must use logic, based on the MPI rank's ID,to differentiate the code paths. 
+The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID,to differentiate the code paths. 
 
 <br>
 <center>
