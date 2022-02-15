@@ -91,7 +91,7 @@ $ conda env list
 # conda environments:
 #
                       *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
-base                     /sw/ascent/python/3.6/anaconda3/5.3.0
+base                     /sw/ascent/python/3.8/anaconda-base
 ```
 
 ## Installing mpi4py
