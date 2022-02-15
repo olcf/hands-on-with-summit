@@ -29,7 +29,7 @@ $ conda env list
 
 # conda environments:
 #
-base                  *  /sw/ascent/python/3.6/anaconda3/5.3.0
+base                  *  /sw/ascent/python/3.8/anaconda-base
 ```
 
 This also is a great way to keep track of the locations and names of all other environments that have been created.
@@ -40,7 +40,7 @@ To see what packages are installed in the active environment, use `conda list`:
 ```
 $ conda list
 
-# packages in environment at /sw/ascent/python/3.6/anaconda3/5.3.0:
+# packages in environment at /sw/ascent/python/3.8/anaconda-base:
 #
 # Name                    Version                   Build  Channel
 _ipyw_jlab_nb_ext_conf    0.1.0                    py36_0
@@ -62,7 +62,7 @@ We can find the version of Python that exists in this base environment by execut
 ```
 $ python --version
 
-Python 3.6.6
+Python 3.8.12
 ```
 
 ## Creating a new environment
@@ -117,7 +117,7 @@ $ conda env list
 # conda environments:
 #
                       *  /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/ascent/py3711-ascent
-base                     /sw/ascent/python/3.6/anaconda3/5.3.0
+base                     /sw/ascent/python/3.8/anaconda-base
 ```
 
 ## Installing packages
