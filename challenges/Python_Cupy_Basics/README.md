@@ -86,7 +86,7 @@ $ conda env list
 # conda environments:
 #
                       *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
-base                     /sw/ascent/python/3.6/anaconda3/5.3.0
+base                     /sw/ascent/python/3.8/anaconda-base
 ```
 
 CuPy depends on NumPy, so let's install an optimized version of NumPy into our fresh conda environment:
