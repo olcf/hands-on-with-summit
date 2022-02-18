@@ -41,7 +41,7 @@ The script unloads all of your previously activated conda environments, and no h
 Next, we will load the gnu compiler module (most Python packages assume GCC), cuda module (necessary for CuPy), and the python module (allows us to create a new conda environment):
 
 ```
-$ module load gcc/7.4.0
+$ module load gcc/7.5.0
 $ module load cuda/11.0.2
 $ module load python
 ```
