@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN171
+#BSUB -P GEN172
 #BSUB -J vec_add_test
 #BSUB -o vec_add_test.%J
 #BSUB -nnodes 1
