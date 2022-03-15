@@ -26,7 +26,7 @@ int main()
     start = omp_get_wtime();
 
 	// Perform element-wise addition of vectors
-    #pragma omp parallel default(none) shared(A, B, C, num_threads)
+    #pragma omp parallel default(none) shared(A, B, C, num_threads, N)
     {
       num_threads = omp_get_num_threads(); 
       #pragma omp for
