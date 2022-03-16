@@ -8,6 +8,7 @@ Written by Tom Papatheodore
 #include <stdio.h>
 #include <essl.h>
 #include <cuda.h>
+#include <cuda_runtime.h>
 #include <cublas_v2.h>
 
 // Macro for checking errors in CUDA API calls

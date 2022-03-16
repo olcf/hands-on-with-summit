@@ -1,4 +1,4 @@
-CCOMP  = pgcc
+CCOMP  = pgc++
 CFLAGS =
 
 INCLUDES  = -I$(OLCF_ESSL_ROOT)/include -I$(OLCF_CUDA_ROOT)/include
