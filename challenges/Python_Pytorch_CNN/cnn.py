@@ -11,6 +11,7 @@ from matplotlib.ticker import MultipleLocator
 import numpy as np
 import time as tp
 
+############## FUNCTION DEFINITIONS ######################
 
 def imshow_grid(classes, imgs, labels, predics, num_imgs):
     '''Create a grid of a batch of images using imshow.
@@ -49,7 +50,7 @@ def imshow_grid(classes, imgs, labels, predics, num_imgs):
     figure.savefig('last_batch.png')
 
 
-def overall_results(classes, num_correct, num_samples, num_predictions, acc_network):
+def overall_results(classes, num_correct, num_samples, num_predictions, acc_network, batches, epochs):
     '''Create a side-by-side bar graph of the success rate of identifying
     a given class and the success rate of a given prediction'''
 
@@ -76,7 +77,8 @@ def overall_results(classes, num_correct, num_samples, num_predictions, acc_netw
     ax.set_ylim(0.0,100.0)
     ax.yaxis.set_minor_locator(MultipleLocator(5))
 
-    # Legend
+    # Title and Legend
+    ax.set_title('Overall Results for: batches = %s, epochs = %s' %(batches, epochs))
     ax.legend()
 
     # Save Plot
@@ -103,18 +105,29 @@ class ConvNet(nn.Module):
         x = self.fc3(x)                       # -> n, 10
         return x
 
+############## END OF FUNCTION DEFINITIONS #################
+
+
+
+#################### CNN WORKFLOW ##########################
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(device)
+print('The device you are using is: ',device)
 
 # Hyper-parameters 
-num_epochs = 40
-batch_size = 16
+num_epochs = 4 # CHANGE-ME
+batch_size = 4 # CHANGE-ME
 learning_rate = 0.001
 
-# dataset has PILImage images of range [0, 1]. 
-# We transform them to Tensors of normalized range [-1, 1]
+print('')
+print('Batch size:', batch_size)
+print('Number of epochs:', num_epochs)
+print('Learning rate:', learning_rate)
+print('')
+
+# First transform image to tensor
+# Then normalize tensor to range [-1, 1]
 transform = transforms.Compose(
     [transforms.ToTensor(),
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
@@ -123,11 +136,11 @@ transform = transforms.Compose(
 train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=transform)
 
-test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       download=True, transform=transform)
-
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
                                           shuffle=True, num_workers=0)
+
+test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       download=True, transform=transform)
 
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,
                                          shuffle=False, num_workers=0)
@@ -193,6 +206,12 @@ with torch.no_grad():
             n_class_samples[label] += 1
             n_class_predics[pred] += 1
 
+#################### END OF CNN WORKFLOW #####################
+
+
+
+#################### ANALYSIS / STATS ########################
+
 # E.g., Success rate of IDENTIFYING frogs
 print('')
 print('Accuracy of Class Samples (e.g., Number of Frogs Correct / Number of Frog Samples)')
@@ -217,7 +236,15 @@ for i in range(10):
 acc = 100.0 * n_correct / n_samples
 print('')
 print(f'Accuracy of the network: {acc} %')
-print('Execution time of training loop: ', t2-t1)
+print('Execution time of training loop: ', t2-t1, 's')
+
+print('')
+if ( (acc >= 60.0) and (learning_rate==0.001)):
+    print('Success!')
+elif ( (acc >= 60.0) and (learning_rate!=0.001)):
+    print('Great! But change your learning rate back to 0.001 for the challenge')
+else:
+    print('Accuracy not 60% or above, try again!')
 
 # Get the last batch of images
 dataiter = iter(test_loader)
@@ -231,5 +258,6 @@ plt.rc('font', family='serif') # set plot font style
 imshow_grid(classes= classes, imgs= images, labels= labels, predics= predicted, num_imgs= batch_size)
 
 overall_results(classes= classes, num_correct= n_class_correct, num_samples= n_class_samples, \
-                num_predictions= n_class_predics, acc_network= acc)
+                num_predictions= n_class_predics, acc_network= acc, batches= batch_size, epochs= num_epochs)
 
+#################### END OF ANALYSIS / STATS ###################

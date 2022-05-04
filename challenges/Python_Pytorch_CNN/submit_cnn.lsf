@@ -1,10 +1,10 @@
 #!/bin/bash
 #BSUB -P STF007
-#BSUB -W 00:30
+#BSUB -W 01:00
 #BSUB -nnodes 1
-#BSUB -J python_test_gpu_16_2
-#BSUB -o python_test_gpu_16_2.%J.out
-#BSUB -e python_test_gpu_16_2.%J.err
+#BSUB -J pytorch_cnn
+#BSUB -o pytorch_cnn.%J.out
+#BSUB -e pytorch_cnn.%J.err
 #BSUB -alloc_flags smt4 gpumps
 
 cd $LSB_OUTDIR
@@ -13,18 +13,7 @@ date
 module load python
 module load cuda
 
-
 source activate opence-clone
-#export OMP_NUM_THREADS=2
-#export OMP_SCHEDULE="dynamic"
-#export OMP_STACKSIZE="256M"
-export MPLCONFIGDIR='/gpfs/wolf/scratch/9b8/gen107/mlstuff'
+export MPLCONFIGDIR="${MEMBERWORK}/stf007/mpl_cache"
 
-#REG CPU
-#jsrun -n1 -a1 -c2 -g0 python3 cnn.py
-
-#REG GPU
-#jsrun -n1 -a1 -c2 -g1 python3 cnn.py
-#jsrun -n1 -a1 -c16 -g1 -bpacked:16 -dpacked python3 cnn.py
-jsrun -n1 -a1 -c21 -g1 -b packed:21 -d packed python3 cnn_clean.py
-#jsrun -bpacked:7 -g6 -a6 -c42 -r1 python3 cnn.py
+jsrun -n1 -a1 -c21 -g1 -b packed:21 -d packed python3 -u cnn.py
