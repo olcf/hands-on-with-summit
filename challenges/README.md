@@ -21,5 +21,6 @@ After completing these challenges, feel free to "choose your own adventure" by c
 - [OpenMP_Offload](OpenMP_Offload) <img src="../images/medium_badge.png" width="80">
 - [Python_Parallel_HDF5](Python_Parallel_HDF5) <img src="../images/medium_badge.png" width="80">
 - [Python_Cupy_Basics](Python_Cupy_Basics) <img src="../images/hard_badge.png" width="80">
+- [Python_Pytorch_Basics](Python_Pytorch_Basics) <img src="../images/hard_badge.png" width="80">
 - [GPU_Matrix_Multiply](GPU_Matrix_Multiply) <img src="../images/hard_badge.png" width="80">
 - [GPU_Profiling](GPU_Profiling) <img src="../images/hard_badge.png" width="80">
