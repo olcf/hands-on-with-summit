@@ -9,7 +9,7 @@ Since DL processes information in a similar manner as a human brain does, it is 
 Using DL in this manner is typically done via a Convolutional Neural Network (CNN), which is useful for analyzing image data.
 
 As ML/DL models evolve to keep up with the complexity of the real world, a supercomputer's resources get more and more valuable.
-In high-performance computing (HPC), ML/DL is getting more and more popular because of the shear amount of data that needs to be processed and the computational power it requires.
+In high-performance computing (HPC), ML/DL is getting more and more popular because of the sheer amount of data that needs to be processed and the computational power it requires.
 To process and train an accurate ML/DL model in a reasonable amount of time, more and more compute nodes are required as the amount of big data increases.
 
 [PyTorch](https://pytorch.org/) is a library for Python programs that pairs well with HPC resources and facilitates building DL projects.

@@ -24,7 +24,7 @@ def imshow_grid(classes, imgs, labels, predics, num_imgs):
     rows = int( np.ceil( num_imgs / cols ) )
 
     # Create figure
-    figure, ax = plt.subplots(rows, cols, constrained_layout=True)
+    figure, ax = plt.subplots(rows, cols, constrained_layout=True, squeeze=False)
 
     for i in range(0, num_imgs):
 
