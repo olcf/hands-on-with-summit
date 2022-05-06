@@ -50,25 +50,35 @@ Table of Contents:
 
 ## 1. <a name="setup"></a>Setting Up Our Environment
 
+First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+Assuming you cloned the repository in your home directory:
+
+```
+$ cd ~/hands-on-with-summit/challenges/Python_Pytorch_Basics
+$ source deactivate_envs.sh
+$ module purge
+$ module load DefApps
+```
+
+The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
+The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
+
+Next, we will load the python module (allows us to utilize conda environments) and the cuda module (necessary for using PyTorch on the GPU):
+
+```
+$ module load python
+$ module load cuda
+```
+
 PyTorch is included within a Conda environment in the `open-ce` module on Ascent.
-Because we need to install an additional package (matplotlib) for this challenge, we have to clone this environment and install matplotlib afterwards:
+However, due to the need to install an additional package (matplotlib) and how long it takes to clone and install the `open-ce` environment, we have already created an environment for you to activate.
+Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate the environment:
 
 ```
-$ module load open-ce
-$ conda create -p $HOME/.conda/envs/opence_clone --clone open-ce-1.5.0-py39-0
+$ source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone
 ```
 
-Cloning the environment may take several minutes because of how large the environment is.
-Once your environment finishes cloning and you activate it with `conda activate`, you will be ready to install matplotlib:
-
-```
-$ conda activate opence_clone
-$ conda install matplotlib
-```
-
-After following the prompts and pressing "Y", you are ready to continue with the challenge.
-
-> Note: If for some reason you end up having to log back in to Ascent during this challenge, you can get back to your cloned environment by doing: `module load open-ce` and `conda activate opence_clone`. Alternatively, you can do `module load python cuda` and `source activate opence_clone`.
+> Note: If for some reason you end up having to log back in to Ascent during this challenge, you can get back to your cloned environment by doing: `module load python cuda` and `source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone`.
 
 
 ## 2. <a name="ptorch"></a>Getting Started With PyTorch
@@ -296,7 +306,7 @@ In the `cnn.py` challenge script (on lines 136 and 139) you can see this data lo
 
 ```python
 train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True,
-                                        download=True, transform=transform)
+                                        download=False, transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
                                           shuffle=True, num_workers=0)
@@ -320,7 +330,7 @@ The above just covers the "training dataset", next we need to initialize the "te
 
 ```python
 test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False,
-                                       download=True, transform=transform)
+                                       download=False, transform=transform)
 
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,
                                          shuffle=False, num_workers=0)
@@ -684,7 +694,14 @@ After you complete the challenge, you can transfer these plots to your computer 
 
 To do this challenge:
 
-1. Use your favorite editor to change `num_epochs` and `batch_size` to tune your network (lines 119 and 120, marked by "CHANGE-ME"). For example:
+1. Run the `download_data.py` script to download the CIFAR-10 dataset. This is necessary because the compute nodes won't be able to download it during your batch job when running `cnn.py`. If successful, you'll see a directory named `data` in your current directory.
+
+    ```
+    $ python3 download_data.py
+    ```
+    > Note: You only need to run this script once.
+
+2. Use your favorite editor to change `num_epochs` and `batch_size` to tune your network (lines 119 and 120, marked by "CHANGE-ME"). For example:
 
     ```
     $ vi cnn.py
@@ -697,14 +714,14 @@ To do this challenge:
     ```
     > Warning: You must pick a `batch_size` so that 50,000 divided by `batch_size` results in a whole number. You can get errors if this is not the case.
 
-2. Submit a job (the `-L $SHELL` flag is necessary):
+3. Submit a job (the `-L $SHELL` flag is necessary):
 
     ```
     $ bsub -L $SHELL submit_cnn.lsf
     ```
 
-3. Look at the statistics printed in your `.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
-4. If you aren't successful, write down your results based on your parameters and try again! Looking at your `.out` file should help give you ideas of how to refine your parameters.
+4. Look at the statistics printed in your `.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
+5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `.out` file should help give you ideas of how to refine your parameters.
 
 > Hint: It's always a balance of the number of epochs and the size of your batches -- bigger numbers aren't always optimal. Try changing only one of the parameters and look at how it affects your network's performance.
 
