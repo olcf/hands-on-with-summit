@@ -720,8 +720,8 @@ To do this challenge:
     $ bsub -L $SHELL submit_cnn.lsf
     ```
 
-4. Look at the statistics printed in your `.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
-5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `.out` file should help give you ideas of how to refine your parameters.
+4. Look at the statistics printed in your `pytorch_cnn.<JOB_ID>.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
+5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `pytorch_cnn.<JOB_ID>.out` file should help give you ideas of how to refine your parameters.
 
 > Hint: It's always a balance of the number of epochs and the size of your batches -- bigger numbers aren't always optimal. Try changing only one of the parameters and look at how it affects your network's performance.
 
