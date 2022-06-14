@@ -1,0 +1,16 @@
+#!/bin/bash
+#BSUB -P TRN010
+#BSUB -W 00:10
+#BSUB -nnodes 1
+#BSUB -J galaxy
+#BSUB -o galaxy.%J.out
+#BSUB -e galaxy.%J.err
+
+cd $LSB_OUTDIR
+date
+
+module load python hdf5
+
+source activate h5pympi-ascent
+
+jsrun -n1 -r1 -a8 -c8 python3 -u galaxy.py
