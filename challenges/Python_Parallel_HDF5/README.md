@@ -26,6 +26,8 @@ Our plan for building parallel h5py is to:
 * Install h5py from source
 * Test our build with a Python script
 
+After successfully testing your build, you will then have the opportunity to complete a challenge involving the simulation of two galaxies colliding and how to get the simulation working with parallel h5py.
+
 ## Setting up the environment
 
 Building h5py from source is highly sensitive to the current environment variables set in your profile.
@@ -247,13 +249,15 @@ $ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_galaxy.lsf .
 ```
 
 The two scripts of interest are called `galaxy.py` and `generate_animation.py`.
-`galaxy.py` is the script that generates an HDF5 file using mpi4py and h5py, while `generate_animation.py` just creates a GIF of the results.
+The `galaxy.py` script generates an HDF5 file using mpi4py and h5py, while `generate_animation.py` just creates a GIF of the results.
 You will be dealing with `galaxy.py`.
 
 The goal of `galaxy.py` is to simulate an infalling galaxy made up of "particles" (stars) and a "nucleus" (the compact central region) colliding with a bigger host galaxy.
 This would require a lot of code for it to be the most accurate ("many body" problems in physics are complicated); however, we made some physical assumptions to simplify the problem so that it is less complicated but still results in a roughly accurate galactic event.
-Even with simplifying things down, this script does not run quickly when not using MPI, as the amount of stars you want to simulate over a given time period quickly slows things down -- we will be simulating 1000 stars and it takes about 10 minutes to for the script to complete on Ascent without using MPI.
-In this challenge, you will be using 8 MPI tasks to help speed the computations up by splitting up the stars across your MPI tasks (each MPI task will only simulate a subset of the total number of particles).
+Even with simplifying things down, this script does not run quickly when not using MPI, as the amount of stars you want to simulate over a given time period quickly slows things down.
+We will be simulating 1000 stars and it takes about 10 minutes for the script to complete on Ascent without using MPI, while completing in about 1.5 minutes when using 8 MPI tasks.
+
+In this challenge, you will be using 8 MPI tasks to help speed up the computations by splitting up the particles across your MPI tasks (each MPI task will only simulate a subset of the total number of particles).
 The tasks will then write their subset of the data in parallel to an HDF5 file that will hold the entire final dataset.
 
 Luckily all the physics related stuff is done for you and all you have to worry about is changing a few h5py lines for the code to perform properly.
@@ -272,8 +276,12 @@ dset_pos_nuc = f.create_dataset("pos_nuc", data=  )# TO-DO
 dset_vel_nuc = f.create_dataset("vel_nuc", data=  )# TO-DO
 ```
 
-Your challenge is to: 1. supply the necessary arguments to get h5py to work with mpi4py (the first TO-DO line), and 2. supply the necessary "dummy data" variables (either `dummy_data` or `dummy_nuc`) so that the shapes of the HDF5 datasets are correct (the rest of the TO-DO lines).
-A major question to help you: What arugments were used when testing the `hdf5_parallel.py` script earlier?
+Your challenge is to: 
+
+1. Supply the necessary arguments to get h5py to work with mpi4py (the first TO-DO line), and
+2. Supply the necessary "dummy data" variables (either `dummy_data` or `dummy_nuc`) so that the shapes of the HDF5 datasets are correct (the rest of the TO-DO lines).
+
+A major question to help you: "What arugments were used when testing the `hdf5_parallel.py` script earlier?"
 If you're having trouble, you can check `galaxy_solution.py` in the `solution` directory.
 
 To do this challenge:
