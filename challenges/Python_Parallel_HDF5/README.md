@@ -113,11 +113,12 @@ Next, we will install h5py from source.
 Because h5py depends on NumPy, we will install an optimized version of the NumPy package first using `conda install`:
 
 ```
-$ conda install -c defaults --override-channels numpy
+$ conda install -c defaults --override-channels numpy scipy matplotlib
 ```
 
 The `-c defaults --override-channels` flags ensure that conda will search for NumPy only on the "defaults" channel.
 Installing NumPy in this manner results in an optimized NumPy that is built against linear algebra libraries, which performs operations much faster.
+The SciPy and Matplotlib packages aren't required for installing h5py, but we will need them to run our galaxy challenge script later.
 
 Next, we are finally ready to install h5py from source:
 
@@ -223,6 +224,97 @@ GROUP "/" {
 ```
 
 If you see the above output, then congratulations you have used one of the fastest computers in the world to write a parallel HDF5 file in Python!
+
+## Galaxy Collision Challenge
+
+Now for the EXTRA fun part, using mpi4py and h5py together to simulate and generate scientific data (or *partially* scientific, at least).
+You will be using your newfound h5py and mpi4py knowledge to simulate two galaxies colliding.
+The results of the simulation will look something like this:
+
+<p align="center" width="100%">
+    <img width="50%" src="images/galaxy_collision.gif">
+</p>
+
+First, similar to before, change directories to your GPFS scratch area and copy over the python and batch scripts:
+
+```
+$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ mkdir galaxy_challenge
+$ cd galaxy_challenge
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/galaxy.py .
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/generate_animation.py .
+$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_galaxy.lsf .
+```
+
+The two scripts of interest are called `galaxy.py` and `generate_animation.py`.
+`galaxy.py` is the script that generates an HDF5 file using mpi4py and h5py, while `generate_animation.py` just creates a GIF of the results.
+You will be dealing with `galaxy.py`.
+
+The goal of `galaxy.py` is to simulate an infalling galaxy made up of "particles" (stars) and a "nucleus" (the compact central region) colliding with a bigger host galaxy.
+This would require a lot of code for it to be the most accurate ("many body" problems in physics are complicated); however, we made some physical assumptions to simplify the problem so that it is less complicated but still results in a roughly accurate galactic event.
+Even with simplifying things down, this script does not run quickly when not using MPI, as the amount of stars you want to simulate over a given time period quickly slows things down -- we will be simulating 1000 stars and it takes about 10 minutes to for the script to complete on Ascent without using MPI.
+In this challenge, you will be using 8 MPI tasks to help speed the computations up by splitting up the stars across your MPI tasks (each MPI task will only simulate a subset of the total number of particles).
+The tasks will then write their subset of the data in parallel to an HDF5 file that will hold the entire final dataset.
+
+Luckily all the physics related stuff is done for you and all you have to worry about is changing a few h5py lines for the code to perform properly.
+Specifically, there are five lines that need fixing in the `galaxy.py` script (marked by the "TO-DO" comments on lines 207-211):
+
+```python
+ # Create dummy data with correct shape
+dummy_data = np.empty((N_part, t_size, 3))*0. # Shape: [Number of particles, Number of timesteps, Number of dimensions (x, y, z)]
+dummy_nuc  = np.empty((1, t_size, 3))*0.
+
+ # Open and initialize HDF5 file with dummy data
+f = h5py.File('galaxy.hdf5', 'w', driver= , comm= )# TO-DO
+dset_pos_pt  = f.create_dataset("pos_pt",  data=  )# TO-DO
+dset_vel_pt  = f.create_dataset("vel_pt",  data=  )# TO-DO
+dset_pos_nuc = f.create_dataset("pos_nuc", data=  )# TO-DO
+dset_vel_nuc = f.create_dataset("vel_nuc", data=  )# TO-DO
+```
+
+Your challenge is to: 1. supply the necessary arguments to get h5py to work with mpi4py (the first TO-DO line), and 2. supply the necessary "dummy data" variables (either `dummy_data` or `dummy_nuc`) so that the shapes of the HDF5 datasets are correct (the rest of the TO-DO lines).
+A major question to help you: What arugments were used when testing the `hdf5_parallel.py` script earlier?
+If you're having trouble, you can check `galaxy_solution.py` in the `solution` directory.
+
+To do this challenge:
+
+1. Determine the missing pieces of the five "TO-DO" lines.
+2. Use your favorite editor to enter the missing pieces into `galaxy.py`. For example:
+
+    ```
+    $ vi galaxy.py
+    ```
+
+3. Submit a job (the `-L $SHELL` flag is necessary):
+
+    ```
+    $ bsub -L $SHELL submit_galaxy.lsf
+    ```
+
+4. If you fixed the script, you should see something similar to the output below in `galaxy.<JOB_ID>.out` after the job completes:
+
+    ```python
+    MPI Rank 0 : Simulating my particles took 102.9287338256836 s
+    MPI Rank 5 : Simulating my particles took 105.36905121803284 s
+    MPI Rank 7 : Simulating my particles took 106.68532800674438 s
+    MPI Rank 2 : Simulating my particles took 108.80526208877563 s
+    MPI Rank 6 : Simulating my particles took 109.75137877464294 s
+    MPI Rank 4 : Simulating my particles took 111.80397272109985 s
+    MPI Rank 1 : Simulating my particles took 112.4355766773224 s
+    MPI Rank 3 : Simulating my particles took 117.3634796142578 s
+    Success!
+    ```
+
+If you got the script to successfully run, then congratulations!
+
+After you complete the challenge, you can run `generate_anmation.py` in the same directory you ran your simulation to generate your personal `galaxy_collision.gif` based on your simulation:
+
+```
+$ python3 generate_animation.py
+```
+
+This will take around a minute to complete, but will result in your own GIF.
+You can then transfer this GIF to your computer with Globus, `scp`, or `sftp` to keep as a "souvenir" from the challenge.
 
 ## Additional Resources
 
