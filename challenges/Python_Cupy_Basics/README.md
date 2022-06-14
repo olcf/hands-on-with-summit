@@ -328,7 +328,7 @@ Specifically, there are three lines that need fixing in this script (marked by t
 Your challenge is to apply the necessary function calls on the three "TO-DO" lines to transfer the data between the GPUs and CPUs properly.
 Some of the questions to help you: What function do I use to pass arrays to a GPU? What function do I use to pass arrays to a CPU?
 Also, you can use the error messages to your advantage (they will give you hints as well).
-If you're having trouble, you can check `data_transfer_solution.py`.
+If you're having trouble, you can check `data_transfer_solution.py` in the `solution` directory.
 
 To do this challenge:
 
