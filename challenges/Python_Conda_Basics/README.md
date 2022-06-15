@@ -14,7 +14,20 @@ This hands-on challenge will introduce a user to the basic workflow of using con
 
 ## Inspecting and setting up the environment
 
-First, we need to load the python module and the gnu compiler module on Ascent (most Python packages assume use of GCC)
+First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+Assuming you cloned the repository in your home directory:
+
+```
+$ cd ~/hands-on-with-summit/challenges/Python_Conda_Basics
+$ source deactivate_envs.sh
+$ module purge
+$ module load DefApps
+```
+
+The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
+The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
+
+Next, we need to load the python module and the gnu compiler module on Ascent (most Python packages assume use of GCC)
 
 ```
 $ module load gcc

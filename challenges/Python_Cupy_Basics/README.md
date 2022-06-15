@@ -97,7 +97,7 @@ $ conda install -c defaults --override-channels numpy scipy
 
 After following the prompts, NumPy and its linear algebra dependencies should successfully install.
 
-We also installed SciPy, which is an optional dependency, but it would allow us to use the additional SciPy-based routines in CuPy:
+We also installed SciPy, which is an optional dependency, but it will allow us to use the additional SciPy-based routines in CuPy.
 
 Finally, we will install CuPy from source into our environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:

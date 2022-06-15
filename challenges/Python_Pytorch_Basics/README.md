@@ -690,6 +690,16 @@ More specifically:
 * `last_batch.png`: Shows you the last batch of animal images to get tested by the network. The pictures are titled by their actual classification and also include what the network guessed the animal was.
 * `overall_results.png`: Bar charts of how accurate your network was at predicting each class of animal. This includes your overall network accuracy, identification success (e.g., number of frogs correct divided by number of frog images), and prediction success (e.g., number of frogs correct divided by number of times GUESSED "frog").
 
+You can open these images on Ascent by doing:
+
+```
+$ module load imagemagick
+$ display last_batch.png
+$ display overall_results.png
+```
+
+> Note: You can only open the images if you connected to Ascent with window forwarding enabled. This is usually done by including the `X` or `Y` SSH flags when connecting to the system. For example: `ssh -XY USER_ID@login1.ascent.olcf.ornl.gov`.
+
 After you complete the challenge, you can transfer these plots to your computer with Globus, `scp`, or `sftp` to keep as "souvenirs" from this challenge.
 
 To do this challenge:
@@ -721,7 +731,7 @@ To do this challenge:
     ```
 
 4. Look at the statistics printed in your `pytorch_cnn.<JOB_ID>.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
-5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `pytorch_cnn.<JOB_ID>.out` file should help give you ideas of how to refine your parameters.
+5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `pytorch_cnn.<JOB_ID>.out` file or PNG files should help give you ideas of how to refine your parameters.
 
 > Hint: It's always a balance of the number of epochs and the size of your batches -- bigger numbers aren't always optimal. Try changing only one of the parameters and look at how it affects your network's performance.
 

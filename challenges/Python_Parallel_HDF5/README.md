@@ -255,7 +255,7 @@ You will be dealing with `galaxy.py`.
 The goal of `galaxy.py` is to simulate an infalling galaxy made up of "particles" (stars) and a "nucleus" (the compact central region) colliding with a bigger host galaxy.
 This would require a lot of code for it to be the most accurate ("many body" problems in physics are complicated); however, we made some physical assumptions to simplify the problem so that it is less complicated but still results in a roughly accurate galactic event.
 Even with simplifying things down, this script does not run quickly when not using MPI, as the amount of stars you want to simulate over a given time period quickly slows things down.
-We will be simulating 1000 stars and it takes about 10 minutes for the script to complete on Ascent without using MPI, while completing in about 1.5 minutes when using 8 MPI tasks.
+We will be simulating 1000 stars and it takes about 10 minutes for the script to complete on Ascent when only using 1 MPI task, while completing in about 1.5 minutes when using 8 MPI tasks.
 
 In this challenge, you will be using 8 MPI tasks to help speed up the computations by splitting up the particles across your MPI tasks (each MPI task will only simulate a subset of the total number of particles).
 The tasks will then write their subset of the data in parallel to an HDF5 file that will hold the entire final dataset.
@@ -315,7 +315,7 @@ To do this challenge:
 
 If you got the script to successfully run, then congratulations!
 
-After you complete the challenge, you can run `generate_anmation.py` in the same directory you ran your simulation to generate your personal `galaxy_collision.gif` based on your simulation:
+After you complete the challenge, you can run `generate_anmation.py` (in the same directory you ran your simulation) to generate your personal `galaxy_collision.gif` based on your simulation:
 
 ```
 $ python3 generate_animation.py
