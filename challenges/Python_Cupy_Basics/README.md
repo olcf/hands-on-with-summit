@@ -92,17 +92,12 @@ base                     /sw/ascent/python/3.8/anaconda-base
 CuPy depends on NumPy, so let's install an optimized version of NumPy into our fresh conda environment:
 
 ```
-$ conda install -c defaults --override-channels numpy
+$ conda install -c defaults --override-channels numpy scipy
 ```
 
 After following the prompts, NumPy and its linear algebra dependencies should successfully install.
 
-Next, we will install SciPy.
-SciPy is an optional dependency, but it would allow us to use the additional SciPy-based routines in CuPy:
-
-```
-$ conda install scipy
-```
+We also installed SciPy, which is an optional dependency, but it would allow us to use the additional SciPy-based routines in CuPy:
 
 Finally, we will install CuPy from source into our environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:

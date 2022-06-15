@@ -31,3 +31,10 @@ print(x_gpu_0.device, ':', x_gpu_0)
 print(x_gpu_1.device, ':', x_gpu_1)
 print(x_gpu_2.device, ':', x_gpu_2)
 print('CPU: ', x_cpu)
+
+# Check results
+solution = np.array((0,3,14,39,84,155,258,399,584,819))
+if ( (x_cpu==solution).all() ):
+    print('Success!')
+else:
+    print('Something went wrong, try again!')
