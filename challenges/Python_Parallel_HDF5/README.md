@@ -283,6 +283,7 @@ Your challenge is to:
 
 A major question to help you: "What arugments were used when testing the `hdf5_parallel.py` script earlier?"
 If you're having trouble, you can check `galaxy_solution.py` in the `solution` directory.
+Although you only have to deal with a small section of `galaxy.py` to complete the challenge, feel free to explore the entire script and see what the rest of it is doing.
 
 To do this challenge:
 
