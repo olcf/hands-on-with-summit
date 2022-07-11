@@ -215,6 +215,26 @@ Congratulations, you have just created your own Python environment and ran on on
     $ conda env remove -p /path/to/your/env
     ```
 
+* Exporting (sharing) an environment:
+
+    You may want to share your environment with someone else.
+    As mentioned previously, one way to do this is by creating your environment in a shared location where other users can access it.
+    A different way (the method described below) is to export a list of all the packages and versions of your environment (an `environment.yml` file).
+    If a different user provides conda the list you made, conda will install all the same package versions and recreate your environment for them -- essentially "sharing" your environment.
+    To export your environment list:
+    
+    ```
+    $ source activate my_env
+    $ conda env export > environment.yml
+    ```
+    
+    You can then email or otherwise provide the `environment.yml` file to the desired person.
+    The person would then be able to create the environment like so:
+    
+    ```
+    $ conda env create -f environment.yml
+    ```
+
 * Adding known environment locations:
 
     For a conda environment to be callable by a "name", it must be installed in one of the `envs_dirs` directories.
