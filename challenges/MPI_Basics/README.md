@@ -158,7 +158,7 @@ $ bsub submit_hello.lsf
 ```
 
 This submission script will ask for 1 node with 4 MPI ranks and one rank on each core. Thus, the size (number of ranks) that gets passed to MPI is 4. 
-If it succeeded, you should see the following output in the mpi_hello. output file: 
+If it succeeded, you should see the following output in the hello.<job_id> output file: 
 
 ```
 Hello from rank 3 of 4 total
@@ -166,6 +166,7 @@ Hello from rank 2 of 4 total
 Hello from rank 1 of 4 total
 Hello from rank 0 of 4 total
 ```
+Note: Note: The ranks run independently so the order they return in may not be the 3,2,1,0 as see in my output. That's OK for this example. However, synchronizing tasks is one of the things that MPI programmers do have to think about when the order does matter. That is beyond the scope of this introduction though. 
 
 If you had an error go back and check your code , then recompile it, and try again. You may also look at mpi_hello_solution.c to check your answer.  
 
