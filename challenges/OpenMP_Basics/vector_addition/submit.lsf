@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #BSUB -P TRN010
-#BSUB -J vec_add_test
-#BSUB -o vec_add_test.%J
+#BSUB -J vec_add
+#BSUB -o vec_add.%J
 #BSUB -nnodes 1
 #BSUB -W 10
 
