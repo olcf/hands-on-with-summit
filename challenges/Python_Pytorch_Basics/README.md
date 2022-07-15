@@ -746,7 +746,11 @@ Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy 
 
 | Rank  | Name             | Affiliation | Accuracy | Speed   |
 | :---  | :---             | :---------: | :------: | :---:   |
-| 1.    | Michael Sandoval | OLCF        | 100%     | 9999hrs |
+| 1.    | Johannes K.      |             | 65.71%   | 1389s   |
+| 2.    | Sola O.          |             | 64.87%   | 1704s   |
+| 3.    | Adam S.          |             | 63.87%   | 2642s   |
+| 4.    | Justin B.        |             | 61.94%   | 804s    |
+| 5.    | Abigail W.       |             | 61.04%   | 2161s   |
 
 ## 6. <a name="resources"></a>Additional Resources
 
