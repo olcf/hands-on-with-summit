@@ -1,4 +1,6 @@
 # cnn.py
+# Author: Michael A. Sandoval
+# Adapted from Patrick Loeber's CNN tutorial https://github.com/python-engineer/pytorchTutorial
 # Trains a Convolutional Neural Network (CNN) on the CIFAR10 dataset using PyTorch
 
 import torch
