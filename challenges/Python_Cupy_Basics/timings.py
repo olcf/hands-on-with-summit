@@ -1,4 +1,5 @@
 # timings.py
+# Author: Michael A. Sandoval
 import cupy as cp
 import numpy as np
 import time as tp

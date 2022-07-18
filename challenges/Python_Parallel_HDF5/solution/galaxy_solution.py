@@ -1,4 +1,5 @@
-# galaxy.py
+# galaxy_solution.py
+# Author: Michael A. Sandoval
 # Simulates orbits of a random distribution of particles (an "infalling galaxy") around a "host galaxy".
 # Individual particles only interact with the host galaxy and the nucleus of the infalling galaxy.
 # The nucleus of the infalling galaxy only interacts with the host galaxy.

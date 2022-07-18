@@ -1,3 +1,5 @@
+# hello.py
+# Author: Michael A. Sandoval
 import platform
 import numpy
 

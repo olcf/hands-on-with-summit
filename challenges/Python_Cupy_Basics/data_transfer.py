@@ -1,4 +1,5 @@
 # data_transfer.py
+# Author: Michael A. Sandoval
 import numpy as np
 import cupy as cp
 

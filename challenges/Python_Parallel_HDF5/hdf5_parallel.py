@@ -1,4 +1,5 @@
 # hdf5_parallel.py
+# Author: Michael A. Sandoval
 from mpi4py import MPI
 import h5py
 
