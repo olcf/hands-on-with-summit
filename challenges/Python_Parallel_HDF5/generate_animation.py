@@ -1,4 +1,5 @@
 # generate_animation.py
+# Author: Michael A. Sandoval
 # Generates an animation / GIF of galaxy.py output
 
 import matplotlib.pyplot as plt
