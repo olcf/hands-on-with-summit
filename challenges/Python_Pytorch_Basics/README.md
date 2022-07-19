@@ -744,13 +744,34 @@ If you liked PyTorch I also suggest taking a loot at [PyTorch Lightning](https:/
 
 Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy within an hour of walltime on Ascent!
 
-| Rank  | Name             | Affiliation | Accuracy | Speed   |
-| :---  | :---             | :---------: | :------: | :---:   |
-| 1.    | Johannes K.      |             | 65.71%   | 1389s   |
-| 2.    | Sola O.          |             | 64.87%   | 1704s   |
-| 3.    | Adam S.          |             | 63.87%   | 2642s   |
-| 4.    | Justin B.        |             | 61.94%   | 804s    |
-| 5.    | Abigail W.       |             | 61.04%   | 2161s   |
+Top Accuracy:
+
+| Rank  | Name             | Program                       | Accuracy | Speed   |
+| :---  | :---             | :---------:                   | :------: | :---:   |
+| 1.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
+| 2.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
+| 3.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
+| 4.    | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
+| 5.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
+| 6.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
+| 7.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
+| 8.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 9.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
+
+Top Speed:
+
+| Rank  | Name             | Program                       | Accuracy | Speed   |
+| :---  | :---             | :---------:                   | :------: | :---:   |
+| 1.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 2.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
+| 3.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
+| 4.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
+| 5.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
+| 6.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
+| 7.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
+| 8.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
+| 9.    | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
+
 
 ## 6. <a name="resources"></a>Additional Resources
 
