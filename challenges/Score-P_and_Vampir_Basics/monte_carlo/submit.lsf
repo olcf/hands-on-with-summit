@@ -1,12 +1,11 @@
 #!/bin/bash
 
-#BSUB -P GEN007
+#BSUB -P PRJ123
 #BSUB -W 5
 #BSUB -nnodes 1
 #BSUB -J monte_carlo
 #BSUB -o monte_carlo.%J
 #BSUB -e monte_carlo.%J
-#BSUB -q debug
 
 date
 

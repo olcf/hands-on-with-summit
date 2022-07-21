@@ -1,11 +1,11 @@
 CCOMP  = mpicc
 CFLAGS =
 
-run: calcPiMPI.o
-        $(CCOMP) $(CFLAGS) calcPiMPI.o -o run
+run: calculating_pi.o
+        $(CCOMP) $(CFLAGS) calculating_pi.o -o run
 
-calcPiMPI.o: calcPiMPI.c
-        $(CCOMP) $(CFLAGS) -c calcPiMPI.c
+calculating_pi.o: calcPiMPI.c
+        $(CCOMP) $(CFLAGS) -c calculating_pi.c
 
 .PHONY: clean cleanall
 
