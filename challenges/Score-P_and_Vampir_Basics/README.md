@@ -318,7 +318,7 @@ $ export SCOREP_ENABLE_TRACING=true
 $ export SCOREP_TOTAL_MEMORY=4097kB
 ```
 
-Like the profiling run, the variables `SCOREP_ENABLE_PROFILING`` and `SCOREP_ENABLE_TRACING` must be set to specify what action will take place during the run. It's also good to set `SCOREP_TOTAL_MEMORY` to the recommended amount in order to reduce the amount of memory required and to avoid flushes.
+Like the profiling run, the variables `SCOREP_ENABLE_PROFILING` and `SCOREP_ENABLE_TRACING` must be set to specify what action will take place during the run. It's also good to set `SCOREP_TOTAL_MEMORY` to the recommended amount in order to reduce the amount of memory required and to avoid flushes.
 
 Once we have these variables set, get out of the scorep directory and submit the job!
 
@@ -470,7 +470,7 @@ Now that the `cmake.sh` file is ready to go, exit out of vim and issue the follo
 
 ```
 $ source cmake.sh
-``
+```
 
 This will create a couple of other CMake files as well as a Makefile. You can then compile and build with the `make` command:
 
