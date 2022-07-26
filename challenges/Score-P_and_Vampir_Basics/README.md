@@ -158,30 +158,30 @@ $ scorep-score -r profile.cubex
 You should then see something like this:
 
 ```
-Estimated aggregate size of event trace:                   2366 bytes
+Estimated aggregate size of event trace:                   6kB
 Estimated requirements for largest trace buffer (max_buf): 474 bytes
 Estimated memory requirements (SCOREP_TOTAL_MEMORY):       4097kB
 (hint: When tracing set SCOREP_TOTAL_MEMORY=4097kB to avoid intermediate flushes
  or reduce requirements using USR regions filters.)
 
 flt     type max_buf[B] visits time[s] time[%] time/visit[us]  region
-         ALL        473     60    0.91   100.0       15237.57  ALL
-         MPI        360     40    0.91   100.0       22846.76  MPI
-         COM         48     10    0.00     0.0          23.34  COM
-      SCOREP         41      5    0.00     0.0          21.54  SCOREP
-         USR         24      5    0.00     0.0           8.48  USR
+         ALL        473    144    8.99   100.0       62454.34  ALL
+         MPI        360     96    8.99   100.0       93669.22  MPI
+         COM         48     24    0.00     0.0          30.32  COM
+      SCOREP         41     12    0.00     0.0          28.31  SCOREP
+         USR         24     12    0.00     0.0           9.29  USR
 
-         MPI        132     10    0.00     0.0          17.38  MPI_Reduce
-         MPI         66      5    0.00     0.0           7.64  MPI_Barrier
-         MPI         66      5    0.00     0.0          20.51  MPI_Bcast
-      SCOREP         41      5    0.00     0.0          21.54  run
-         MPI         24      5    0.00     0.0           1.61  MPI_Comm_rank
-         MPI         24      5    0.00     0.0           4.99  MPI_Comm_size
-         MPI         24      5    0.00     0.0          32.95  MPI_Finalize
-         MPI         24      5    0.91    99.9      182671.63  MPI_Init
-         COM         24      5    0.00     0.0          42.23  main
-         COM         24      5    0.00     0.0           4.45  Get_input
-         USR         24      5    0.00     0.0           8.48  Toss
+         MPI        132     24    0.00     0.0          45.55  MPI_Reduce
+         MPI         66     12    0.00     0.0          13.13  MPI_Barrier
+         MPI         66     12    0.00     0.0          34.60  MPI_Bcast
+      SCOREP         41     12    0.00     0.0          28.31  run
+         MPI         24     12    0.00     0.0           1.86  MPI_Comm_rank
+         MPI         24     12    0.00     0.0           7.59  MPI_Comm_size
+         MPI         24     12    0.00     0.0          30.82  MPI_Finalize
+         MPI         24     12    8.99   100.0      749174.70  MPI_Init
+         COM         24     12    0.00     0.0          54.86  main
+         COM         24     12    0.00     0.0           5.77  Get_input
+         USR         24     12    0.00     0.0           9.29  Toss
 ```
 
 The first line is the estimated size of the trace file, in this case 2,366 bytes. The second line estimates the memory space needed on one process for a trace (474 bytes) and the third line estimates the total memory per process required by Score-P (4,097 kilobytes). In the table, you can see all the regions and region types along with information like the amount of space and time those regions take as well as the number of visits to those regions in the program. 
@@ -234,7 +234,7 @@ flt     type max_buf[B]     visits time[s] time[%] time/visit[us]  region
  -    SCOREP         41          6    0.00     0.0          50.49  SCOREP-FLT
 ```
 
-Under the `flt` column, the `-` symbol means "not filterd", the `+` symbol means "filtered", and the `*` symbol means "possibly affected by the filter". In the above example, it shows that a little less than 3.4 Megabytes were filtered out and will  be ignored during the trace.
+Under the `flt` column, the `-` symbol means "not filterd", the `+` symbol means "filtered", and the `*` symbol means "possibly affected by the filter". In the above example, it shows that a little less than 3.4 Megabytes were filtered out and will be ignored during the trace.
 
 Before submitting a job for a trace run, make sure you set the `SCOREP_FILTERING_FILE` enviroment variable to the path to the filter file you created. For example:
 
@@ -247,14 +247,14 @@ $ export SCOREP_FILTERING_FILE=~/scorep-20220612-1045-1234567890123456/test.filt
 Now let's apply this to the Monte Carlo Example! First create a new file inside the Score-P directry with a text editor like vim called `all.filter`:
 
 ```
-$ vi all.filter
+$ vi main.filter
 ```
 
-Since there is not a lot of USR or COM regions in the program to begin with, we will filter out all possible regions so that we are left with just MPI regions. However, if you want to see how some of the USR or COM functions run, feel free to go back and include them. To filter out all the USR and COM regions, add the following lines to the `all.filter` file:
+Since this is a small program, we will only filter out the `main` function so that we can see the other USR functions displayed in Vampir. However, in bigger programs, we would want to filter out more USR functions. To filter out `main`, add the following line to the `main.filter` file.
 
 ```
 SCOREP_REGION_NAMES_BEGIN
-	EXCLUDE *
+	EXCLUDE main
 SCOREP_REGION_NAMES_END
 ```
 Then issue the command:
@@ -265,38 +265,40 @@ $ scorep-score -r -f all.filter profile.cubex
 And you should see somthing like this:
 
 ```
-Estimated aggregate size of event trace:                   2006 bytes
-Estimated requirements for largest trace buffer (max_buf): 402 bytes
+Estimated aggregate size of event trace:                   6kB
+Estimated requirements for largest trace buffer (max_buf): 450 bytes
 Estimated memory requirements (SCOREP_TOTAL_MEMORY):       4097kB
 (hint: When tracing set SCOREP_TOTAL_MEMORY=4097kB to avoid intermediate flushes
  or reduce requirements using USR regions filters.)
 
 flt     type max_buf[B] visits time[s] time[%] time/visit[us]  region
- -       ALL        473     60    0.91   100.0       15237.57  ALL
- -       MPI        360     40    0.91   100.0       22846.76  MPI
- -       COM         48     10    0.00     0.0          23.34  COM
- -    SCOREP         41      5    0.00     0.0          21.54  SCOREP
- -       USR         24      5    0.00     0.0           8.48  USR
+ -       ALL        473    144    8.99   100.0       62454.34  ALL
+ -       MPI        360     96    8.99   100.0       93669.22  MPI
+ -       COM         48     24    0.00     0.0          30.32  COM
+ -    SCOREP         41     12    0.00     0.0          28.31  SCOREP
+ -       USR         24     12    0.00     0.0           9.29  USR
 
- *       ALL        401     45    0.91   100.0       20310.62  ALL-FLT
- -       MPI        360     40    0.91   100.0       22846.76  MPI-FLT
- +       FLT         72     15    0.00     0.0          18.39  FLT
- -    SCOREP         41      5    0.00     0.0          21.54  SCOREP-FLT
+ *       ALL        449    132    8.99   100.0       68127.01  ALL-FLT
+ -       MPI        360     96    8.99   100.0       93669.22  MPI-FLT
+ -    SCOREP         41     12    0.00     0.0          28.31  SCOREP-FLT
+ +       FLT         24     12    0.00     0.0          54.86  FLT
+ *       USR         24     12    0.00     0.0           9.29  USR-FLT
+ *       COM         24     12    0.00     0.0           5.77  COM-FLT
 
- -       MPI        132     10    0.00     0.0          17.38  MPI_Reduce
- -       MPI         66      5    0.00     0.0           7.64  MPI_Barrier
- -       MPI         66      5    0.00     0.0          20.51  MPI_Bcast
- -    SCOREP         41      5    0.00     0.0          21.54  run
- -       MPI         24      5    0.00     0.0           1.61  MPI_Comm_rank
- -       MPI         24      5    0.00     0.0           4.99  MPI_Comm_size
- -       MPI         24      5    0.00     0.0          32.95  MPI_Finalize
- -       MPI         24      5    0.91    99.9      182671.63  MPI_Init
- +       COM         24      5    0.00     0.0          42.23  main
- +       COM         24      5    0.00     0.0           4.45  Get_input
- +       USR         24      5    0.00     0.0           8.48  Toss
+ -       MPI        132     24    0.00     0.0          45.55  MPI_Reduce
+ -       MPI         66     12    0.00     0.0          13.13  MPI_Barrier
+ -       MPI         66     12    0.00     0.0          34.60  MPI_Bcast
+ -    SCOREP         41     12    0.00     0.0          28.31  run
+ -       MPI         24     12    0.00     0.0           1.86  MPI_Comm_rank
+ -       MPI         24     12    0.00     0.0           7.59  MPI_Comm_size
+ -       MPI         24     12    0.00     0.0          30.82  MPI_Finalize
+ -       MPI         24     12    8.99   100.0      749174.70  MPI_Init
+ +       COM         24     12    0.00     0.0          54.86  main
+ -       COM         24     12    0.00     0.0           5.77  Get_input
+ -       USR         24     12    0.00     0.0           9.29  Toss
 ```
 
-So now the trace we will run will have only MPI regions since we filtered out both USR and COM regions. 
+You can see that only `main` will be filtered out while the rest of the functions will be traced and viewed in Vampir.
 
 Next, assign the path to the `all.filter` file to the `SCOREP_FILTERING_FILE` variable:
 
@@ -403,23 +405,31 @@ Available platform plugins are: xcb.
 This should open a Vampir window that looks like this:
 <br>
 <center>
-<img src="images/vampir_first_window.png" width="400" height="400">
+<img src="images/vampir_first_window.png" width="400">
 </center>
 <br>
 
 To open the `otf2` file we created, click on "Local File" on the left (if the window shows a Recent Files page, just click "Open Other"). Then enter in the path to the file, in this case it would be `/gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/<2nd scorep directory>/traces.otf2`. 
 <br>
 <center>
-<img src="images/vampir_filesystem_labeled2.png" width="300" height="300">
+<img src="images/vampir_filesystem_labeled2.png" width="400"> 
 </center>
 <br>
 
-After the file loads, you should see a Vampir GUI like this:
-[enter image]
+After the file loads, you should see a Vampir GUI like the one below:
+<br>
+<center>
+<img src="images/monte_carlo_vampir_labeled.png" width="400">
+</center>
+<br>
   
+>NOTE: The timing will be different on each run, so your data on time won't be the exact same as this example
+
 The master timeline is the big, crowded-looking frame on the left. This shows how each process runs over time and which functions are called according to the color-coded function group (the key for the colors is shown in the bottom right). The frame in the top-right corner is the function summary, which breaks down the accumulated time spent in each function summed up across all the processes. Then the middle frame on the right is the context view that gives details about the trace. At the very very top is the trace timeline, which gives an general timeline of the trace.  
 
-Feel free to play around with all the displays available. Try zooming in where there are any message bursts (black diamonds) to see what is going on. Clicking on anything in the master timeline will give you information on the feature in the context view frame. You might also want to use the the top-left bar to add new frames to the overall display. For example, this button (enter image) will open the process summary.
+Feel free to play around with all the displays available. Try zooming in on the black diamond area at the end of the trace to see what kind of messaging is going on between functions. To zoom in, drag your mouse horizontally on the master timeline (For example, from 0.486 seconds to 0.490 seconds). Clicking on anything in the master timeline will give you information on the feature in the context view frame. You might also want to use the the top-left bar to add new frames to the overall display. For example, this button <center><img src="process_summary_buttonpng" height="50"></center> will open the process summary.
+
+>NOTE: Launching Vampir on Ascent might act slow since its working on a login node, so it could take the GUI a few seconds to load after clicking things.
 
 Now you have successsfully profiled a program with Score-P as well as opened and used Vampir! 
 
@@ -496,12 +506,11 @@ Then you can submit the job. We will start with the MPI version.
 $ bsub submit_mpi.lsf
 ```
 
-Use `jobstat -u <username>` to check your job's status. Once complete, you can go to the new Score-P directory and use the `scorep-score -r profile.cubex` command to look at the profilng results. You should see something like this (note that the results on time will be different for each individual profiling run):
+Use `jobstat -u <username>` to check your job's status. Once complete, you can go to the new Score-P directory and use the `scorep-score -r profile.cubex` command to look at the profilng results. Below is a snippet of the profiling results from the MPI version (note that the results on time will be different for each individual profiling run):
 
 ```
 $ cd <scorep directory>
 $ scorep-score  -r profile.cubex
- 
 
 Estimated aggregate size of event trace:                   73MB
 Estimated requirements for largest trace buffer (max_buf): 7MB
@@ -531,36 +540,8 @@ flt     type max_buf[B]    visits time[s] time[%] time/visit[us]  region
          USR     36,504    15,748    0.01     0.0           0.49  ncwrap(int, int)
          MPI     34,136     6,024    2.00     2.0         331.42  MPI_Allreduce
          MPI     30,100       301    0.01     0.0          28.38  MPI_File_write_at
-         MPI     20,904     9,648    0.01     0.0           0.68  MPI_Comm_rank
-         MPI     13,800     2,400    2.66     2.6        1107.47  MPI_File_open
-         MPI     13,600     2,400    0.29     0.3         121.63  MPI_Bcast
-         MPI     13,000     4,900    0.27     0.3          55.29  MPI_File_set_view
-         MPI      9,900        99    0.01     0.0          62.30  MPI_File_read_at
-         MPI      8,600     2,400    1.79     1.8         744.95  MPI_File_close
-         MPI      2,652     1,224    0.00     0.0           0.51  MPI_Comm_size
-         MPI      2,600     1,200    0.01     0.0           7.48  MPI_File_get_info
-         COM      2,600     1,200    0.33     0.3         271.31  output(double*, double)
-         USR         78         3    0.00     0.0           0.40  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const
-         MPI         68        12    0.00     0.0          25.57  MPI_Barrier
-         COM         52        24    0.01     0.0         322.37  reductions(double&, double&)
-         USR         52         2    0.00     0.0           0.58  std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const
-         USR         52         2    0.00     0.0           0.53  std::chrono::duration<double, std::ratio<1l, 1l> >::count() const
-      SCOREP         41        12    0.00     0.0          44.57  mpi
-         MPI         26        12    0.00     0.0          28.03  MPI_Finalize
-         MPI         26        12   12.82    12.8     1068298.86  MPI_Init
-         USR         26        12    0.00     0.0           9.11  _GLOBAL__sub_I_dt
-         USR         26        12    0.00     0.0           2.88  __static_initialization_and_destruction_0(int, int)
-         COM         26        12    0.02     0.0        1492.21  main
-         COM         26        12    0.06     0.1        4763.56  init(int*, char***)
-         USR         26        12    0.00     0.0           0.98  dmin(double, double)
-         USR         26         1    0.00     0.0          19.33  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::steady_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&)
-         USR         26         1    0.00     0.0          12.65  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
-         USR         26         1    0.00     0.0           0.54  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&)
-         USR         26         1    0.00     0.0          14.36  std::chrono::duration<double, std::ratio<1l, 1l> >::duration<long, std::ratio<1l, 1000000000l>, void>(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
-         USR         26         1    0.00     0.0           7.69  std::enable_if<std::chrono::__is_duration<std::chrono::duration<double, std::ratio<1l, 1l> > >::value, std::chrono::duration<double, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
-         USR         26         1    0.00     0.0           6.17  std::chrono::duration<double, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<double, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, double, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
-         USR         26         1    0.00     0.0           0.55  std::chrono::duration<double, std::ratio<1l, 1l> >::duration<double, void>(double const&)
-         COM         26        12    0.00     0.0          10.38  finalize()
+         MPI     20,904     9,648    0.01     0.0           0.68  MPI_Comm_rank 
+	 ...	 
 ```
 
 Now we can create a filter file with vim:
@@ -619,9 +600,12 @@ $ cd ..
 $ bsub submit_mpi.lsf
 ```
 
-Once the job is complete, you should have another Score-P directory with the date, time, and unique ID. 
+Once the job is complete, you should have another Score-P directory with the date, time, and unique ID. Move both the Score-P directories to the `MPI-scorep` directory with the `mv` command. This will avoid confusion between the MPI results and the OpenMP results. Later, when profiling and tracing the OpenMP version, move the Score-P directories to the `OpenMP-scorep` directory.
 
->NOTE: You might want to create separate directories for MPI vs OpenMP to keep them organized. For example, having a directory called `MPI-scorep` that contains the Score-P MPI profiling and tracing directories, and then a directory called `OpenMP-scorep` that contains the Score-P OpenMP profiling and tracing directories. This will avoid confusion between all the Score-P directories. You can create new directories with the `mkdir` command and move the appropriate scorep directories with the `mv` commadn.
+```
+$ mv <scorep directory #1> MPI-scorep
+$ mv <scorep directory #2> MPI-scorep
+```
 
 Now that we have the profiling and tracing results with just MPI, we can do the same thing with OpenMP. You can follow the same exact steps above in order to profile and trace the OpenMP version, except you will need to submit the `submit_openmp.lsf` file when submitting a job, and the `SCOREP_TOTAL_MEMORY` variable for the tracing run should be set to 93MB instead of 6MB. You don't need to rebuild the cmake files or compile with `make` again since you already have the `openmp` executable. Just start with the step for setting the Score-P environment variables for a profiling run and continue until you have both Score-P directories for OpenMP.
 
@@ -643,19 +627,54 @@ Run the Vampir GUI remotely via X-forwarding
 $ vampir &
 ```
 
-If Vampir opens up to a Recent Files page, click "Open Other". Then click the "Comparison Session" option, and then the green plus sign to add files. Now select the "Local File" option and enter in the path to the MPI trace file or click through the file system to where the `trace.otf2` file is located. If you made a separate directory for MPI Score-P runs, the path might be: `/gpfs/wolf/<roject>/scratch/<username>/Score-P_and_Vampir_Basics/miniWeather/<MPI direcotry>/`. If you need help figuring out the path to your trace file, use the `pwd` command in Ascent. 
-
-
-enter image
-After selecting the MPI Score-P trace file, click the green plus sign again and find the OpenMP Score-P trace file. Once both files are selected and loaded, click "OK". Once it is loaded, you should see something like this:
+If Vampir opens up to a Recent Files page, click "Open Other". Then click the "Comparison Session" option, and then the green plus sign to add files. Now select the "Local File" option and enter in the path to the MPI trace file or click through the file system to where the `trace.otf2` file is located. The path for the MPI trace file will be: `/gpfs/wolf/<roject>/scratch/<username>/Score-P_and_Vampir_Basics/miniWeather/MPI-scorep/<2nd scorep direcotry>/traces.otf2`. Then you can do the same thing with the OpenMP trace file (the path will be the same except that it will be in the `OpenMP-scorep` directory instead of `MPI-scorep`). If you need help figuring out the path to your trace file, use the `pwd` command in Ascent. 
 <br>
 <center>
-<img src="images/miniWeather_comparison.png" width="400" height="664">
+<img src="images/vampir_comparison_windows.png" width="900">
 </center>
 <br>
 
-The two background colors (white and purple) differentiate the two traces. In the image above, the white represents the trace that ran with just MPI, while the purple represents the trace that ran with MPI and OpenMP. 
+
+ Once both files are selected and loaded, click "OK". Once it is loaded, you should see something like this:
+<br>
+<center>
+<img src="images/miniWeather_comparison.png" width="400">
+</center>
+<br>
+
+The two background colors (white and purple) differentiate the two traces. In the image above, the white represents the trace that ran with just MPI, while the purple represents the trace that ran with MPI and OpenMP. In this case, the OpenMP trace ran faster than the MPI trace. 
+
 ## Challenges
+
+Now that we have walked through how to incorporate Score-P in the Monte Carlo and MiniWeather programs, try one on your own! There are two challenges, called Jacobi and MiniSweep, that are available below.
+
+**Jacobi**
+
+The Jacobi program uses the Jacobi algorithm to solve the Poisson Equation. For more information on this algorithm, you can visit [this](https://people.sc.fsu.edu/~jburkardt/presentations/jacobi_poisson_1d.pdf) page.
+
+This program has both MPI and OpenMP versions, so try using Vampir to compare them side by side. You will need the following modules:
+
+```
+$ module unload darshan-runtime
+$ module load gcc scorep otf2 cubew
+```
+
+The solution to instrumenting Score-P in the Makefile for both MPI and OpenMP versions in the `solutions/jacobi` directory. 
+
+**MiniSweep**
+
+MiniSweep is a mini application that focuses on radiative transport. Like MiniWeather, it also uses a CMake system. For more detailed information on what MiniSweep does, see the [MiniSweep](https://github.com/wdj/minisweep) page and look through the References section. You can also read through [this](https://github.com/wdj/minisweep/blob/master/doc/how_to_run.txt) explanation that describes the command line arguments. You might wan to try changing and comparing these command line arguments in the `submit.lsf` file.
+
+You will have to load the following modules:
+
+```
+$ module unload darshan-runtime
+$ module load cmake gcc scorep otf2 cubew
+```
+
+On your own, go through all the steps detailed earlier to use Score-P and Vampir on MiniSweep. The solution to implementing Score-P on MiniSweep in the CMake file can be found in `solutions/miniSweep`. 
+
+>NOTE: When it comes to filtering, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
 
 ## Further Resources
 
@@ -673,4 +692,4 @@ The two background colors (white and purple) differentiate the two traces. In th
 
 [MiniWeather Full Code and Explanation](https://github.com/mrnorman/miniWeather#running-the-code)
 
-
+[MiniSweep Full Code and Explanation](https://github.com/wdj/minisweep)
