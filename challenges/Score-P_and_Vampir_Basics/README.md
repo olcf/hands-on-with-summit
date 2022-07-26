@@ -432,9 +432,8 @@ The master timeline is the big, frame on the left. This shows how each process r
 Feel free to play around with all the displays available. Try zooming in on the black diamond area at the end of the trace to see what kind of messaging is going on between functions. To zoom in, drag your mouse horizontally on the master timeline (For example, from 0.486 seconds to 0.490 seconds). You can zoom in as far as you need to see the messaging activity. Clicking on anything in the master timeline will give you information on the feature in the context view frame. You might also want to use the the top-left bar to add new frames to the overall display. For example, this button 
 <br>
 <center>
-<img src="process_summary_button.png" height="50">
+<img src="images/process_summary_button.png" height="50">
 </center>
-<br> 
 will open the process summary, which will show the call stack of functions in one process (you can change which process by right-clicking and selecting "Select Process"). Also, if you want to search for a specific function, you can type "Control+F".
 
 >NOTE: Launching Vampir on Ascent might act slow since it's working on a login node, so it could take the GUI a few seconds to load after clicking things.
