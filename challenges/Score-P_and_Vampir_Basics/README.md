@@ -244,13 +244,13 @@ $ export SCOREP_FILTERING_FILE=~/scorep-20220612-1045-1234567890123456/test.filt
 
 ### Practice with Monte Carlo Example
 
-Now let's apply this to the Monte Carlo Example! First create a new file inside the Score-P directry with a text editor like vim called `all.filter`:
+Now let's apply this to the Monte Carlo Example! First create a new file inside the Score-P directory with a text editor like vim called `main.filter`:
 
 ```
 $ vi main.filter
 ```
 
-Since this is a small program, we will only filter out the `main` function so that we can see the other USR functions displayed in Vampir. However, in bigger programs, we would want to filter out more USR functions. To filter out `main`, add the following line to the `main.filter` file.
+Since this is a small program, we will only filter out the `main` function so that we can see the other USR functions displayed in Vampir. However, in bigger programs, we would want to filter out more USR functions. To filter out `main`, add the following lines to the `main.filter` file.
 
 ```
 SCOREP_REGION_NAMES_BEGIN
@@ -260,7 +260,7 @@ SCOREP_REGION_NAMES_END
 Then issue the command:
 
 ```
-$ scorep-score -r -f all.filter profile.cubex
+$ scorep-score -r -f main.filter profile.cubex
 ```
 And you should see somthing like this:
 
@@ -300,10 +300,10 @@ flt     type max_buf[B] visits time[s] time[%] time/visit[us]  region
 
 You can see that only `main` will be filtered out while the rest of the functions will be traced and viewed in Vampir.
 
-Next, assign the path to the `all.filter` file to the `SCOREP_FILTERING_FILE` variable:
+Next, assign the path to the `main.filter` file to the `SCOREP_FILTERING_FILE` variable:
 
 ```
-$ export SCOREP_FILTERING_FILE=/gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/monte_carlo/<scorep directory>/all.filter
+$ export SCOREP_FILTERING_FILE=/gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/monte_carlo/<scorep directory>/main.filter
 ```
 
 ## Step 4: Tracing Run
@@ -334,7 +334,7 @@ When the job is complete, you should see another directory named `scorep-<yyyymm
 ```
 $ cd <new scorep directory>
 $ ls
-MANIFEST.md  scorep.cfg  traces  traces.def  traces.otf2  traces.vsettings  
+MANIFEST.md  scorep.cfg  scorep.filter traces  traces.def  traces.otf2   
 ```
 
 ## Step 5: Analyzing with Vampir
@@ -350,6 +350,7 @@ Now it's your turn!
 In order to load Vampir on Ascent, you must have X forwarding. This process differs between Mac and Windows users, so follow the appropriate directions for what you are working with.
 
 **Mac Users**
+
 To log in with X forwarding, logout of Ascent, and then ssh back in with the -X flag:
 
 ```
@@ -368,6 +369,7 @@ Please go to the following links to set up Xming and Putty:
 
 While following the second link's instructions, use `login1.ascent.olcf.ornl.gov` hostname instead of "ocean.stanford.edu" and use your own username instead of "gp235". 
 
+**Launching Vampir**
 Once you have the necessary software and are logged in with X forwarding, you can load the Vampir module to your environment:
 
 ```
@@ -412,24 +414,24 @@ This should open a Vampir window that looks like this:
 To open the `otf2` file we created, click on "Local File" on the left (if the window shows a Recent Files page, just click "Open Other"). Then enter in the path to the file, in this case it would be `/gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/<2nd scorep directory>/traces.otf2`. 
 <br>
 <center>
-<img src="images/vampir_filesystem_labeled2.png" width="400"> 
+<img src="images/vampir_filesystem_labeled2.png" style="width:70%">
 </center>
 <br>
 
 After the file loads, you should see a Vampir GUI like the one below:
 <br>
 <center>
-<img src="images/monte_carlo_vampir_labeled.png" width="400">
+<img src="images/monte_carlo_vampir_labeled.png" style="width:100%">
 </center>
 <br>
   
 >NOTE: The timing will be different on each run, so your data on time won't be the exact same as this example
 
-The master timeline is the big, crowded-looking frame on the left. This shows how each process runs over time and which functions are called according to the color-coded function group (the key for the colors is shown in the bottom right). The frame in the top-right corner is the function summary, which breaks down the accumulated time spent in each function summed up across all the processes. Then the middle frame on the right is the context view that gives details about the trace. At the very very top is the trace timeline, which gives an general timeline of the trace.  
+The master timeline is the big, frame on the left. This shows how each process runs over time and which functions are called according to the color-coded function group (the key for the colors is shown in the bottom right). The frame in the top-right corner is the function summary, which breaks down the accumulated time spent in each function summed up across all the processes. Then the middle frame on the right is the context view that gives details about the trace. At the very very top is the trace timeline, which gives an general timeline of the trace.  
 
-Feel free to play around with all the displays available. Try zooming in on the black diamond area at the end of the trace to see what kind of messaging is going on between functions. To zoom in, drag your mouse horizontally on the master timeline (For example, from 0.486 seconds to 0.490 seconds). Clicking on anything in the master timeline will give you information on the feature in the context view frame. You might also want to use the the top-left bar to add new frames to the overall display. For example, this button <center><img src="process_summary_buttonpng" height="50"></center> will open the process summary.
+Feel free to play around with all the displays available. Try zooming in on the black diamond area at the end of the trace to see what kind of messaging is going on between functions. To zoom in, drag your mouse horizontally on the master timeline (For example, from 0.486 seconds to 0.490 seconds). You can zoom in as far as you need to see the messaging activity. Clicking on anything in the master timeline will give you information on the feature in the context view frame. You might also want to use the the top-left bar to add new frames to the overall display. For example, this button <center><img src="process_summary_button.png" height="50"></center> will open the process summary, which will show the call stack of functions in one process (you can change which process by right-clicking and selecting "Select Process"). Also, if you want to search for a specific function, you can type Ctrl f.
 
->NOTE: Launching Vampir on Ascent might act slow since its working on a login node, so it could take the GUI a few seconds to load after clicking things.
+>NOTE: Launching Vampir on Ascent might act slow since it's working on a login node, so it could take the GUI a few seconds to load after clicking things.
 
 Now you have successsfully profiled a program with Score-P as well as opened and used Vampir! 
 
@@ -439,7 +441,7 @@ For more information on everything Vampir can do, see this [Vampir Visualization
 
 MiniWeather is a mini application used to simulate weather-like flows. For our purposes, we will be more focused on profiling the program instead of the output, but feel free to dive more into miniWeather's specifics at this [MiniWeather](https://github.com/mrnorman/miniWeather) Github page.
 
-The MiniWeather app uses CMake to compile and build the code, which requires a different approach when instrumenting Score-P. This makes it a bit more complicated, but we will walk through it. Additonally, miniWeather is great for comparing a program using different programming paradigms. Therefore, we will be profiling and tracing both MPI and MPI_OpenMP versions and then comparing them in Vampir.
+The MiniWeather app uses CMake to compile and build the code, which requires a different approach when instrumenting Score-P. This makes it a bit more complicated, but we will walk through it. Additonally, miniWeather is great for comparing a program using different programming paradigms. Therefore, we will be profiling and tracing both MPI and MPI+OpenMP versions and then comparing them in Vampir.
 
 Before starting, make sure you are in the right directory:
 
@@ -467,7 +469,7 @@ cmake -DCMAKE_CXX_COMPILER=scorep-mpicxx                                        
       .
 ```
 
-Also make sure you have the following modules. You can either add these commands to the cmake.sh file under the other `module load` commands, or you can load them normally in the command line.
+Also make sure you have the `scorep`, `otf2`, and `cubew` modules. You can either add these commands to the cmake.sh file under the other `module load` commands, or you can load them normally in the command line.
 
 ```
 module purge
@@ -550,7 +552,7 @@ Now we can create a filter file with vim:
 $ vi scorep.filter
 ```
 
-Then add the following lines to filter out all USR and COM regions. Again, feel free to go back and include some of the other regions, but for now we will just look at MPI and OpenMP functions.
+Then add the following lines to filter out all USR and COM regions. Feel free to go back and include some of the other regions, but for now we will just look at MPI and OpenMP functions.
 
 ```
 SCOREP_REGION_NAMES_BEGIN
@@ -627,22 +629,22 @@ Run the Vampir GUI remotely via X-forwarding
 $ vampir &
 ```
 
-If Vampir opens up to a Recent Files page, click "Open Other". Then click the "Comparison Session" option, and then the green plus sign to add files. Now select the "Local File" option and enter in the path to the MPI trace file or click through the file system to where the `trace.otf2` file is located. The path for the MPI trace file will be: `/gpfs/wolf/<roject>/scratch/<username>/Score-P_and_Vampir_Basics/miniWeather/MPI-scorep/<2nd scorep direcotry>/traces.otf2`. Then you can do the same thing with the OpenMP trace file (the path will be the same except that it will be in the `OpenMP-scorep` directory instead of `MPI-scorep`). If you need help figuring out the path to your trace file, use the `pwd` command in Ascent. 
+If Vampir opens up to a Recent Files page, click "Open Other". Then click the "Comparison Session" option, and then the green plus sign (shown below) to add files. Now select the "Local File" option and enter in the path to the MPI trace file or click through the file system to where the `trace.otf2` file is located. The path for the MPI trace file will be: `/gpfs/wolf/<roject>/scratch/<username>/Score-P_and_Vampir_Basics/miniWeather/MPI-scorep/<2nd scorep direcotry>/traces.otf2`. Then you can do the same thing with the OpenMP trace file (the path will be the same except that it will be in the `OpenMP-scorep` directory instead of `MPI-scorep`). If you need help figuring out the path to your trace file, use the `pwd` command in Ascent. 
 <br>
 <center>
-<img src="images/vampir_comparison_windows.png" width="900">
+<img src="images/vampir_comparison_windows.png" style="width:100%">
 </center>
 <br>
 
 
- Once both files are selected and loaded, click "OK". Once it is loaded, you should see something like this:
+After both files are selected and loaded, click "OK". Once it is loaded, you should see something like this:
 <br>
 <center>
-<img src="images/miniWeather_comparison.png" width="400">
+<img src="images/miniWeather_comparison.png" style="width:100%">
 </center>
 <br>
 
-The two background colors (white and purple) differentiate the two traces. In the image above, the white represents the trace that ran with just MPI, while the purple represents the trace that ran with MPI and OpenMP. In this case, the OpenMP trace ran faster than the MPI trace. 
+The two background colors (white and purple) differentiate the two traces. In the image above, the white represents the trace that ran with just MPI, while the purple represents the trace that ran with MPI and OpenMP. In this case, the OpenMP trace ran faster than the MPI trace. The yellow traingles signify I/O (input/output) events. You can zoom in on these events as well as the message bursts (represented by the black diamonds). Now that we can look at two traces side by side, try comparing several of the features and data. Does one trace spend more of its time in MPI functions than the other? Does the MPI_Init function take longer in one of the traces? Play around with Vampir and see what you can find!
 
 ## Challenges
 
@@ -659,11 +661,11 @@ $ module unload darshan-runtime
 $ module load gcc scorep otf2 cubew
 ```
 
-The solution to instrumenting Score-P in the Makefile for both MPI and OpenMP versions in the `solutions/jacobi` directory. 
+The solution to instrumenting Score-P in the Makefile for both MPI and OpenMP versions is in the `solutions/jacobi` directory. 
 
 **MiniSweep**
 
-MiniSweep is a mini application that focuses on radiative transport. Like MiniWeather, it also uses a CMake system. For more detailed information on what MiniSweep does, see the [MiniSweep](https://github.com/wdj/minisweep) page and look through the References section. You can also read through [this](https://github.com/wdj/minisweep/blob/master/doc/how_to_run.txt) explanation that describes the command line arguments. You might wan to try changing and comparing these command line arguments in the `submit.lsf` file.
+MiniSweep is a mini application that focuses on radiative transport. Like MiniWeather, it also uses a CMake system. For more detailed information on what MiniSweep does, see the [MiniSweep](https://github.com/wdj/minisweep) page and look through the References section. You can also read through [this](https://github.com/wdj/minisweep/blob/master/doc/how_to_run.txt) explanation that describes the command line arguments, which you can change in the `submit.lsf` file and compare the results.
 
 You will have to load the following modules:
 
@@ -674,7 +676,7 @@ $ module load cmake gcc scorep otf2 cubew
 
 On your own, go through all the steps detailed earlier to use Score-P and Vampir on MiniSweep. The solution to implementing Score-P on MiniSweep in the CMake file can be found in `solutions/miniSweep`. 
 
->NOTE: When it comes to filtering, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
+>NOTE: When it comes to filtering MiniSweep, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
 
 ## Further Resources
 
@@ -686,7 +688,7 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 
 [Vampir OLCF Documentation](https://docs.olcf.ornl.gov/software/profiling/Vampir.html)
 
-[OLCF Training Archives.](https://docs.olcf.ornl.gov/training/training_archive.html) There are two Score-P presentations called "Intro to Score-P" and "Advanced Score-P" that are listed. 
+[OLCF Training Archives.](https://docs.olcf.ornl.gov/training/training_archive.html) (There are two Score-P presentations called "Intro to Score-P" and "Advanced Score-P" that are listed.) 
 
 [Monte Carlo Code Explanation](http://www.selkie.macalester.edu/csinparallel/modules/MPIProgramming/build/html/calculatePi/Pi.html)
 
