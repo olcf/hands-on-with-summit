@@ -1,4 +1,4 @@
-CCOMP  = mpicc
+CCOMP  = scorep mpicc
 CFLAGS =
 
 run: calculating_pi.o

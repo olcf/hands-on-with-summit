@@ -87,7 +87,7 @@ You will need to load the following modules:
 
 ```
 $ module unload darshan-runtime
-$ module load scorep gcc 
+$ module load scorep gcc otf2 cubew
 ```
 
 > NOTE: Loading the `scorep` module requires you to unload the `darshan-runtime` module first
@@ -513,7 +513,14 @@ Then you can submit the job. We will start with the MPI version.
 $ bsub submit_mpi.lsf
 ```
 
-Use `jobstat -u <username>` to check your job's status. Once complete, you can go to the new Score-P directory and use the `scorep-score -r profile.cubex` command to look at the profilng results. Below is a snippet of the profiling results from the MPI version (note that the results on time will be different for each individual profiling run):
+Use `jobstat -u <username>` to check your job's status. Once complete, you can go to the new Score-P directory and use the `scorep-score -r profile.cubex` command to look at the profilng results. 
+
+```
+$ cd <score-p directory>
+$ scorep-score -r profile.cubex
+```
+
+Below is a snippet of the profiling results from the MPI version (note that the results on time will be different for each individual profiling run):
 
 ```
 $ cd <scorep directory>

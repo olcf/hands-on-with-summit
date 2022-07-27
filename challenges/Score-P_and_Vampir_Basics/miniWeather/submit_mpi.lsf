@@ -5,6 +5,7 @@
 #BSUB -nnodes 1
 #BSUB -J miniWeather_mpi
 #BSUB -o miniWeather_mpi.%J
+#BSUB -e miniWeather_mpi.%J
 
 date
 
