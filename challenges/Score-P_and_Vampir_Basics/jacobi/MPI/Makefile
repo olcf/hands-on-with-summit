@@ -1,6 +1,6 @@
 COMP = mpicc
 CFLAGS =
-PREP = scorep
+PREP = 
 
 run: jacobi.o main.o
 	$(PREP) $(COMP) $(CFLAGS) main.o jacobi.o -o run

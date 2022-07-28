@@ -27,14 +27,14 @@ if [ "$PE_ENV" = INTEL ] ; then
   OMP_ARGS="-qopenmp"
   OPT_ARGS="-ip -prec-div -O3 -align -ansi-alias -fargument-noalias -fno-alias -fargument-noalias"
 else
-  CC=scorep-mpicc
+  CC=mpicc
   OMP_ARGS="-fopenmp"
   OPT_ARGS="-O3 -fomit-frame-pointer -funroll-loops -finline-limit=10000000"
 fi
 
 #------------------------------------------------------------------------------
 
-SCOREP_WRAPPER=off cmake \
+cmake \
   -DCMAKE_BUILD_TYPE:STRING="$BUILD" \
   -DCMAKE_INSTALL_PREFIX:PATH="$INSTALL" \
  \
