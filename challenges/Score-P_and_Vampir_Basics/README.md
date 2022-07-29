@@ -688,7 +688,7 @@ $ module load cmake gcc scorep otf2 cubew
 
 On your own, go through all the steps detailed earlier to use Score-P and Vampir on MiniSweep. The solution to implementing Score-P on MiniSweep in the CMake file can be found in `solutions/miniSweep`. 
 
->NOTE: When it comes to filtering MiniSweep, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
+>NOTES: You may come across a warning when compiling, but this is not critical, and you can continue to submit the job as usual. Also, when it comes to filtering MiniSweep, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
 
 ## Further Resources
 
