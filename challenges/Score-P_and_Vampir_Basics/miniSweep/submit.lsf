@@ -9,5 +9,5 @@
 
 date
 
-export OMP_NUM_THREADS=7
-jsrun -n 6 -c 7 -a 1 -bpacked:7 ./sweep --ncell_x  8 --ncell_y 16 --ncell_z 32 --nproc_x 2 --nproc_y 2 --nblock_z 32  --ne 1 --nthread_e 4
+export OMP_NUM_THREADS=4
+jsrun -n 4 -c 4 -a 1 -bpacked:4 ./sweep --ncell_x  8 --ncell_y 16 --ncell_z 32 --nproc_x 2 --nproc_y 2 --nblock_z 32  --ne 1 --nthread_e 4
