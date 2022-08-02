@@ -184,13 +184,13 @@ Once in Normal Mode, you can save by typing on your keyboard `:w`. These charact
 appear in the main text but will appear in the bottom left. `:w` is the command for Vim to
 'write' the file to disk, thus savimng the file. 
 
-![screenshot showing :w](images/screenshot_showing_q.png)
+![screenshot showing :w](images/screenshot_showing_w.png)
 
 You can exit out of Vim and go back to the command line by typing in `:q`. If you haven't
 saved, you will get a warning and Vim won't exit, so make sure you save the file with `:w`
 first. 
 
-![screenshot showing :q](images/screenshot_showing_w.png)
+![screenshot showing :q](images/screenshot_showing_q.png)
 
 
 And that should give you the basics you need for UNIX and Vim! Try working through the
