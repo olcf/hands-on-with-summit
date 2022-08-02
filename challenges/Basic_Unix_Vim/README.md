@@ -1,20 +1,16 @@
 # Purpose
-TODO: change all ascent prompts to jupyter prompts
 
 This challenge is going to show you the very basic Unix and Vim skills you need to work on
 the Hands-On HPC Challenges. If you have some experience with Vim or Unix, you can skip
 this challenge.
 
-  Notes: cd, ls, pwd 
-  
-  Notes: Open a vim file, put in in insert mode, write something, delete something, take it out of edit mode. save and close. 
-
 # Working in a Unix System
 
 In order to accomplish tasks in any high-performance computing system, you need to know
-how to navimgate through and issue commands in a Unix or Linux operating system. In these
-operating systems, all interactions you have with the computer will be done vima the
-issuing of text based commands, as opposed to clicking around on a graphical interface, in order to open and modify files or run programs.
+how to navigate through and issue commands in a UNIX or Linux operating system. In these
+operating systems, all interactions you have with the computer will be done via the
+issuing of text based commands, as opposed to clicking around on a graphical interface, in
+order to open and modify files or run programs.
 
 In this section you will learn about the command line and how to list files in your
 current directory, make directories, change from one directory to another, and copy and
@@ -25,7 +21,7 @@ remove files.
 
 The command line (also called a command prompt) is a text interface for a computer. It is
 the place in which you type the commands that will be interpreted and executed by the
-computer when you enter them. From the command line, you can run programs and navimgate
+computer when you enter them. From the command line, you can run programs and navigate
 through files and folders just like you would with Windows Explorer on Windows or Finder
 on MacOS.
 
@@ -49,21 +45,6 @@ will print out your username like so:
 76a
 ```
 
-By this point, if you haven't already done it, execute `git clone
-https://github.com/olcf/hands-on-with-summit/` on the command line (type it into the
-command line and press Enter) to download the Hands
-On With Summit repository. The output should look something like:
-
-```
-[76a@login1.ascent ~]$ git clone https://github.com/olcf/hands-on-with-summit/
-Cloning into 'hands-on-with-summit'...
-remote: Enumerating objects: 1486, done.
-remote: Counting objects: 100% (445/445), done.
-remote: Compressing objects: 100% (248/248), done.
-remote: Total 1486 (delta 222), reused 401 (delta 185), pack-reused 1041
-Receivimng objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
-Resolvimng deltas: 100% (829/829), done.
-```
 
 ## Work with Directories
 
@@ -98,7 +79,34 @@ you were in your `/ccsopen/home/<user>` directory, we can use `cd` followed by t
 
 Make sure you replace `76a` with your actual username. We are just using `76a` as an example.
 
-From here, let us try using `cd` to get to the `Basic_UNIX_Vim` challenge directory in the
+
+> By this point, if you haven't already done it, execute `git clone
+> https://github.com/olcf/hands-on-with-summit/` on the command line (type it into the
+> command line and press Enter) to download the Hands
+> On With Summit repository. The output should look something like:
+> 
+> ```
+> [76a@login1.ascent ~]$ git clone https://github.com/olcf/hands-on-with-summit/
+> Cloning into 'hands-on-with-summit'...
+> remote: Enumerating objects: 1486, done.
+> remote: Counting objects: 100% (445/445), done.
+> remote: Compressing objects: 100% (248/248), done.
+> remote: Total 1486 (delta 222), reused 401 (delta 185), pack-reused 1041
+> Receivimng objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
+> Resolvimng deltas: 100% (829/829), done.
+> ```
+
+
+In order to see what files and directories are present in your current directory, you use
+the `ls` command which will 'list' your current directory's contents. Your output if this
+is your time on these systems will look something like this
+
+```
+[76a@login1.ascent ~]$ ls
+hands-on-with-summit
+```
+
+From here, let us try using `cd` to get to the `Basic_Unix_Vim` challenge directory in the
 `hands-on-with-summit` repository we downloaded.
 
 ```
@@ -111,31 +119,28 @@ starting with `/` is called a absolute path. This will take you to the same dire
 
 ```
 [76a@login1.ascent ~]$ cd /ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
-[76a@login1.ascent Basic_Unix_Vim]$ pwd 
-/ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
-[76a@login1.ascent Basic_Unix_Vim]$ ls
-README.md text_file.txt
 ```
 
-In order to see what files and directories are present in your current directory, you use
-the `ls` command which will 'list' your current directory's contents. Your output if this
-is your time on these systems will look something like this
-
-```
-[76a@login1.ascent ~]$ ls
-hands-on-with-summit
-```
 
 
 Execute `pwd` to check if you're in the right place, and execute `ls` to see what files are
-available in this directory. If you want to go back to where you were,
-remember the previmous path you had and use `cd` to navimgate there e.g. `cd
+available in this directory. 
+
+```
+[76a@login1.ascent Basic_Unix_Vim]$ pwd 
+/ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
+[76a@login1.ascent Basic_Unix_Vim]$ ls
+images README.md text_file.txt
+```
+
+If you want to go back to where you were,
+remember the previous path you had and use `cd` to navigate there e.g. `cd
 /ccsopen/home/<user>` . 
 
 ```
-[76a@login1.ascent Basic_Unix_Vim]$ cd /ccsopen/home/<user>
+[76a@login1.ascent Basic_Unix_Vim]$ cd /ccsopen/home/76a
 [76a@login1.ascent ~]$ pwd
-/ccsopen/home/<user>
+/ccsopen/home/76a
 ```
 
 Let us now learn how to create a new directory. Now that you are in the `Basic_Unix_Vim`
@@ -145,7 +150,7 @@ the directory. For example, to create a directory named 'mydirectory', do the fo
 ```
 [76a@login1.ascent Basic_Unix_Vim]$ mkdir mydirectory 
 [76a@login1.ascent Basic_Unix_Vim]$ ls
-mydirectory README.md text_file.txt
+images mydirectory README.md text_file.txt
 ```
 
 # Editing Files
@@ -204,10 +209,11 @@ __UNIX__
 
 Command             | Description                                                               |
 --------------------|---------------------------------------------------------------------------|
-pwd                 | print the current directory you are in (your 'present working directory') | 
-cd /path/to/file    | Navimgate to the directory location given by the path                      |
+pwd                 | Print the current directory you are in (your 'present working directory') | 
+cd /path/to/file    | Navimgate to the directory location given by the path                     |
 ls                  | List the files and directories in your current directory                  |
-mkdir directoryname | create a new directory in your current directory with the name you give   |
+mkdir directoryname | Create a new directory in your current directory with the name you give   |
+vim filename        | Open a file in Vim                                                        |
 
 
 
