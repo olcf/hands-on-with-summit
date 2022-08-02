@@ -1,4 +1,5 @@
 # Purpose
+TODO: change all ascent prompts to jupyter prompts
 
 This challenge is going to show you the very basic Unix and Vim skills you need to work on
 the Hands-On HPC Challenges. If you have some experience with Vim or Unix, you can skip
@@ -11,8 +12,8 @@ this challenge.
 # Working in a Unix System
 
 In order to accomplish tasks in any high-performance computing system, you need to know
-how to navigate through and issue commands in a Unix or Linux operating system. In these
-operating systems, all interactions you have with the computer will be done via the
+how to navimgate through and issue commands in a Unix or Linux operating system. In these
+operating systems, all interactions you have with the computer will be done vima the
 issuing of text based commands, as opposed to clicking around on a graphical interface, in order to open and modify files or run programs.
 
 In this section you will learn about the command line and how to list files in your
@@ -24,7 +25,7 @@ remove files.
 
 The command line (also called a command prompt) is a text interface for a computer. It is
 the place in which you type the commands that will be interpreted and executed by the
-computer when you enter them. From the command line, you can run programs and navigate
+computer when you enter them. From the command line, you can run programs and navimgate
 through files and folders just like you would with Windows Explorer on Windows or Finder
 on MacOS.
 
@@ -60,8 +61,8 @@ remote: Enumerating objects: 1486, done.
 remote: Counting objects: 100% (445/445), done.
 remote: Compressing objects: 100% (248/248), done.
 remote: Total 1486 (delta 222), reused 401 (delta 185), pack-reused 1041
-Receiving objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
-Resolving deltas: 100% (829/829), done.
+Receivimng objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
+Resolvimng deltas: 100% (829/829), done.
 ```
 
 ## Work with Directories
@@ -79,8 +80,42 @@ in with the `pwd` command. `pwd` will give you your 'present working directory'.
 
 This tells you that you are in the `/ccsopen/home/<user>` directory where you should
 replace `<user>` with your username. This directory is where you will land by default when
-you first log in with SSH. The string with forward slashes like e.g. `/ccsopen/home/76a`
-is a called a _path_.
+you first log in on the terminal. The string with forward slashes like e.g. `/ccsopen/home/76a`
+is a called a _path_. If you are not already in this directory, you can use the `cd`
+command to navigate here as we will see next.
+
+
+Let's now try to move around in the filesystem. To move to a different directory we will
+need to use the `cd` command to 'change directory'. On the command line, you have to type
+in `cd` followed by the _path_ of the directory you want to go to. If earlier, `pwd` didn't show that
+you were in your `/ccsopen/home/<user>` directory, we can use `cd` followed by the path to get there.
+
+```
+[76a@login1.ascent ~]$ cd /ccsopen/home/76a
+[76a@login1.ascent ~]$ pwd
+/ccsopen/home/76a
+```
+
+Make sure you replace `76a` with your actual username. We are just using `76a` as an example.
+
+From here, let us try using `cd` to get to the `Basic_UNIX_Vim` challenge directory in the
+`hands-on-with-summit` repository we downloaded.
+
+```
+[76a@login1.ascent ~]$ cd hands-on-with-summit/challenges/Basic_Unix_Vim
+```
+
+This is the path _relative to your current directory_ (which would be
+`/ccsopen/home/<user>`). You can also use the _absolute path_ with `cd` i.e. the path string
+starting with `/` is called a absolute path. This will take you to the same directory.
+
+```
+[76a@login1.ascent ~]$ cd /ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
+[76a@login1.ascent Basic_Unix_Vim]$ pwd 
+/ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
+[76a@login1.ascent Basic_Unix_Vim]$ ls
+README.md text_file.txt
+```
 
 In order to see what files and directories are present in your current directory, you use
 the `ls` command which will 'list' your current directory's contents. Your output if this
@@ -91,31 +126,10 @@ is your time on these systems will look something like this
 hands-on-with-summit
 ```
 
-Let's now try to move around in the filesystem. To move to a different directory we will
-need to use the `cd` command to 'change directory'. On the command line, you have to type
-in `cd` followed by the _path_ of the directory you want to go to. Let us try using `cd`
-to get to the `Basic_UNIX_Vim` challenge directory in the `hands-on-with-summit`
-repository we downloaded.
-
-```
-[76a@login1.ascent ~]$ cd hands-on-with-summit/challenges/Basic_Unix_Vim
-```
-
-This is the path _relative to your current directory_ (which would be
-`/ccsopen/home/<user>`). You can also use the _full path_ with `cd` i.e. the path string
-will start with `/` is called a full path. This will take you to the same directory.
-
-```
-[76a@login1.ascent ~]$ cd /ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
-[76a@login1.ascent Basic_Unix_Vim]$ pwd 
-/ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
-[76a@login1.ascent Basic_Unix_Vim]$ ls
-README.md text_file.txt
-```
 
 Execute `pwd` to check if you're in the right place, and execute `ls` to see what files are
 available in this directory. If you want to go back to where you were,
-remember the previous path you had and use `cd` to navigate there e.g. `cd
+remember the previmous path you had and use `cd` to navimgate there e.g. `cd
 /ccsopen/home/<user>` . 
 
 ```
@@ -138,7 +152,7 @@ mydirectory README.md text_file.txt
 
 We will now learn to edit files using a command line text editor called Vim. Vim is a
 standard text editor available on almost all systems where you have to use a command
-line. It provides the quickest way to view and modify files when you don't have access to
+line. It provides the quickest way to vimew and modify files when you don't have access to
 graphical text editors that you might be used to.
 
 You should be familiar with the format by now. To open a file in Vim, execute the `vim`
@@ -150,40 +164,39 @@ command with the name of the file. Try to open the file `text_file.txt` with Vim
 
 This will open a window that looks like this:
 
-![vim with text file open](TODO)
+![vim with text file open](images/vim_with_text_file_open.png)
 
 Vim has two main modes, __Insert Mode__ and __Normal Mode__. When Vim opens a file, it
 will always open in Normal Mode. To start actually editing the text, you need to enter
 Insert Mode. To do this, press the letter 'i' on your keyboard. You will see the little
-indicator on the bottom left appear saying `-- INSERT MODE --`
+indicator on the bottom left appear saying `-- INSERT MODE --` as you can see in the image below.
 
-![screenshot showing insert mode](TODO)
+![screenshot showing insert mode](images/screenshot_showing_insert_mode.png)
 
 Try typing in some sentences. Once you are done, you need to be able to save and/or exit
 Vim. To do that, you must first go back to Normal Mode. To go to Normal Mode, press the
 `Escape` key or press `Control key + [` on your keyboard. You will see the little `--
-INSERT MODE --` indicator disappear.
+INSERT MODE --` indicator disappear as you can see in the image below.
 
-![screenshot showing normal mode](TODO)
+![screenshot showing normal mode](images/screenshot_showing_normal_mode.png)
 
 Once in Normal Mode, you can save by typing on your keyboard `:w`. These characters won't
 appear in the main text but will appear in the bottom left. `:w` is the command for Vim to
-'write' the file to disk, thus saving the file. 
+'write' the file to disk, thus savimng the file. 
 
-![screenshot showing :w](TODO)
+![screenshot showing :w](images/screenshot_showing_q.png)
 
 You can exit out of Vim and go back to the command line by typing in `:q`. If you haven't
 saved, you will get a warning and Vim won't exit, so make sure you save the file with `:w`
 first. 
 
-![screenshot showing :q](TODO)
+![screenshot showing :q](images/screenshot_showing_w.png)
 
 
 And that should give you the basics you need for UNIX and Vim! Try working through the
 other challenges in this repository now. If you want more in depth details about using
-UNIX and Vim, you
-can find it in the `intro_to_unix` and `intro_to_vim` directories in the [Foundational HPC
-Skills repository](https://github.com/olcf/foundational_hpc_skills) 
+UNIX and Vim, you can find it in the `intro_to_unix` and `intro_to_vim` directories in the
+[Foundational HPC Skills repository](https://github.com/olcf/foundational_hpc_skills)
 
 # Cheatsheet
 
@@ -192,13 +205,13 @@ __UNIX__
 Command             | Description                                                               |
 --------------------|---------------------------------------------------------------------------|
 pwd                 | print the current directory you are in (your 'present working directory') | 
-cd /path/to/file    | Navigate to the directory location given by the path                      |
+cd /path/to/file    | Navimgate to the directory location given by the path                      |
 ls                  | List the files and directories in your current directory                  |
 mkdir directoryname | create a new directory in your current directory with the name you give   |
 
 
 
-__VIM__
+__Vim__
 
 Command              | Description                                                               |
 ---------------------|---------------------------------------------------------------------------|
