@@ -92,8 +92,8 @@ Make sure you replace `76a` with your actual username. We are just using `76a` a
 > remote: Counting objects: 100% (445/445), done.
 > remote: Compressing objects: 100% (248/248), done.
 > remote: Total 1486 (delta 222), reused 401 (delta 185), pack-reused 1041
-> Receivimng objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
-> Resolvimng deltas: 100% (829/829), done.
+> Receiving objects: 100% (1486/1486), 95.52 MiB | 3.26 MiB/s, done.
+> Resolving deltas: 100% (829/829), done.
 > ```
 
 
@@ -157,7 +157,7 @@ images mydirectory README.md text_file.txt
 
 We will now learn to edit files using a command line text editor called Vim. Vim is a
 standard text editor available on almost all systems where you have to use a command
-line. It provides the quickest way to vimew and modify files when you don't have access to
+line. It provides the quickest way to view and modify files when you don't have access to
 graphical text editors that you might be used to.
 
 You should be familiar with the format by now. To open a file in Vim, execute the `vim`
@@ -187,7 +187,7 @@ INSERT MODE --` indicator disappear as you can see in the image below.
 
 Once in Normal Mode, you can save by typing on your keyboard `:w`. These characters won't
 appear in the main text but will appear in the bottom left. `:w` is the command for Vim to
-'write' the file to disk, thus savimng the file. 
+'write' the file to disk, thus saving the file. 
 
 ![screenshot showing :w](images/screenshot_showing_w.png)
 
@@ -210,7 +210,7 @@ __UNIX__
 Command             | Description                                                               |
 --------------------|---------------------------------------------------------------------------|
 pwd                 | Print the current directory you are in (your 'present working directory') | 
-cd /path/to/file    | Navimgate to the directory location given by the path                     |
+cd /path/to/file    | Navigate to the directory location given by the path                     |
 ls                  | List the files and directories in your current directory                  |
 mkdir directoryname | Create a new directory in your current directory with the name you give   |
 vim filename        | Open a file in Vim                                                        |
