@@ -692,7 +692,7 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 
 ## Score-P with CUDA
 
-Score-P can also profile programs that utilize GPU programming, specifically with CUDA. To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `redundant_MM` directory, which contains coda that uses CUDA programming to multiply matrices:
+Score-P can also profile programs that utilize GPU programming, specifically with CUDA. To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `redundant_MM` directory, which contains code that uses CUDA programming to multiply matrices:
 
 ```
 $ cd /gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/redundant_MM
