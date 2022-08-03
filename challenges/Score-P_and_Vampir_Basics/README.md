@@ -690,6 +690,39 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 
 >NOTES: You may come across a warning when compiling, but this is not critical, and you can continue to submit the job as usual. Also, when it comes to filtering MiniSweep, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
 
+## Score-P with CUDA
+
+Score-P can also profile programs that utilize GPU programming, specifically with CUDA. To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `redundant_MM` directory, which contains code that uses CUDA programming to multiply matrices:
+
+```
+$ cd /gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/redundant_MM
+```
+
+You will also need the following modules:
+
+```
+$ module unload darshan-runtime
+$ module load scorep/7.0-papi otf2 cubew gcc cuda essl
+```
+
+>NOTE: To use Score-P with CUDA, you need the `scorep/7.0-papi` version. The other versions do not support CUDA instrumentation.
+
+One addition needed is, when instrumenting Score-P, you will need to include the `--cuda` flag after the `scorep` command, as seen in the redundant_MM Makefile:
+
+```
+CUCOMP  = scorep --cuda nvcc
+```
+
+Furthermore, when setting the Score-P environment variables, you will need to set `SCOREP_CUDA_ENABLE` equal to `yes`:
+
+```
+$ export SCOREP_CUDA_ENABLE=yes
+```
+
+After that, everything else is the same (filtering, tracing, etc.). You can now launch Vampir and see the CUDA kernels in addition to the master thread. If you need help with instrumenting the redundant_MM code, the Makefile solution can be found in `solutions/redundant_MM`. 
+
+For more information on Score-P with CUDA, you can visit these sites: [VI_HPS slides](https://www.vi-hps.org/cms/upload/material/tw15/CUDA_Hands_On.pdf) and [CUDA Perfomance Measurement](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-4.1/html/measurement.html#cuda_adapter). 
+
 ## Further Resources
 
 [Score-P](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-6.0/html/index.html)
@@ -707,3 +740,9 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 [MiniWeather Full Code and Explanation](https://github.com/mrnorman/miniWeather#running-the-code)
 
 [MiniSweep Full Code and Explanation](https://github.com/wdj/minisweep)
+
+[VI_HPS slides](https://www.vi-hps.org/cms/upload/material/tw15/CUDA_Hands_On.pdf)
+
+[CUDA Perfomance Measurement](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-4.1/html/measurement.html#cuda_adapter)
+
+[Redudant_MM Code](https://github.com/olcf/HIP_for_CUDA_programmers/tree/master/examples/redundant_MM)
