@@ -122,7 +122,6 @@ starting with `/` is called a absolute path. This will take you to the same dire
 ```
 
 
-
 Execute `pwd` to check if you're in the right place, and execute `ls` to see what files are
 available in this directory. 
 
@@ -152,6 +151,33 @@ the directory. For example, to create a directory named 'mydirectory', do the fo
 [76a@login1.ascent Basic_Unix_Vim]$ ls
 images mydirectory README.md text_file.txt
 ```
+
+Now that we have a new directory, let us try copying a file to that new directory. For
+copying, we use the `cp` command to "copy" a file to another location. The format is `cp`
+followed by the name of the file to copy as well as the path of the new location where the
+file needs to be copied to. Let us try to copy the file `text_file.txt` to the newly
+created `mydirectory` directory. To do that, we can do the following on the command line
+
+```
+[76a@login1.ascent Basic_Unix_Vim]$ cp test_file.txt mydirectory
+```
+
+Remember that specifying the full path for the file or directory will also work. In this
+case, we could write the below
+
+```
+[76a@login1.ascent Basic_Unix_Vim]$ cp /ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/text_file.txt /ccsopen/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/mydirectory
+```
+
+You can check the contents of a directory with `ls` without first using `cd` to go to that
+directory, by using `ls` followed by the path or directory name.
+
+```
+[76a@login1.ascent Basic_Unix_Vim]$ ls mydirectory
+text_file.txt
+```
+
+You can see that `text_file.txt` has been successfully copied to the directory `mydirectory`.
 
 # Editing Files
 
@@ -207,13 +233,16 @@ UNIX and Vim, you can find it in the `intro_to_unix` and `intro_to_vim` director
 
 __UNIX__
 
-Command             | Description                                                               |
---------------------|---------------------------------------------------------------------------|
-pwd                 | Print the current directory you are in (your 'present working directory') | 
-cd /path/to/file    | Navigate to the directory location given by the path                     |
-ls                  | List the files and directories in your current directory                  |
-mkdir directoryname | Create a new directory in your current directory with the name you give   |
-vim filename        | Open a file in Vim                                                        |
+Anything in [square brackets] is optional for that command.
+
+Command                       | Description                                                                            |
+------------------------------|----------------------------------------------------------------------------------------|
+pwd                           | Print the current directory you are in (your 'present working directory')              | 
+cd /path/to/file              | Navigate to the directory location given by the path                                   |
+ls [path or directory]        | List the files and directories in your current directory or in the directory specified |
+mkdir directoryname           | Create a new directory in your current directory with the name you give                |
+cp filename /path/to/location | Copy the file to the directory given by the path                                       |
+vim filename                  | Open a file in Vim                                                                     |
 
 
 
