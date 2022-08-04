@@ -1,6 +1,6 @@
 # What is MPI? 
 
-The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. 
+The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. The MPI standard can be found here: [MPI: A Message-Passing Interface Standard Version 3.1]( https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf). 
 
 The basic flow of MPI within in a program is:
 1. Initialize communication 
@@ -8,11 +8,14 @@ The basic flow of MPI within in a program is:
 3. Exit the communication
 
 
-This neat encapsulation of data and instructions, in portable messages, means that differnt processes can be sent run on nodes that have different pools of memory. MPI also works well on nodes where, processing elements share memory, but other parallel methods designed for shared-memeory may be more effient. MPI is often used in conjunction with OpenMP and other shared-memory threading methods.  For example, you might use MPI to pass work between compute nodes and then use OpenMP threads to divide work among the different processing elements on the node. 
+This neat encapsulation of data and instructions in portable messages allows different processes to be sent run on nodes that have different pools of memory. Each process has its own unique copy of the data, variables, and instructions for its task. 
 
-This challenge will explore an MPI hello-world and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node. 
+MPI also works well on nodes where processing elements share memory, but other parallel methods designed for shared memory may be more efficient inside of one node. MPI is often used in conjunction with OpenMP and other shared-memory threading methods.  For example, you might use MPI to pass work between compute nodes and then use OpenMP threads to divide work among the different processing elements on the node. 
 
-The MPI standard can be found here: [MPI: A Message-Passing Interface Standard Version 3.1]( https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf). 
+This challenge will explore an MPI hello-world and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node so that we have enough nodes available for everyone to do this at once.
+
+
+
 
 # MPI Terminology  
  
