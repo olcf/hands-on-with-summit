@@ -2,11 +2,6 @@
 
 The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. 
 
-The basic flow of MPI within in a program is:
-1. Initialize communication 
-2. Communicate between processes to share data.
-3. Exit the communication
-
 
 MPI can be used in conjunction with threading and accelerators. For example, you might use MPI to pass work between compute nodes and then use threads or accelerators to divide work among the different processing elements on the node. 
 
@@ -22,14 +17,19 @@ A good refence for learning more about MPI is [MPI: A Message-Passing Interface 
 
 **Size** The total number of ranks in a communicator.
 
-**MPI Region** The part of the code that will be executed in parallel using one MPI communicator. It will always be sandwiched between  MPI_Init and MPI_Finalize function calls. 
+**MPI Region** The part of the code that will be executed in parallel using one MPI communicator. It will always be sandwiched between  MPI_Init and 
+MPI_Finalize function calls.
+The basic flow of MPI within in a program is:
+1. Initialize communication 
+2. Communicate between processes to share data.
+3. Exit the communication
+
 <br>
 <center>
 <img src="images/MPI_burger.png" width="220" height="200">
 </center>
 <br>
-
-                                                       
+                                 
                                                         
 The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID,to differentiate the code paths. 
 
