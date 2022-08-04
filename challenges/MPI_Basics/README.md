@@ -51,7 +51,7 @@ The first thing MPI does when it is initialized, is set up the communicator. You
 
 **A communicator of size 8, with 8 ranks that map to 8 processes running on 8 CPU cores.** 
 
-# MPI Functions and Hello_World
+# MPI Functions and Helloworld
 
 MPI consists of hundreds of functions but most users will only use a handful of them. 
 We'll start by looking at the functions needed for an MPI Hello-world program. 
