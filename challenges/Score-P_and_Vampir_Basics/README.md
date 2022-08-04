@@ -694,7 +694,7 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 
 Score-P can also profile programs that utilize GPU programming, specifically with CUDA and OpenACC. Below are details on how to profile both CUDA and OpenACC programs with Score-P.
 
-#CUDA
+###CUDA
 
 To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `gpu-program-examples/redundant_MM` directory, which contains code that uses CUDA programming to multiply matrices:
 
@@ -727,7 +727,7 @@ After that, everything else is the same (filtering, tracing, etc.). You can now 
 
 For more information on Score-P with CUDA, you can visit these sites: [VI_HPS slides](https://www.vi-hps.org/cms/upload/material/tw15/CUDA_Hands_On.pdf) and [CUDA Perfomance Measurement](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-4.1/html/measurement.html#cuda_adapter). 
 
-#OpenACC
+###OpenACC
 
 The steps for using Score-P with OpenACC are very similar to the ones with CUDA. You can follow along with the OpenACC version of MiniWeather found in the `gpu-program-examples/miniWeather-openacc` directory:
 
