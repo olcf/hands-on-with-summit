@@ -690,12 +690,16 @@ On your own, go through all the steps detailed earlier to use Score-P and Vampir
 
 >NOTES: You may come across a warning when compiling, but this is not critical, and you can continue to submit the job as usual. Also, when it comes to filtering MiniSweep, you should filter out most, if not all, functions since there are so many USR functions that take up a lot of space.
 
-## Score-P with CUDA
+## Score-P with GPU Programming
 
-Score-P can also profile programs that utilize GPU programming, specifically with CUDA. To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `redundant_MM` directory, which contains code that uses CUDA programming to multiply matrices:
+Score-P can also profile programs that utilize GPU programming, specifically with CUDA and OpenACC. Below are details on how to profile both CUDA and OpenACC programs with Score-P.
+
+### CUDA
+
+To use Score-P with CUDA code, there are just a few additional steps that need to be taken. To follow along, go to the `gpu-program-examples/redundant_MM` directory, which contains code that uses CUDA programming to multiply matrices:
 
 ```
-$ cd /gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/redundant_MM
+$ cd /gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/gpu-program-examples/redundant_MM
 ```
 
 You will also need the following modules:
@@ -722,6 +726,38 @@ $ export SCOREP_CUDA_ENABLE=yes
 After that, everything else is the same (filtering, tracing, etc.). You can now launch Vampir and see the CUDA kernels in addition to the master thread. If you need help with instrumenting the redundant_MM code, the Makefile solution can be found in `solutions/redundant_MM`. 
 
 For more information on Score-P with CUDA, you can visit these sites: [VI_HPS slides](https://www.vi-hps.org/cms/upload/material/tw15/CUDA_Hands_On.pdf) and [CUDA Perfomance Measurement](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-4.1/html/measurement.html#cuda_adapter). 
+
+### OpenACC
+
+The steps for using Score-P with OpenACC are very similar to the ones with CUDA. You can follow along with the OpenACC version of MiniWeather found in the `gpu-program-examples/miniWeather-openacc` directory:
+
+```
+$ cd /gpfs/wolf/<project>/scratch/<username>/Score-P_and_Vampir_Basics/gpu-program-examples/miniWeather-openacc
+```
+
+Make sure to load the `scorep`, `otf2`, and `cubew` modules either in the `cmake.sh` file or in the command line. The rest of the modules needed are already in `cmake.sh`. 
+
+```
+module purge
+module load DefApps nvhpc/21.11 cuda parallel-netcdf cmake
+module load scorep otf2 cubew
+``` 
+
+>NOTE Score-P with OpenACC instrumentation does not work with the gcc compiler, so we will be using nvhpc
+
+After you build the CMake files with `source cmake.sh`, you will need to include the `--openacc` option when issuing the `make` command by setting the `SCOREP_WRAPPER_INSTRUMENTER_FLAGS` variable:
+
+```
+$ make SCOREP_WRAPPER_INSTRUMENTER_FLAGS=--openacc
+```
+
+You will also need to set the `SCOREP_OPENACC_ENABLE` variable to `yes` before profiling:
+
+```
+$ export SCOREP_OPENACC_ENABLE=yes
+```
+
+Then everything else in the Score-P process is the same, and you will be able to see the OpenACC functions in Vampir. The solution to instrumenting the `cmake.sh` file can be found in `solutions/miniWeather-openacc`. For more information, visit the [OpenACC Performance Measurement](https://scorepci.pages.jsc.fz-juelich.de/scorep-pipelines/docs/scorep-4.1/html/measurement.html#openacc_adapter) site. 
 
 ## Further Resources
 
