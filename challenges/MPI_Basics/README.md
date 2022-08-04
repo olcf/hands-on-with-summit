@@ -2,6 +2,11 @@
 
 The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. 
 
+The basic flow of MPI within in a program is:
+1. Initialize communication 
+2. Communicate between processes to share data.
+3. Exit the communication
+
 
 MPI can be used in conjunction with threading and accelerators. For example, you might use MPI to pass work between compute nodes and then use threads or accelerators to divide work among the different processing elements on the node. 
 
