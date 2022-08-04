@@ -2,12 +2,17 @@
 
 The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, methods, and specifications that can be called to distribute a code's processing work between nodes or processors on the same node.  It does this by passing messages between the processors. It is governed by a set of community driven standards. 
 
+The basic flow of MPI within in a program is:
+1. Initialize communication 
+2. Communicate between processes to share data.
+3. Exit the communication
 
-MPI can be used in conjunction with threading and accelerators. For example, you might use MPI to pass work between compute nodes and then use threads or accelerators to divide work among the different processing elements on the node. 
+
+This neat encapsulation of data and instructions, in portable messages, means that differnt processes can be sent run on nodes that have different pools of memory. MPI also works well on nodes where, processing elements share memory, but other parallel methods designed for shared-memeory may be more effient. MPI is often used in conjunction with OpenMP and other shared-memory threading methods.  For example, you might use MPI to pass work between compute nodes and then use OpenMP threads to divide work among the different processing elements on the node. 
 
 This challenge will explore an MPI hello-world and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node. 
 
-A good refence for learning more about MPI is [MPI: A Message-Passing Interface Standard Version 3.1]( https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf). 
+The MPI standard can be found here: [MPI: A Message-Passing Interface Standard Version 3.1]( https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report.pdf). 
 
 # MPI Terminology  
  
@@ -20,10 +25,6 @@ A good refence for learning more about MPI is [MPI: A Message-Passing Interface 
 **MPI Region** The part of the code that will be executed in parallel using one MPI communicator. It will always be sandwiched between  MPI_Init and 
 MPI_Finalize function calls.
 
-The basic flow of MPI within in a program is:
-1. Initialize communication 
-2. Communicate between processes to share data.
-3. Exit the communication
 
 <br>
 <center>
@@ -39,6 +40,7 @@ The first thing MPI does when it is initialized, is set up the communicator. You
 <img src="images/comm.png" width="500" height="500">
 </center>
 <br>
+The Communication Sandwich 
 
 **A communicator of size 8, with 8 ranks that map to 8 processes running on 8 CPU cores.** 
 
