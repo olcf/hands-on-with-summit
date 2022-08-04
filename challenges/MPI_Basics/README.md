@@ -19,6 +19,7 @@ A good refence for learning more about MPI is [MPI: A Message-Passing Interface 
 
 **MPI Region** The part of the code that will be executed in parallel using one MPI communicator. It will always be sandwiched between  MPI_Init and 
 MPI_Finalize function calls.
+
 The basic flow of MPI within in a program is:
 1. Initialize communication 
 2. Communicate between processes to share data.
