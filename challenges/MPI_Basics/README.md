@@ -4,15 +4,15 @@ The **M**essage **P**assing **I**nterface (MPI) is a set of library functions, m
 
 The basic flow of MPI within in a program is:
 1. Initialize communication 
-2. Communicate between processes to share data.
+2. Communicate between processes to share data
 3. Exit the communication
 
 
-This neat encapsulation of data and instructions in portable messages allows different processes to be sent run on nodes that have different pools of memory. Each process has its own unique copy of the data, variables, and instructions for its task. 
+This neat encapsulation of data and instructions in portable messages allows different processes to run on nodes that have different pools of memory. Each process has its own unique copy of the data, variables, and instructions for its task. 
 
-MPI also works well on nodes where processing elements share memory, but other parallel methods designed for shared memory may be more efficient inside of one node. MPI is often used in conjunction with OpenMP and other shared-memory threading methods.  For example, you might use MPI to pass work between compute nodes and then use OpenMP threads to divide work among the different processing elements on the node. 
+MPI also works well on nodes where processing elements share memory, but other parallel methods designed for shared memory may be more efficient in that situation. MPI is often used in conjunction with OpenMP and other shared-memory threading methods.  For example, you might use MPI to pass work between compute nodes and then use OpenMP threads to divide work among the different processing elements on the node. 
 
-This challenge will explore an MPI hello-world and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node so that we have enough nodes available for everyone to do this at once.
+This challenge will explore an MPI helloworld and two kinds of MPI communication patterns. We will use C code and pass its work with MPI between CPU cores on the same node so that we have enough nodes available for everyone to do this at once.
 
 
 
@@ -40,7 +40,7 @@ MPI_Finalize function calls.
 
 
 
-The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID,to differentiate the code paths. 
+The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID to differentiate the code paths. 
 
 <br>
 <center>
