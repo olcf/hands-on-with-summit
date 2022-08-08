@@ -16,7 +16,6 @@ This challenge will explore an MPI helloworld and two kinds of MPI communication
 
 
 
-
 # MPI Terminology  
  
 **Communicator**   An object that represents a group of processes than can communicate with each other. 
@@ -104,7 +103,7 @@ Now it is your turn. Use the outline to help find and enter the missing MPI func
 $ cd hands-on-with-summit/challenges/MPI_Basics/hello/
 
 ```
-2. Use your favorite editor to find and enter the missing MPI function in mpi_hello.c. For example
+2.Use your favorite editor or Vim to find and enter the missing MPI function in mpi_hello.c. For example
 
 ```
 $ vi mpi_hello.c
