@@ -119,7 +119,7 @@ Now it is your turn. Use the outline to help find and enter the missing MPI func
 $ cd hands-on-with-summit/challenges/MPI_Basics/hello/
 
 ```
-2.Use your favorite editor or Vim to find and enter the missing MPI function in mpi_hello.c. For example
+2. Use your favorite editor or Vim to find and enter the missing MPI function in mpi_hello.c. For example
 
 ```
 $ vi mpi_hello.c
