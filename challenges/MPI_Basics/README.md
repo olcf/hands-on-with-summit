@@ -66,7 +66,7 @@ Below is an outline for the program and its MPI functions. For this challenge, r
 
 We have setup this example to use 4 ranks, each mapped to a separate core on the node. This was done in the submission script, which you may look at if you wish, with `cat /hello/submit_hello.lsf`.
 
-The line in the submssion script that sets this example to use 4 ranks with one per code is: 
+The line in the submssion script that sets this example to use 4 ranks with one per core is: 
 ```
 . . .
 
