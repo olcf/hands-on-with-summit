@@ -64,7 +64,14 @@ Below is an outline for the program and its MPI functions. For this challenge, r
 
 **Helloworld Outline**
 
-We have set this example up to use 4 ranks each mapped to a core on the node. This can been seen in the 
+We have set this example up to use 4 ranks, each mapped to a core on the node. This was done in the submit script /
+
+```
+. . .
+
+jsrun -n 4 -c 1 ./run
+
+```
 
 * First initialize  MPI. 
   
