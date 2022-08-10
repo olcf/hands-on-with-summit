@@ -39,7 +39,11 @@ MPI_Finalize function calls.
 
 
 
-The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID to differentiate the code paths. 
+For a typical MPI program, the number of ranks is set by the programmer in the command used to run the program. This allows the programmer to try differnt numbers of processes per task without needing to change the code. 
+
+The first thing MPI does when it is initialized, is set up the communicator. You can think of a communicator as a package that holds all the needed organizational information for its MPI region in the code. Inside the communicator each process is given a rank. The size of the communicator is equal to its total number of ranks. 
+
+All MPI function calls within the same MPI region will get each process’s rank from the communicator. The programmer must use logic, based on the MPI rank's ID to differentiate the code paths. 
 
 <br>
 <center>
@@ -53,12 +57,14 @@ The first thing MPI does when it is initialized, is set up the communicator. You
 # MPI Functions and Helloworld
 
 MPI consists of hundreds of functions but most users will only use a handful of them. 
-We'll start by looking at the functions needed for an MPI Hello-world program. 
+We'll start by looking at the functions needed for an MPI Helloworld program. 
 
 Below is an outline for the program and its MPI functions. For this challenge, review the outline and then try to use it to find the missing MPI function in your copy of mpi_hello.c 
 
 
 **Helloworld Outline**
+
+We have set this example up to use 4 ranks each mapped to a core on the node. This can been seen in the 
 
 * First initialize  MPI. 
   
