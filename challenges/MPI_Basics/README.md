@@ -56,7 +56,7 @@ All MPI function calls within the same MPI region will get each process’s rank
 
 # MPI Functions and Helloworld
 
-MPI consists of hundreds of functions but most users will only use a handful of them. 
+MPI consists of hundreds of functions, but most users will only use a handful of them. 
 We'll start by looking at the functions needed for an MPI Helloworld program. 
 
 Below is an outline for the program and its MPI functions. For this challenge, review the outline and then try to use it to find the missing MPI function in your copy of mpi_hello.c 
@@ -64,14 +64,17 @@ Below is an outline for the program and its MPI functions. For this challenge, r
 
 **Helloworld Outline**
 
-We have set this example up to use 4 ranks, each mapped to a core on the node. This was done in the submit script /
+We have set this example up to use 4 ranks, each mapped to a core on the node. This was done in the submission script, which you may look at if you wish with `cat /hello/submit_hello.lsf`
 
+The line that set this use 4 ranks with one per code is: 
 ```
 . . .
 
 jsrun -n 4 -c 1 ./run
 
 ```
+You don't need to worry about changing this. It is only shown so you know where we set up the number of ranks. Now we will look at an outline of the program.
+
 
 * First initialize  MPI. 
   
