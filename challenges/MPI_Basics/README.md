@@ -64,16 +64,16 @@ Below is an outline for the program and its MPI functions. For this challenge, r
 
 **Helloworld Outline**
 
-We have set this example up to use 4 ranks, each mapped to a core on the node. This was done in the submission script, which you may look at if you wish with `cat /hello/submit_hello.lsf`
+We have setup this example to use 4 ranks, each mapped to a separate core on the node. This was done in the submission script, which you may look at if you wish, with `cat /hello/submit_hello.lsf`.
 
-The line that set this use 4 ranks with one per code is: 
+The line in the submssion script that sets this example to use 4 ranks with one per code is: 
 ```
 . . .
 
 jsrun -n 4 -c 1 ./run
 
 ```
-You don't need to worry about changing this. It is only shown so you know where we set up the number of ranks. Now we will look at an outline of the program.
+You won't need to change or edit this script. It is only shown so you know where we set up the number of ranks. Now we will look at an outline of the program.
 
 
 * First initialize  MPI. 
