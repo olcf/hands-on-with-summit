@@ -684,13 +684,15 @@ This will print out statistics as the job runs, and print out final network accu
 If the output isn't generated or the job crashes, check `pytorch_cnn.<JOB_ID>.err` to see what went wrong.
 Don't hesitate to ask questions in the Slack channel!
 
+> Note: Because of the 1 hour walltime limit, a "realistic" goal to aim for would be mid 60s in accuracy, while anything approaching 70% would be considered amazing.
+
 The `cnn.py` script will also generate two picture files: `last_batch.png` and `overall_results.png` which are visual representations of how the network performed.
 More specifically:
 
 * `last_batch.png`: Shows you the last batch of animal images to get tested by the network. The pictures are titled by their actual classification and also include what the network guessed the animal was.
 * `overall_results.png`: Bar charts of how accurate your network was at predicting each class of animal. This includes your overall network accuracy, identification success (e.g., number of frogs correct divided by number of frog images), and prediction success (e.g., number of frogs correct divided by number of times GUESSED "frog").
 
-You can open these images on Ascent by doing:
+If you have something like [XQuartz](https://www.xquartz.org/index.html) (Mac) or [Xming](http://www.straightrunning.com/XmingNotes/) (Windows) installed on your local computer, and have enabled window forwarding, you can open the images on Ascent by doing:
 
 ```
 $ module load imagemagick
@@ -698,7 +700,9 @@ $ display last_batch.png
 $ display overall_results.png
 ```
 
-> Note: You can only open the images if you connected to Ascent with window forwarding enabled. This is usually done by including the `X` or `Y` SSH flags when connecting to the system. For example: `ssh -XY USER_ID@login1.ascent.olcf.ornl.gov`.
+Opening the images is **not required**, as all the same statistics will be printed to your `.out` file.
+
+> Note: You can only open the images if you connected to Ascent with window forwarding enabled and have X software installed (see above). Enabling window forwarding is usually done by including the `X` or `Y` SSH flags when connecting to the system. For example: `ssh -XY USER_ID@login1.ascent.olcf.ornl.gov`. PuTTY users have an "X11 Forwarding" checkbox located in their SSH settings.
 
 After you complete the challenge, you can transfer these plots to your computer with Globus, `scp`, or `sftp` to keep as "souvenirs" from this challenge.
 
