@@ -196,7 +196,7 @@ Hello from rank 2 of 4 total
 Hello from rank 1 of 4 total
 Hello from rank 0 of 4 total
 ```
-Note: Note: The ranks run independently so the order they return in may not be the 3,2,1,0 as see in my output. That's OK for this example. However, synchronizing tasks is one of the things that MPI programmers do have to think about when the order does matter. That is beyond the scope of this introduction though. 
+Note: Note: The ranks run independently so the order they return in may not be the 3,2,1,0 as you see in my output. That's OK for this example. However, synchronizing tasks is one of the things that MPI programmers do have to think about when the order does matter. That is beyond the scope of this introduction though. 
 
 If you had an error go back and check your code , then recompile it, and try again. You may also look at mpi_hello_solution.c to check your answer.  
 
@@ -236,7 +236,7 @@ int MPI_Send(void *buf, int count,
 In this function: 
 * buf - Initial address of send buffer. The message you want to send will be packed-up into this buffer. 
 
-* count - Number of elements to send. For example, if you are going to send a message that has 6 data elements of type datatype, the value for count would be 6. 
+* count - Number of elements to send. For example, if you are going to send a message that has 6 data elements, the value for count would be 6. 
 
 * datatype - This is the MPI datatype of each element in the send buffer. There are built-in data types for all intrinsic C types: MPI_INT, MPI_FLOAT, MPI_DOUBLE, MPI_CHAR, etc. If you wanted to send "hello!" from process 0 to process 1, you would use a datatype of MPI_CHAR. 
 
