@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P TRN010
+#BSUB -P TRN013
 #BSUB -W 00:05
 #BSUB -nnodes 1
 #BSUB -J mpi4py

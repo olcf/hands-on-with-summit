@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN010
+#BSUB -P TRN013
 #BSUB -J hello_test
 #BSUB -o hello_test.%J
 #BSUB -nnodes 1
