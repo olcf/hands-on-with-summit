@@ -14,6 +14,6 @@ module load cuda/11.0.2
 module load python
 
 source activate $HOME/.conda/envs/cupy-ascent
-export CUPY_CACHE_DIR="${MEMBERWORK}/trn010/.cupy/kernel_cache"
+export CUPY_CACHE_DIR="${MEMBERWORK}/trn013/.cupy/kernel_cache"
 
 jsrun -n1 -g1 python3 timings.py
