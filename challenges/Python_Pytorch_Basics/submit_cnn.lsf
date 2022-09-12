@@ -14,6 +14,6 @@ module load python
 module load cuda
 
 source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone
-export MPLCONFIGDIR="${MEMBERWORK}/trn010/mpl_cache"
+export MPLCONFIGDIR="${MEMBERWORK}/trn013/mpl_cache"
 
 jsrun -n1 -a1 -c21 -g1 -b packed:21 -d packed python3 -u cnn.py
