@@ -706,7 +706,7 @@ Opening the images is **not required**, as all the same statistics will be print
 
 After you complete the challenge, you can transfer these plots to your computer with Globus, `scp`, or `sftp` to keep as "souvenirs" from this challenge.
 
-To do this challenge:
+To do this challenge (starting from your `$MEMBERWORK` directory [see above] ):
 
 1. Run the `download_data.py` script to download the CIFAR-10 dataset. This is necessary because the compute nodes won't be able to download it during your batch job when running `cnn.py`. If successful, you'll see a directory named `data` in your current directory.
 
@@ -714,6 +714,7 @@ To do this challenge:
     $ python3 download_data.py
     ```
     > Note: You only need to run this script once.
+    > Warning: This script MUST be run in the same directory you plan to run `cnn.py` (in your `$MEMBERWORK/<YOUR_PROJECT_ID>` directory)
 
 2. Use your favorite editor to change `num_epochs` and `batch_size` to tune your network (lines 119 and 120, marked by "CHANGE-ME"). For example:
 
