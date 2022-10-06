@@ -281,12 +281,13 @@ Your challenge is to:
 1. Supply the necessary arguments to get h5py to work with mpi4py (the first TO-DO line), and
 2. Supply the necessary "dummy data" variables (either `dummy_data` or `dummy_nuc`) so that the shapes of the HDF5 datasets are correct (the rest of the TO-DO lines).
 
-A major question to help you: "What arugments were used when testing the `hdf5_parallel.py` script earlier?"
+A major question to help you: "What arguments were used when testing the `hdf5_parallel.py` script earlier?"
 If you're having trouble, you can check `galaxy_solution.py` in the `solution` directory.
 Although you only have to deal with a small section of `galaxy.py` to complete the challenge, feel free to explore the entire script and see what the rest of it is doing.
 
 To do this challenge:
 
+0. Copy over the scripts into your `$MEMBERWORK` directory (as described further above in this section).
 1. Determine the missing pieces of the five "TO-DO" lines.
 2. Use your favorite editor to enter the missing pieces into `galaxy.py`. For example:
 
