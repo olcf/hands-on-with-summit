@@ -762,22 +762,24 @@ Top Accuracy:
 | 5.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
 | 6.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
 | 7.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
-| 8.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
-| 9.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
+| 8.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    |
+| 9.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 10.   | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
 
 Top Speed:
 
 | Rank  | Name             | Program                       | Accuracy | Speed   |
 | :---  | :---             | :---------:                   | :------: | :---:   |
-| 1.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
-| 2.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
-| 3.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
-| 4.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
-| 5.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
-| 6.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
-| 7.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
-| 8.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
-| 9.    | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
+| 1.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    | 
+| 2.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 3.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
+| 4.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
+| 5.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
+| 6.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
+| 7.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
+| 8.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
+| 9.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
+| 10.   | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
 
 
 ## 6. <a name="resources"></a>Additional Resources
