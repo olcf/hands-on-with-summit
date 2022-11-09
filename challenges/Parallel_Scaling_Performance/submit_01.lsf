@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN013
+#BSUB -P TRN015
 #BSUB -W 10
 #BSUB -nnodes 1
 #BSUB -J 01_omp
