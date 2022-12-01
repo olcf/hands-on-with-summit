@@ -193,6 +193,8 @@ You are using NumPy 1.20.3
 
 Congratulations, you have just created your own Python environment and ran on one of the fastest computers in the world!
 
+> Note: If you're doing this challenge for the certificate, you can submit your Python environment for completion. See "Exporting (sharing) an environment" tip below of how to export your environment to a file.
+
 ## Additional Tips
 
 * Cloning an environment:
