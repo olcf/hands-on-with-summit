@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P TRN015
+#BSUB -P TRN016
 #BSUB -W 00:10
 #BSUB -nnodes 1
 #BSUB -J galaxy

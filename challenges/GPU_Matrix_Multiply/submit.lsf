@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN015
+#BSUB -P TRN016
 #BSUB -J dgemm
 #BSUB -o dgemm.%J
 #BSUB -nnodes 1

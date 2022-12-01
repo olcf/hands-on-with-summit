@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN015
+#BSUB -P TRN016
 #BSUB -J add_vec_acc
 #BSUB -o add_vec_acc.%J
 #BSUB -nnodes 1
