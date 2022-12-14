@@ -70,7 +70,7 @@ List your directoy to verify that `add_vec_cpu.JOBID` is present by doing:
 ```
 $ ls
 ```
-You can confirm that it gave the correct results by looking for `__SUCCESS__` in the output file. 
+You can confirm that it gave the correct results by looking for `__SUCCESS__` in the output file. To see the contents of the file, do: 
 
 ```
 cat add_vec_cpu.JOBID
