@@ -355,7 +355,9 @@ To log in with X forwarding, logout of Ascent, and then ssh back in with the -X 
 $ ssh -X <username>@login1.ascent.olcf.ornl.gov
 ```
 
-Another thing you will need to have is the XQuartz app. This can be accessed by going to ORNL Self Service in your launchpad (can also use search bar at the top to search for it). In ORNL Self Service, scroll down until you find XQuartz and click the Install button. 
+Another thing you will need to have is the XQuartz app. You can find XQuartz for MacOS here: [XQuartz Download](https://www.xquartz.org/)
+
+> For users on an ORNL laptop: this can be accessed by going to ORNL Self Service in your launchpad (can also use search bar at the top to search for it). In ORNL Self Service, scroll down until you find XQuartz and click the Install button. 
 
 **Windows Users**
 
