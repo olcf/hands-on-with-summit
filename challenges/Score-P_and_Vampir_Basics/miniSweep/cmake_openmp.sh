@@ -28,7 +28,7 @@ OPT_ARGS="-O3 -fomit-frame-pointer -funroll-loops -finline-limit=10000000"
 
 #------------------------------------------------------------------------------
 
-cmake ..\
+cmake \
   -DCMAKE_BUILD_TYPE:STRING="$BUILD" \
   -DCMAKE_INSTALL_PREFIX:PATH="$INSTALL" \
  \
