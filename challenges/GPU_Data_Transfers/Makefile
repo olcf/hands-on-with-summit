@@ -1,11 +1,11 @@
-CUCOMP = nvcc
-CFLAGS =
+HIPCC = hipcc
+CFLAGS = 
 
 run: vector_addition.o
-	$(CUCOMP) $(CFLAGS) vector_addition.o -o run
+	$(HIPCC) $(CFLAGS) vector_addition.o -o run
 
-vector_addition.o: vector_addition.cu
-	$(CUCOMP) $(CFLAGS) -c vector_addition.cu
+vector_addition.o: vector_addition.cpp
+	$(HIPCC) $(CFLAGS) -c vector_addition.cpp
 
 .PHONY: clean cleanall
 

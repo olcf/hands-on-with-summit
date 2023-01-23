@@ -1,0 +1,8 @@
+ you need to use either the cray or amd prgenv and you need to module load rocm to envoke hipcc directly. I do not undestand the srun commands that I used to launce the job there is a mysterious --cpu-bind=map_cpu:49 recommended by our doc that I don't get. 
+
+
+Todo
+1. Comb the code to make sure all the cuda refrence are gone and then add any hipp explainations, for example I don't know what the 0,0 s are in the hipLaunchKernelGGL, so I need to look that up and explain. 
+
+2. The readme for this challegne needs to be redone for Hipp and summit. 
+
