@@ -1,4 +1,4 @@
-CCOMP = pgcc
+CCOMP = cc
 CFLAGS = 
 
 run: vector_addition.o

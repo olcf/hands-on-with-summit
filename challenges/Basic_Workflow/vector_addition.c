@@ -33,7 +33,7 @@ int main()
 	{
 		if(C[i] != 3.0)
 		{ 
-			printf("\nError: value of C[%d] = %d instead of 3.0\n\n", i, C[i]);
+			printf("\nError: value of C[%d] = %f instead of 3.0\n\n", i, C[i]);
 			exit(-1);
 		}
 	}	
