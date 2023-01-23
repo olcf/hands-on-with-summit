@@ -21,7 +21,7 @@ $ module list
 
 > NOTE: The `$` in the command above represents the "command prompt" for the bash shell and is not part of the command that needs to be executed.
 
-For this example program, we will use the AMD compiler. To use the AMD compiler, load the AMD programming environemnt by issuing the following command:
+For this example program, we will use the AMD compiler. To use the AMD compiler, load the AMD programming environment by issuing the following command:
 
 ```
 $ module load PrgEnv-amd
