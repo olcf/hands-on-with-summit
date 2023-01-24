@@ -26,7 +26,7 @@ Before getting started, you'll need to make sure you're in the `GPU_Data_Transfe
 $ cd ~/hands-on-with-frontier/challenges/GPU_Data_Transfers/
 ```
 
-There are two places in the `vector_addition.cpp` code (identified with the word `TODO`) where missing arguments will need to be added to the `hipMemcpy` API calls. Find these two places and add in the missing arguments by looking up the `hipMemcpy` API call to know which arguments to add. Use [this link](https://rocmdocs.amd.com/en/latest/ROCm_API_References/HIP_API/Memory-Management.html) to the AMD Documentation on the `hipMemcpy` routine to learn how to use the routine.
+There are two places in the `vector_addition.cpp` code (identified with the word `TODO`) where missing arguments will need to be added to the `hipMemcpy` API calls. Find these two places and add in the missing arguments by looking up the `hipMemcpy` API call to know which arguments to add. Use [this link](https://rocmdocs.amd.com/en/latest/ROCm_API_References/HIP_API/Memory-Management.html#hipmemcpy) to the AMD Documentation on the `hipMemcpy` routine to learn how to use the routine.
 
 > NOTE: You will not need to edit any files other than `vector_addition.cpp`.
 
