@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P TRN016
+#BSUB -P GEN186
 #BSUB -W 01:00
 #BSUB -nnodes 1
 #BSUB -J pytorch_cnn
@@ -14,6 +14,6 @@ module load python
 module load cuda
 
 source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone
-export MPLCONFIGDIR="${MEMBERWORK}/trn016/mpl_cache"
+export MPLCONFIGDIR="${MEMBERWORK}/gen186/mpl_cache"
 
 jsrun -n1 -a1 -c21 -g1 -b packed:21 -d packed python3 -u cnn.py

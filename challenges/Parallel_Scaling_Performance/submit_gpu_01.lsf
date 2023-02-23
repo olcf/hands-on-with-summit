@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN016
+#BSUB -P GEN186
 #BSUB -W 10
 #BSUB -nnodes 1
 #BSUB -J 01_gpu

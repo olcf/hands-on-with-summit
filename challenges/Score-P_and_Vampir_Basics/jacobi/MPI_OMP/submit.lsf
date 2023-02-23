@@ -2,7 +2,7 @@
 
 
 #BSUB -nnodes 1
-#BSUB -P TRN016
+#BSUB -P GEN186
 #BSUB -W 10
 #BSUB -J jacobi
 #BSUB -e jacobi.%J
