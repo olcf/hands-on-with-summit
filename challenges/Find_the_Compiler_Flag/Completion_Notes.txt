@@ -1,0 +1,3 @@
+Module is based around OpenACC directives. 
+
+Pausing on module to determine what to do about OpenACC on Frontier, or to discuss plan for restructuring. 
