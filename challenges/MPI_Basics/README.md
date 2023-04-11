@@ -64,13 +64,13 @@ Below is an outline for the program and its MPI functions. For this challenge, r
 
 **Helloworld Outline**
 
-We have setup this example to use 4 ranks, each mapped to a separate core on the node. This was done in the submission script, which you may look at if you wish, with `cat /hello/submit_hello.lsf`.
+We have setup this example to use 4 ranks, each mapped to a separate core on the node. This was done in the submission script, which you may look at if you wish, with `cat /hello/submit_hello.sbatch`.
 
 The line in the submssion script that sets this example to use 4 ranks with one per core is: 
 ```
 . . .
 
-jsrun -n 4 -c 1 ./run
+srun -n 4 -c 1 ./run
 
 ```
 You won't need to change or edit this script. It is only shown so you know where we set up the number of ranks. Now we will look at an outline of the program.
@@ -114,9 +114,9 @@ When the MPI_Init function is called, all of MPI's global and internal variables
 
 Now it is your turn. Use the outline to help find and enter the missing MPI function in mpi_hello.c. To do this: 
 
-1. Go to hands-on-with-summit/challenges/MPI_Basics/hello/ .
+1. Go to hands-on-with-Frontier-/challenges/MPI_Basics/hello/ .
 ```
-$ cd hands-on-with-summit/challenges/MPI_Basics/hello/
+$ cd hands-on-with-Frontier-/challenges/MPI_Basics/hello/
 
 ```
 2. Use your favorite editor or Vim to find and enter the missing MPI function in mpi_hello.c. For example
@@ -184,11 +184,11 @@ $ make
 To run the code 
 
 ```
-$ bsub submit_hello.lsf 
+$ sbatch submit_hello.sbatch 
 ```
 
 This submission script will ask for 1 node with 4 MPI ranks and one rank on each core. Thus, the size (number of ranks) that gets passed to MPI is 4. 
-If it succeeded, you should see the following output in the hello.<job_id> output file: 
+If it succeeded, you should see the following output in the "hello-<job_id>.out" output file: 
 
 ```
 Hello from rank 3 of 4 total
@@ -200,17 +200,17 @@ Note: Note: The ranks run independently so the order they return in may not be t
 
 If you had an error go back and check your code , then recompile it, and try again. You may also look at mpi_hello_solution.c to check your answer.  
 
-If you wanted to run with 10 ranks, you would change the jsrun line in the submission script:
+If you wanted to run with 10 ranks, you would change the srun line in the submission script:
 
 from
 
 ```
-jsrun -n 4 -c 1 ./run
+srun -n 4 -c 1 ./run
 ```
 to
 
 ```
-jsrun -n 10 -c 1 ./run
+srun -n 10 -c 1 ./run
 ```
 
 We mention this because a nice feature of MPI programs that are structured like this, is that the user can change the size of the problem from the submit file without making changes in the code that would require it to be recompiled.
@@ -332,9 +332,9 @@ int main(int argc, char ** argv)
 To do this challenge: 
 1. Determine the missing arguments. 
 
-2. Go to hands-on-with-summit/challenges/MPI_Basics/ptp/. 
+2. Go to hands-on-with-Frontier-/challenges/MPI_Basics/ptp/. 
 ```
-$ cd hands-on-with-summit/challenges/MPI_Basics/ptp/
+$ cd hands-on-with-Frontier-/challenges/MPI_Basics/ptp/
 
 ```
 3. Edit the Receive function in ptp.c with your A, B and C arguments. 
@@ -350,7 +350,7 @@ $ make
 5. Submit the job. 
 
 ```
-$ bsub submit_ptp.lsf
+$ sbatch submit_ptp.sbatch
 ```
 
 If your code ran correctly, you will see:
@@ -436,7 +436,7 @@ int main(int argc, char **argv)
 To find this code: 
 
 ```
-$ cd hands-on-with-summit/challenges/MPI_basics/bcast/mpi_bcast.c
+$ cd hands-on-with-Frontier-/challenges/MPI_basics/bcast/mpi_bcast.c
 ```
 
 To compile it:
@@ -448,10 +448,10 @@ $ make
 To run it: 
 
 ```
-$ bsub submit_bcast.lsf
+$ sbatch submit_bcast.sbatch
 ```
 
-The output file will be called bcast.<job__number>. When you open this file, you should see that every rank has been sent the integer 10.
+The output file will be called "bcast-<job__number>.out". When you open this file, you should see that every rank has been sent the integer 10.
 
 Two other collectives you should be familiar with, are the MPI_scatter and MPI_gather functions. MPI_scatter sends a specified part of an initial array from the root process to each other process. MPI_Gather collects local data from each process and sends it to the root process. 
 

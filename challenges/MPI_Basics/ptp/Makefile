@@ -1,4 +1,4 @@
-CCOMP = mpicc
+CCOMP = cc
 CFLAGS =
 
 run: ptp.o

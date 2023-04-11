@@ -1,8 +1,8 @@
-COMP  = xlc_r
-FLAGS = -qsmp=omp
+COMP  = cc
+FLAGS = -fopenmp -target x86_64-pc-linux-gnu -fopenmp-targets=amdgcn-amd-amdhsa -Xopenmp-target=amdgcn-amd-amdhsa -march=gfx90a
 
-INCLUDES  = -I${OLCF_ESSL_ROOT}/include
-LIBRARIES = -L${OLCF_ESSL_ROOT}/lib64 -lessl
+INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include
+LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas
 
 matrix_multiply: matrix_multiply.o
 	${COMP} ${FLAGS} ${LIBRARIES} matrix_multiply.o -o matrix_multiply
