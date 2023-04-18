@@ -1,9 +1,8 @@
-COMP = CC
-CFLAGS = -std=c++11 -D__HIP_ROCclr__ -D__HIP_ARCH_GFX90A__=1 --rocm-path=${ROCM_PATH} --offload-arch=gfx90a -x hip
-LFLAGS = --rocm-path=${ROCM_PATH}
+COMP = hipcc
+CFLAGS = --amdgpu-target=gfx90a
 
-INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include -I${OLCF_ROCM_ROOT}/include
-LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas  -L${ROCM_PATH}/lib -lhipblas -lamdhip64 
+INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include
+LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas  -L${ROCM_PATH}/lib -lhipblas
 
 cpu_gpu_dgemm: cpu_gpu_dgemm.o
 	${COMP} ${LFLAGS} ${LIBRARIES} cpu_gpu_dgemm.o -o cpu_gpu_dgemm

@@ -1,5 +1,5 @@
 HIPCC = hipcc
-CFLAGS = 
+CFLAGS = --amdgpu-target=gfx90a
 
 run: vector_addition.o
 	$(HIPCC) $(CFLAGS) vector_addition.o -o run

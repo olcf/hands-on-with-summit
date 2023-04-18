@@ -81,7 +81,7 @@ The `default` clause allows you to set the default value of privacy for variable
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/hands-on-with-Frontier/challenges/OpenMP_Basics/hello_world
+$ cd ~/hands-on-with-Frontier-/challenges/OpenMP_Basics/hello_world
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):
@@ -94,6 +94,7 @@ To compile, issue the command `make`. This uses the Makefile, which is a way of 
 
 ```
 $ make
+
 gcc -fopenmp -c hello_world.c
 gcc -fopenmp hello_world.o -o hello
 ```
@@ -106,9 +107,9 @@ Now we're ready to run! To do so, issue the command:
 sbatch submit.sbatch
 ```
 
-You can view the status of your job with the `squeue -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads to be spawned in the parallel region. It's currently set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
+You can view the status of your job with the `sacct -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads to be spawned in the parallel region. It's currently set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
 
-Once your job is complete, you should have a file called `hello_test-<JOBID>.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
+Once your job is complete, you should have a file called `hello_test-JOBID.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
 
 ```
 OpenMP thread 000 of 004 ran on virtual core 000
@@ -245,7 +246,7 @@ The version of the code included in this directory already has the directives ab
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/hands-on-with-Frontier/challenges/OpenMP_Basics/vector_addition
+$ cd ~/hands-on-with-Frontier-/challenges/OpenMP_Basics/vector_addition
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):
@@ -258,6 +259,7 @@ To compile, issue the command `make`:
 
 ```
 $ make
+
 gcc -fopenmp -c vector_addition.c
 gcc -fopenmp vector_addition.o -o vec_add
 ```
@@ -268,9 +270,9 @@ Now, we're ready to run! To do so, issue the command:
 sbatch submit.sbatch
 ```
 
-You can view the status of your job with the `squeue -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads that are spawned in the parallel region. It's originally set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
+You can view the status of your job with the `sacct -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads that are spawned in the parallel region. It's originally set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
 
-Once your job is complete, you should have a file called `vec_add-<JOBID>.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
+Once your job is complete, you should have a file called `vec_add-JOBID.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
 
 ```
 Number of OpenMP threads: 004

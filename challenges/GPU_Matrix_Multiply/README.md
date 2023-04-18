@@ -16,6 +16,8 @@ Look in the code `cpu_gpu_dgemm.cpp` and find the `TODO` section and add in the 
 
 > NOTE: You do not need to perform a transpose operation on the matrices, so the `hipblasOperation_t` arguments should be set to `HIPBLAS_OP_N`.
 
+&nbsp;
+
 ## Compile the Code
 
 Once you think you've correctly added the hipBLAS routine, try to compile the code.
@@ -23,12 +25,10 @@ Once you think you've correctly added the hipBLAS routine, try to compile the co
 First, you'll need to make sure your programming environment is set up correctly for this program. You'll need to use the cBLAS library for the CPU matrix multiply (`dgemm`) and the hipBLAS library for the GPU-version (`hipblasDgemm`), so you'll need to load the following modules:
 
 ```bash
-$ module load PrgEnv-amd               
-$ module load craype-accel-amd-gfx90a   
+$ module load PrgEnv-amd              
 $ module load openblas
 ```
 
-(The PrgEnv-amd module is needed because we use AMD's CC compiler (`CC`) in the Makefile.) 
 Then, try to compile the code:
 
 ```bash

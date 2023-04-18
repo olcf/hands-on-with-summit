@@ -1,5 +1,5 @@
 #!/bin/bash 
-#SBATCH -A STF007uanofn
+#SBATCH -A TRN016
 #SBATCH -J add_vec_cpu
 #SBATCH -o %x-%j.out
 #SBATCH -t 00:10:00

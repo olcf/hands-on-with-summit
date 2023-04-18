@@ -23,7 +23,6 @@ compiling the code. You need to make sure the ROCm profiling tools are present i
 
 ```bash
 $ module load PrgEnv-amd
-$ module load craype-accel-amd-gfx90a
 ```
 
 Then you compile the `matrix_sums_unoptimized.cpp` code with
@@ -44,7 +43,7 @@ $ sbatch submit_unoptimized.sbatch
 
 If you look inside the batch script, you will see that the program is being run with the
 ROCm profiler `rocprof --stats`. This starts the profiler and attaches it to the
-program. Check the output file `profiling_unoptimized-<jobid>.out` and you will see the
+program. Check the output file `profiling_unoptimized-JOBID.out` and you will see the
 basic profiling output in plain text for the `row_sums` and `column_sums` kernels (scroll
 down to get past the loading text). Look at the Kernel Statistics section. Notice the
 difference in their duration? The column sum is a lot faster than the row sum. Why is
@@ -79,7 +78,7 @@ $ sbatch submit_optimized.sbatch
 ```
 
 This also runs the rocprof profiler, same as before. Open the output file
-`profiling_optimized-<jobid>.out` and check the duration. You can see that the duration
+`profiling_optimized-JOBID.out` and check the duration. You can see that the duration
 for the `row_sums` is nearly equal to the `column_sums` kernel. Compare this with our
 previous output file and you can see it is much faster than the `row_sums` of our previous
 code. What causes this?  This is because of the way the `row_sums` was rewritten. It now

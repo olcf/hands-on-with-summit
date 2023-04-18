@@ -32,26 +32,27 @@ There are two places in the `vector_addition.cpp` code (identified with the word
 
 > NOTE: An Application Programming Interface (API) routine/call should just be thought of as a pre-existing function that can be called from within our program.
 
+&nbsp;
+
 ## Compile and Run the Program
 
-Once you think you've added the correct lines to the code, try to compile and run it...
+This module involves using the ROCm Toolchain, so we need to expose it to the Programming Environment.
 
-First, make sure you have rocm loaded:
-
-```c
-$ module load rocm
+To expose the ROCm Toolchain, We are going to load the AMD Programming Environment:
+```bash
+$ module load PrgEnv-amd
 ``` 
 
-Then, compile the code:
+If you think you have added the correct lines to the code, try to compile:
 
-```c
+```bash
 $ make
 ```
 
 If the code compiles, try to run it as shown below. If not, read the compilation errors and try to determine what went wrong.
 
-```c
-$ bsub submit.sbatch
+```bash
+$ sbatch submit.sbatch
 ```
 
 If the code ran correctly, you will see `__SUCCESS__` along with some other details about how the code was executed. If you don't see this output, try to figure out what went wrong. As always, if you need help, feel free to ask.

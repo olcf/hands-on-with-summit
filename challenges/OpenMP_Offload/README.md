@@ -228,6 +228,8 @@ To truly take advantage of the GPU, we'll need to add the `teams`, `distribute`,
     }
 ```
 
+&nbsp;
+
 ### Add OpenMP directives to the serial code, compile, and run
 First, makes sure you're in the `OpenMP_Offload` challenge directory:
 
@@ -253,7 +255,7 @@ Once you've successfully compiled the code, submit the job as follows:
 $ sbatch submit.sbatch
 ```
 
-You can monitor the progress of your job by issuing the command `squeue -u USERNAME`, where `USERNAME` should be replaced with your username. Once the job finishes, you can find the result in the output file, `mat_mul<JOBID>.out`. If successful, the results should show the timing output of the job, which should look something similar to this:
+You can monitor the progress of your job by issuing the command `sacct -u USERNAME`, where `USERNAME` should be replaced with your username. Once the job finishes, you can find the result in the output file, `mat_mul-JOBID.out`. If successful, the results should show the timing output of the job, which should look something similar to this:
 
 ```
 Elapsed time total (s)  : 74.04765627099914

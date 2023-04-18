@@ -6,3 +6,12 @@ Todo
 
 2. The readme for this challegne needs to be redone for Hipp and summit. 
 
+
+Mysterious cpu-bind=map_cpu:49:
+
+Somewhat counterintuitively, this common test case is currently among the most difficult. Slurm ignores GPU bindings for nodes with only a single task, so we do not use --gpu-bind here. We must allocate only a single GPU to ensure that only one GPU is available to the task, and since we get the first GPU available we should bind the task to the CPU closest to the allocated GPU.
+
+According to Frontier Node breakdown, ranks 48-55 & 112-119 map to GPU 0, which would be the first GPU by rank. In low-noise mode, CPU 49 is the first CPU in the L3 Cache linked to GPU 0.
+
+https://slurm.schedmd.com/mc_support.html
+
