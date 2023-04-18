@@ -20,7 +20,7 @@ GitHub is a code-hosting platform for version control and collaboration. It lets
 In order to continue with the other challenges, you will need to `clone` a copy of our repository. To do so, make sure you're in your "home" directory and clone the repo with the following commands:
 
 ```
-$ cd /ccsopen/home/username
+$ cd /ccs/home/username
 $ git clone https://github.com/olcf/hands-on-with-Frontier-.git
 ```
 Now you can list the files in your current directory to see the repository directory: 

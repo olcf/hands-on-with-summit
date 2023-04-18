@@ -132,8 +132,8 @@ available in this directory.
 images README.md text_file.txt
 ```
 
-If you want to go back to where you were,
-remember the previous path you had and use `cd` to navigate there e.g. `cd/ccs/home/<username>` . 
+If you want to go back to where you were, remember the previous path you had and use `cd` to navigate there.   
+e.g. `cd /ccs/home/<username>` . 
 
 ```
 [username@login1.frontier Basic_Unix_Vim]$ cd /ccs/home/username
