@@ -14,22 +14,32 @@ Most operations provide an immediate speed-up out of the box, and some operation
     <img width="50%" src="images/cupy_chart.png">
 </p>
 
-Because each Ascent compute node has 6 NVIDIA V100 GPUs, we will be able to take full advantage of CuPy's capabilities on the system, providing significant speedups over NumPy-written code.
+Compute nodes equipped with NVIDIA GPUs will be able to take full advantage of CuPy’s capabilities on the system, providing significant speedups over NumPy-written code. CuPy with AMD GPUs is still being explored, and the same performance is not guaranteed (especially with larger data sizes).  
+
+Instructions for Frontier are available in this guide, but users must note that the CuPy developers have labeled this method as experimental and has limitations.
+
+&nbsp;
 
 In this challenge, you will:
 
 * Learn how to install CuPy into a custom conda environment
 * Learn the basics of CuPy
 * Apply what you've learned in a debugging challenge
-* Compare speeds to NumPy on Ascent (bonus)
+* Compare speeds to NumPy on Frontier (bonus)
+
+&nbsp;
 
 ## Installing CuPy
 
-First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+>>  ---
+> Before setting up your environment, you must exit and log back in so that you have a fresh login shell. This is to ensure that no previously activated environments exist in your $PATH environment variable. Additionally, you should execute module reset.
+>>  ---
+
+First, we will unload all the current modules that you may have previously loaded on Frontier and then immediately load the default modules.
 Assuming you cloned the repository in your home directory:
 
 ```
-$ cd ~/hands-on-with-summit/challenges/Python_Cupy_Basics
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics
 $ source deactivate_envs.sh
 $ module purge
 $ module load DefApps
@@ -38,22 +48,24 @@ $ module load DefApps
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
 The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
-Next, we will load the gnu compiler module (most Python packages assume GCC), cuda module (necessary for CuPy), and the python module (allows us to create a new conda environment):
+Next, we will load the gnu compiler module (most Python packages assume GCC), relevant GPU module (necessary for CuPy), and the python module (allows us to create a new conda environment):
 
-```
-$ module load gcc/7.5.0
-$ module load cuda/11.0.2
-$ module load python
+```bash
+$ module load PrgEnv-gnu
+$ module load rocm/5.3.0
+$ module load craype-accel-amd-gfx90a
 ```
 
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent python=3.9
+$ conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/cupy-frontier python=3.9
 ```
 
+>>  ---
 > NOTE: As noted in [Conda Basics](../Python_Conda_Basics), it is highly recommended to create new environments in the "Project Home" directory.
-> However, due to the limited disk quota and potential number of training participants on Ascent, we will be creating our environment in the "User Home" directory.
+> However, due to the limited disk quota and potential number of training participants on Frontier, we will be creating our environment in the "User Home" directory.
+>>  ---
 
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
 
@@ -64,17 +76,17 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
+#     $ conda activate /ccs/home/<YOUR_USER_ID>/.conda/envs/cupy-frontier
 #
 # To deactivate an active environment, use
 #
 #     $ conda deactivate
 ```
 
-Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate our new environment:
+Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
-```
-$ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
+```bash
+$ source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/cupy-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicates that you are currently using that specific conda environment.
@@ -85,13 +97,13 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/cupy-ascent
-base                     /sw/ascent/python/3.8/anaconda-base
+                      *  /ccs/home/<YOUR_USER_ID>/.conda/envs/cupy-frontier
+base                     /sw/frontier/python/3.8/anaconda-base
 ```
 
 CuPy depends on NumPy, so let's install an optimized version of NumPy into our fresh conda environment:
 
-```
+```bash
 $ conda install -c defaults --override-channels numpy scipy
 ```
 
@@ -102,11 +114,15 @@ We also installed SciPy, which is an optional dependency, but it will allow us t
 Finally, we will install CuPy from source into our environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:
 
-```
-$ CUDA_PATH="${CUDAPATH}" CC=gcc NVCC=nvcc pip install --no-binary=cupy cupy
+```bash
+$ export CUPY_INSTALL_USE_HIP=1
+$ export ROCM_HOME=/opt/rocm-5.3.0
+$ export HCC_AMDGPU_TARGET=gfx90a
+$ CC=gcc pip install --no-cache-dir --no-binary=cupy cupy
 ```
 
-The `CUDA_PATH` flag makes sure that we are using the correct path set by the `cuda/11.0.2` module, while the `CC` and `NVCC` flags ensure that we are passing the correct wrappers.
+The `CUPY_INSTALL_USE_HIP` flag makes sure that we are using HIP instead of CUDA, and the `CC` flag ensures that we are passing the correct compiler wrapper.  
+
 This installation takes, on average, 20 minutes to complete (due to building everything from scratch), so don't panic if it looks like the install timed-out.
 Eventually you should see output similar to:
 
@@ -114,18 +130,23 @@ Eventually you should see output similar to:
 Successfully installed cupy-9.5.0 fastrlock-0.6
 ```
 
-Congratulations, you just installed CuPy on Ascent!
+Congratulations, you just installed CuPy on Frontier!
+
+&nbsp;
 
 ## Getting Started With CuPy
 
+>> ---
 > NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
 > However, if you logged out after finishing the previous section, you must load the "cuda/11.0.2" and "python" modules followed by activating your CuPy conda environment before moving on.
+>> ---
 
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using CuPy in their user guide under the [CuPy Basics](https://docs.cupy.dev/en/stable/user_guide/basic.html) section.
-We will be following this walkthrough on Ascent.
-This is done to illustrate the basics, but participants should **NOT** explicitly follow along (as resources are limited on Ascent and interactive jobs will clog up the queue).
-The syntax below assumes being in a Python shell with access to 4 GPUs.
+We will be following this walkthrough on Frontier.
+This is done to illustrate the basics, but participants should **NOT** explicitly follow along (as resources are limited on Frontier and interactive jobs will clog up the queue).
+
+The syntax below assumes being in a Python shell with access to 4 GPUs; however, Frontier interactive nodes have 8 GPUs allocated to CuPy by default. 
 
 As is the standard with NumPy being imported as "np", CuPy is often imported in a similar fashion:
 
@@ -360,7 +381,7 @@ If you got the script to successfully run, then congratulations!
 ## Bonus: NumPy Speed Comparison
 
 Now that you know how to use CuPy, that brings us to seeing the actual benefits that CuPy provides for large datasets.
-More specifically, let's see how much faster CuPy can be than NumPy on Ascent.
+More specifically, let's see how much faster CuPy can be than NumPy on Frontier.
 You won't need to fix any errors; this is mainly a demonstration on what CuPy is capable of.
 
 There are a few things to consider when running on GPUs, which also apply to using CuPy:
