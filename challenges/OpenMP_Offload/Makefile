@@ -1,5 +1,5 @@
 COMP  = cc
-FLAGS = -fopenmp -craype-verbose
+FLAGS = -fopenmp
 
 INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include
 LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas

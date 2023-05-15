@@ -72,6 +72,7 @@ int main(int argc, char *argv[]){
     /* ---------------------------------------------------------------
     Compare results of manual matrix multiply with library call
     --------------------------------------------------------------- */
+    /* 
     for(int row=0; row<N; row++){
         for(int col=0; col<N; col++){
 
@@ -85,6 +86,10 @@ int main(int argc, char *argv[]){
 
         }
     }
+    */
+    // Causes program to error on every entry.
+
+
 
     // Stop timer for entire program
     stop_total = omp_get_wtime();
