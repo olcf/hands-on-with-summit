@@ -48,7 +48,7 @@ $ module load DefApps
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
 The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
-Next, we will load the gnu compiler module (most Python packages assume GCC), relevant GPU module (necessary for CuPy), and the python module (allows us to create a new conda environment):
+Next, we will load the gnu compiler module (most Python packages assume GCC), relevant GPU module (necessary for CuPy):
 
 ```bash
 $ module load PrgEnv-gnu
