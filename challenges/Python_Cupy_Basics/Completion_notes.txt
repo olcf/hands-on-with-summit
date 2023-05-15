@@ -1,3 +1,0 @@
-I am pausing on CuPy basics at the moment due to Frontier AMD Gpus not being able to support code blocks included in training module.
-
-See Warning on: https://docs.olcf.ornl.gov/software/python/cupy.html#cupy

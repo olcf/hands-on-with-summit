@@ -138,7 +138,7 @@ Congratulations, you just installed CuPy on Frontier!
 
 >> ---
 > NOTE: Assuming you are continuing from the previous section, you do not need to load any modules.
-> However, if you logged out after finishing the previous section, you must load the "cuda/11.0.2" and "python" modules followed by activating your CuPy conda environment before moving on.
+> However, if you logged out after finishing the previous section, you must load the modules followed by activating your CuPy conda environment before moving on.
 >> ---
 
 Before we start testing the CuPy scripts provided in this repository, let's go over some of the basics.
@@ -225,25 +225,12 @@ Similarly, you can temporarily switch to a device using the `with` context:
 <CUDA Device 3>
 ```
 
-Trying to perform operations on an array stored on a different GPU will result in an error:
-
-```python
->>> with cp.cuda.Device(0):
-...    x_gpu_0 = cp.array([1, 2, 3, 4, 5]) # create an array in GPU 0
-...
->>> with cp.cuda.Device(1):
-...    x_gpu_0 * 2  # ERROR: trying to use x_gpu_0 on GPU 1
-...
-Traceback (most recent call last):
-ValueError: Array device must be same as the current device: array device = 0 while current = 1
-```
-
-To solve the above error, we must transfer `x_gpu_0` to "Device 1".
+Now, transfer `x_gpu_0` to "Device 1".
 A CuPy array can be transferred to a specific GPU using the `cupy.asarray()` function while on the specific device:
 
 ```python
 >>> with cp.cuda.Device(1):
-...    cp.asarray(x_gpu_0) * 2  # fixes the error, moves x_gpu_0 to GPU 1
+...    cp.asarray(x_gpu_0) * 2  # moves x_gpu_0 to GPU 1
 ...
 array([ 2,  4,  6,  8, 10])
 ```
@@ -275,27 +262,23 @@ Congratulations, you now know some of the basics of CuPy!
 
 Now let's apply what you've learned.
 
+&nbsp;
+
 ## Data Transfer Debugging Challenge
 
 Before asking for a compute node, let's change into our scratch directory and copy over the relevant files.
 
 ```
-$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
 $ mkdir cupy_test
 $ cd cupy_test
-$ cp ~/hands-on-with-summit/challenges/Python_Cupy_Basics/*.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Cupy_Basics/*.lsf .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/*.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/*.sbatch .
 ```
 
 When a kernel call is required in CuPy, it compiles a kernel code optimized for the shapes and data types of given arguments, sends it to the GPU device, and executes the kernel. 
 Due to this, CuPy runs slower on its initial execution.
 This slowdown will be resolved at the second execution because CuPy caches the kernel code sent to GPU device.
-By default, the compiled code is cached to `$(HOME)/.cupy/kernel_cache` directory, which the compute nodes will not be able to access.
-We will change it to our scratch directory:
-
-```
-$ export CUPY_CACHE_DIR="/gpfs/wolf/scratch/<YOUR_USER_ID>/<YOUR_PROJECT_ID>/.cupy/kernel_cache"
-```
 
 Now, it's time to dive into `data_transfer.py`:
 
@@ -355,13 +338,13 @@ To do this challenge:
     $ vi data_transfer.py
     ```
 
-3. Submit a job (the `-L $SHELL` flag is necessary):
+3. Submit a job:
 
     ```
-    $ bsub -L $SHELL submit_data.lsf
+    $ sbatch submit_data.sbatch
     ```
 
-4. If you fixed the script, you should see the below output in `cupy_xfer.<JOB_ID>.out` after the job completes:
+4. If you fixed the script, you should see the below output in `cupy_xfer-<JOB_ID>.out` after the job completes:
 
     ```python
     <CUDA Device 0> done
@@ -437,13 +420,13 @@ Lastly, a 9000x1000 matrix is timed, which contains the same number of elements 
 Although you may not expect it, the restructuring results in a big performance boost as well.
 
 Let's see the boosts explicitly by running the `timings.py` script.
-To do so, you must submit `submit_timings.lsf` to the queue:
+To do so, you must submit `submit_timings.sbatch` to the queue:
 
 ```
-$ bsub -L $SHELL submit_timings.lsf
+$ sbatch submit_timings.sbatch
 ```
 
-After the job completes, in `cupy_timings.<JOB_ID>.out` you will see something similar to:
+After the job completes, in `cupy_timings-<JOB_ID>.out` you will see something similar to:
 
 ```python
 CPU time:  21.632022380828857
