@@ -6,3 +6,4 @@ unoptimized:
 
 clean:
 	rm -f matrix_sums_optimized matrix_sums_unoptimized
+	rm metrics_matrix_sums_optimized.* metrics_matrix_sums_unoptimized.*
