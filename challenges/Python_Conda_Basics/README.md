@@ -91,7 +91,7 @@ $ module load python
 Next, we will create a new environment using the `conda create` command:
 
 ```bash
-$ conda create -p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier python=3.7.11
+$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier python=3.7.11
 ```
 
 The "`-p`" flag specifies the desired path and name of your new virtual environment.
@@ -100,7 +100,7 @@ Directories will be created if they do not exist already (provided you have writ
 Instead, one can solely use the `--name <your_env_name>` flag which will automatically use your `$HOME` directory.
 
 >>  ---
-> NOTE: It is highly recommended to create new environments in the "Project Home" directory (on Frontier, this is `/ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>`).
+> NOTE: It is highly recommended to create new environments in the "Project Home" directory (on Frontier, this is `/ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>`).
 > This space avoids purges, allows for potential collaboration within your project, and works better with the compute nodes.
 > It is also recommended, for convenience, that you use environment names that indicate the hostname, as virtual environments created on one system will not necessarily work on others.
 >>  ---
@@ -115,7 +115,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
+#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
 #
 # To deactivate an active environment, use
 #
@@ -126,7 +126,7 @@ Due to the specific nature of conda on Frontier, we will be using `source activa
 Let's activate our new environment:
 
 ```
-$ source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
+$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment.
@@ -137,7 +137,7 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
+                      *  /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
 base                     /sw/frontier/python/3.8/anaconda-base
 ```
 
@@ -228,8 +228,8 @@ Congratulations, you have just created your own Python environment and ran on on
     An example for cloning the base environment into your `$HOME` directory on Frontier is provided below:
 
     ```bash
-    $ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier --clone base
-    $ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier
+    $ conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier --clone base
+    $ source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier
     ```
 
 * Deleting an environment:
@@ -270,16 +270,16 @@ Congratulations, you have just created your own Python environment and ran on on
     ```
 
     On Frontier, the default location is your `$HOME` directory.
-    If you plan to frequently create environments in a different location than the default (such as `/ccsopen/proj/...`), then there is an option to add directories to the `envs_dirs` list.
+    If you plan to frequently create environments in a different location than the default (such as `/ccs/proj/...`), then there is an option to add directories to the `envs_dirs` list.
     To do so, you must execute:
 
     ```bash
-    $ conda config --append envs_dirs /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier
+    $ conda config --append envs_dirs /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier
     ```
     
     This will create a `.condarc` file in your `$HOME` directory if you do not have one already, which will now contain this new envs_dirs location.
-    This will now enable you to use the `--name env_name` flag when using conda commands for environments stored in that specific directory, instead of having to use the `-p /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/env_name` flag and specifying the full path to the environment.
-    For example, you can do `source activate py3711-frontier` instead of `source activate /ccsopen/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier`.
+    This will now enable you to use the `--name env_name` flag when using conda commands for environments stored in that specific directory, instead of having to use the `-p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/env_name` flag and specifying the full path to the environment.
+    For example, you can do `source activate py3711-frontier` instead of `source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier`.
 
 &nbsp;
 

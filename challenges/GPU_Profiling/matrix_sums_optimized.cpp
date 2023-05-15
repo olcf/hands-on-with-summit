@@ -126,3 +126,4 @@ int main() {
     return -1;
   printf("column sums correct!\n");
   return 0;
+}
