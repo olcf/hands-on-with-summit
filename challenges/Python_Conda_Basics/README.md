@@ -84,14 +84,14 @@ $ module load DefApps
 Next, we need to load the python module and the gnu compiler module (most Python packages assume use of GCC)
 
 ```bash
-$ module load gcc
-$ module load python
+$ module load PrgEnv-gnu
+$ module load cray-python
 ```
 
 Next, we will create a new environment using the `conda create` command:
 
 ```bash
-$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier python=3.7.11
+$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier python=3.9
 ```
 
 The "`-p`" flag specifies the desired path and name of your new virtual environment.
@@ -115,7 +115,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
+#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
 #
 # To deactivate an active environment, use
 #
@@ -126,7 +126,7 @@ Due to the specific nature of conda on Frontier, we will be using `source activa
 Let's activate our new environment:
 
 ```
-$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
+$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment.
@@ -137,8 +137,8 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py3711-frontier
-base                     /sw/frontier/python/3.8/anaconda-base
+                      *  /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
+base                     /sw/frontier/python/3.9/anaconda-base
 ```
 
 &nbsp;
@@ -206,7 +206,7 @@ Make sure you're in the correct directory and execute the example Python script:
 $ cd ~/hands-on-with-Frontier-/challenges/Python_Conda_Basics/
 $ python3 hello.py
 
-Hello from Python 3.7.11!
+Hello from Python 3.9!
 You are using NumPy 1.20.3
 ```
 
