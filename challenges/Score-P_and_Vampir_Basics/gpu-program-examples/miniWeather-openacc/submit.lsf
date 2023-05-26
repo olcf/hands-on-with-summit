@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN186
+#BSUB -P TRN019
 #BSUB -W 10
 #BSUB -nnodes 1
 #BSUB -J miniWeather_openacc

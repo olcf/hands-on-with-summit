@@ -1,5 +1,5 @@
 #!/bin/bash
-#BSUB -P GEN186
+#BSUB -P TRN019
 #BSUB -W 00:05
 #BSUB -nnodes 1
 #BSUB -J h5py

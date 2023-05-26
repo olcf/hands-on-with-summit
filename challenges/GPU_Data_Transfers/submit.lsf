@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN186
+#BSUB -P TRN019
 #BSUB -J add_vec_cuda
 #BSUB -o add_vec_cuda.%J
 #BSUB -nnodes 1

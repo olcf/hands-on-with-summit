@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P GEN186
+#BSUB -P TRN019
 #BSUB -J profiling_unoptimized
 #BSUB -o profiling_output_unoptimized.%J
 #BSUB -nnodes 1
@@ -14,8 +14,8 @@ module load nsight-systems
 
 date
 
-cp ./matrix_sums_unoptimized /gpfs/wolf/gen186/scratch/${USER}
-cd /gpfs/wolf/gen186/scratch/${USER}
+cp ./matrix_sums_unoptimized /gpfs/wolf/trn019/scratch/${USER}
+cd /gpfs/wolf/trn019/scratch/${USER}
 
 jsrun -n1 -c1 -g1 -a1 nsys profile --stats=true --force-overwrite=true -o profile_data_unoptimized ./matrix_sums_unoptimized
 
