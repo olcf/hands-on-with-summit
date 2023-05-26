@@ -28,7 +28,7 @@ on MacOS.
 Here is an example of a command line prompt:
 
 ```
-[subil@login1.summit ~]$
+[subil@login1.ascent ~]$
 ```
 
 The prompt here is the "$". Your commands will be typed after it. 
@@ -41,7 +41,7 @@ As an example, type in the command `whoami` into the command line and press Ente
 will print out your username like so:
 
 ```
-[subil@login1.summit ~]$ whoami
+[subil@login1.ascent ~]$ whoami
 subil
 ```
 
@@ -55,7 +55,7 @@ from the directory you are currently in. You can find out what directory you are
 in with the `pwd` command. `pwd` will give you your 'present working directory'. 
 
 ```
-[subil@login1.summit ~]$ pwd
+[subil@login1.ascent ~]$ pwd
 /ccs/home/subil
 ```
 
@@ -72,8 +72,8 @@ in `cd` followed by the _path_ of the directory you want to go to. If earlier, `
 you were in your `/ccs/home/<user>` directory, we can use `cd` followed by the path to get there.
 
 ```
-[subil@login1.summit ~]$ cd /ccs/home/subil
-[subil@login1.summit ~]$ pwd
+[subil@login1.ascent ~]$ cd /ccs/home/subil
+[subil@login1.ascent ~]$ pwd
 /ccs/home/subil
 ```
 
@@ -86,7 +86,7 @@ Make sure you replace `subil` with your actual username. We are just using `subi
 > On With Summit repository. The output should look something like:
 > 
 > ```
-> [subil@login1.summit ~]$ git clone https://github.com/olcf/hands-on-with-summit/
+> [subil@login1.ascent ~]$ git clone https://github.com/olcf/hands-on-with-summit/
 > Cloning into 'hands-on-with-summit'...
 > remote: Enumerating objects: 1486, done.
 > remote: Counting objects: 100% (445/445), done.
@@ -102,15 +102,15 @@ the `ls` command which will 'list' your current directory's contents. Your outpu
 is your time on these systems will look something like this
 
 ```
-[subil@login1.summit ~]$ ls
-hands-on-with-summit
+[subil@login1.ascent ~]$ ls
+hands-on-with-ascent
 ```
 
 From here, let us try using `cd` to get to the `Basic_Unix_Vim` challenge directory in the
 `hands-on-with-summit` repository we downloaded.
 
 ```
-[subil@login1.summit ~]$ cd hands-on-with-summit/challenges/Basic_Unix_Vim
+[subil@login1.ascent ~]$ cd hands-on-with-summit/challenges/Basic_Unix_Vim
 ```
 
 This is the path _relative to your current directory_ (which would be
@@ -118,7 +118,7 @@ This is the path _relative to your current directory_ (which would be
 starting with `/` is called a absolute path. This will take you to the same directory.
 
 ```
-[subil@login1.summit ~]$ cd /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
+[subil@login1.ascent~]$ cd /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
 ```
 
 
@@ -126,9 +126,9 @@ Execute `pwd` to check if you're in the right place, and execute `ls` to see wha
 available in this directory. 
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ pwd 
+[subil@login1.ascent Basic_Unix_Vim]$ pwd 
 /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim
-[subil@login1.summit Basic_Unix_Vim]$ ls
+[subil@login1.ascent Basic_Unix_Vim]$ ls
 images README.md text_file.txt
 ```
 
@@ -137,8 +137,8 @@ remember the previous path you had and use `cd` to navigate there e.g. `cd
 /ccs/home/<user>` . 
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ cd /ccs/home/subil
-[subil@login1.summit ~]$ pwd
+[subil@login1.ascent Basic_Unix_Vim]$ cd /ccs/home/subil
+[subil@login1.ascent ~]$ pwd
 /ccs/home/subil
 ```
 
@@ -147,8 +147,8 @@ directory, create a new directory by executing the `mkdir` command followed by t
 the directory. For example, to create a directory named 'mydirectory', do the following:
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ mkdir mydirectory 
-[subil@login1.summit Basic_Unix_Vim]$ ls
+[subil@login1.ascent Basic_Unix_Vim]$ mkdir mydirectory 
+[subil@login1.ascent Basic_Unix_Vim]$ ls
 images mydirectory README.md text_file.txt
 ```
 
@@ -159,21 +159,21 @@ file needs to be copied to. Let us try to copy the file `text_file.txt` to the n
 created `mydirectory` directory. To do that, we can do the following on the command line
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ cp test_file.txt mydirectory
+[subil@login1.ascent Basic_Unix_Vim]$ cp test_file.txt mydirectory
 ```
 
 Remember that specifying the full path for the file or directory will also work. In this
 case, we could write the below
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ cp /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/text_file.txt /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/mydirectory
+[subil@login1.ascent Basic_Unix_Vim]$ cp /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/text_file.txt /ccs/home/<user>/hands-on-with-summit/challenges/Basic_Unix_Vim/mydirectory
 ```
 
 You can check the contents of a directory with `ls` without first using `cd` to go to that
 directory, by using `ls` followed by the path or directory name.
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ ls mydirectory
+[subil@login1.ascent Basic_Unix_Vim]$ ls mydirectory
 text_file.txt
 ```
 
@@ -190,7 +190,7 @@ You should be familiar with the command format by now. To open a file in Vim, ex
 command with the name of the file. Try to open the file `text_file.txt` with Vim.
 
 ```
-[subil@login1.summit Basic_Unix_Vim]$ vim text_file.txt
+[subil@login1.ascent Basic_Unix_Vim]$ vim text_file.txt
 ```
 
 This will open a window that looks like this:
