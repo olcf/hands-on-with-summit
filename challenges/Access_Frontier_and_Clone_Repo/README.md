@@ -1,43 +1,91 @@
 # Access Frontier and Clone Repository
 
-Please follow the instructions below to login to OLCF's Frontier compute system and grab a copy of the code we'll be using.
+Follow the instructions below to login to OLCF's Frontier compute system and grab a copy of the code we'll be using.
 
+<hr>
 
-## Step 1: Use the username and password that you setup for Frontier to login. 
+&nbsp;
 
+## Get started by logging into Frontier using SSH. 
+Use the userid and passcode that you setup for Frontier to login. 
+```bash
+ssh userid@frontier.olcf.ornl.gov
 ```
-ssh <username>@frontier.olcf.ornl.gov
-```
+&nbsp;
 
-Once you have successfully logged in to Frontier, you can move on to Step 2.
+<hr>
 
-## Step 2: Clone GitHub Repository for this Event
+&nbsp;
+## Clone GitHub Repository for this Event
+GitHub is a code-hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. We use GitHub to develop and host the code for this event. 
 
-GitHub is a code-hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. For instance, we used GitHub to host, and track our changes to, the code for this event. Below, you will grab a copy of this GitHub repository to get access to the code.
-
-### Clone the Repository
-
-In order to continue with the other challenges, you will need to `clone` a copy of our repository. To do so, make sure you're in your "home" directory and clone the repo with the following commands:
-
-```
-$ cd /ccs/home/username
+You will need to `clone` a copy of our repository to your `home` directory so that you can complete all of our challenges. Use the following commands to complete this step:
+```bash
+$ cd /ccs/home/userid
 $ git clone https://github.com/olcf/hands-on-with-Frontier-.git
 ```
-Now you can list the files in your current directory to see the repository directory: 
 
-```
+Check that you can list the files in your current directory to see the repository directory: 
+```bash
 $ ls
 hands-on-with-Frontier-
 ```
 
-> NOTE: `git` itself is different than GitHub. It is a tool that developers install locally to manage version control and interact with remote code-hosting sites like GitHub.
-
-Now move into that directory:
-
-```
+Finally, move into that directory:
+```bash
 $ cd hands-on-with-Frontier-
 ```
 
-Congratulations! You've completed your first challenge and can now move on to other [challenges](../). Feel free to jump around to the ones you find most interesting.
+&nbsp;
 
 <hr>
+
+&nbsp;
+## Congratulations! You've completed your first challenge. 
+You can now move on to other [challenges](../). 
+
+``` 
+New to Unix? Start here.
+```
+- [Basic_Unix_Vim](Basic_Unix_Vim)
+- [Basic_Workflow](Basic_Workflow)
+- [Password_in_a_Haystack](Password_in_a_Haystack)
+
+```
+Ready for HPC and Parallel Code?
+```
+- [Jobs_in_Time_Window](Jobs_in_Time_Window)
+- [MPI_Basics](MPI_Basics)
+- [OpenMP_Basics](OpenMP_Basics)
+
+```
+Learn to use those AMD GPUs!
+```
+- [OpenMP_Offload](OpenMP_Offload)
+- [GPU_Data_Transfers](GPU_Data_Transfers)
+- [GPU_Matrix_Multiply](GPU_Matrix_Multiply)
+- [GPU_Profiling](GPU_Profiling)
+
+```
+Or, Visualize all the data!
+```
+- [Python_Conda_Basics](Python_Conda_Basics)
+- [Python_Parallel_HDF5](Python_Parallel_HDF5)
+- [Python_Pytorch_Basics](Python_Pytorch_Basics)
+- [Python_Cupy_Basics](Python_Cupy_Basics)
+
+&nbsp;
+
+<hr>
+
+&nbsp;
+
+
+Not Functioning
+- [srun_Job_Launcher](jsrun_Job_Launcher)
+- [Find_the_Compiler_Flag](Find_the_Compiler_Flag)
+- [Parallel_Scaling_Performance](Parallel_Scaling_Performance)
+- [Score-P_and_Vampir_Basics](Score-P_and_Vampir_Basics)
+
+
+
