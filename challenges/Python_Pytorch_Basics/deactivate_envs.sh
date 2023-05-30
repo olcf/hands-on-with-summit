@@ -10,7 +10,7 @@ else
     echo "Deactivating conda environments" # CONDA_SHLVL set
     for i in $(seq ${CONDA_SHLVL}); do
         echo ${CONDA_SHLVL}
-        source deactivate
+        conda deactivate
     done
     echo "Done"
 fi

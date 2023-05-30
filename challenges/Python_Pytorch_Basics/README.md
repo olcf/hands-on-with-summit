@@ -68,7 +68,6 @@ Next, we will load the gnu compiler module (most Python packages assume GCC), th
 
 ```
 $ module load PrgEnv-gnu
-$ module load cray-python
 $ module load craype-accel-amd-gfx90a
 ```
 

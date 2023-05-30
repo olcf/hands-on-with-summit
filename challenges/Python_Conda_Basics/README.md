@@ -85,7 +85,6 @@ Next, we need to load the python module and the gnu compiler module (most Python
 
 ```bash
 $ module load PrgEnv-gnu
-$ module load cray-python
 ```
 
 Next, we will create a new environment using the `conda create` command:

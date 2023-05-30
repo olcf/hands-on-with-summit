@@ -8,10 +8,12 @@
 
 date
 
+module purge
 module load PrgEnv-gnu
-module load cray-python
 module load craype-accel-amd-gfx90a
+
+source deactivate_envs.sh
 
 source activate /ccs/home/${USER}/conda_envs/frontier/py39-frontier
 
-srun -n1 -c21 -gpus1 --threads-per-core=1 -m block:block  python3 cnn.py
+srun -n1 -c21 --gpus=1 --gpu-bind=closest --threads-per-core=1 -m block:block  python3 cnn.py
