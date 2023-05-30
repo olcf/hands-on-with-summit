@@ -17,14 +17,14 @@ PyTorch emphasizes the flexibility and human-readableness of Python and allows d
 Think about the simplicity, structure, and usefulness of NumPy and its arrays, but more geared toward ML/DL algorithms and its tensors -- that's what PyTorch is.
 Compared to other frameworks and libraries, it is one of the more "beginner friendly" ML/DL packages due to its dynamic and familiar "Pythonic" nature.
 PyTorch is also useful when GPUs are involved because of its strong GPU acceleration ability.
-On Summit, PyTorch is able to take advantage of the many NVIDIA GPUs available on the system.
+On Frontier, PyTorch is able to take advantage of the many AMD GPUs available on the system.
 
 In this challenge, you will:
 
-* Learn how to access PyTorch on Ascent
+* Learn how to access PyTorch on Frontier
 * Learn the basics of PyTorch
 * Learn about Convolutional Neural Networks (CNNs)
-* Tune your own CNN on Ascent
+* Tune your own CNN on Frontier
 
 
 Table of Contents:
@@ -47,14 +47,15 @@ Table of Contents:
 	* [Leaderboard](#leaderboard)
 * [Additional Resources](#resources)
 
+&nbsp;
 
 ## 1. <a name="setup"></a>Setting Up Our Environment
 
-First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+First, we will unload all the current modules that you may have previously loaded on Frontier and then immediately load the default modules.
 Assuming you cloned the repository in your home directory:
 
 ```
-$ cd ~/hands-on-with-summit/challenges/Python_Pytorch_Basics
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics
 $ source deactivate_envs.sh
 $ module purge
 $ module load DefApps
@@ -63,36 +64,40 @@ $ module load DefApps
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
 The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
-Next, we will load the python module (allows us to utilize conda environments) and the cuda module (necessary for using PyTorch on the GPU):
+Next, we will load the gnu compiler module (most Python packages assume GCC), the python module (allows us to utilize conda environments) and the GPU module (necessary for using PyTorch on the GPU):
 
 ```
-$ module load python
-$ module load cuda
+$ module load PrgEnv-gnu
+$ module load cray-python
+$ module load craype-accel-amd-gfx90a
 ```
 
-PyTorch is included within a Conda environment in the `open-ce` module on Ascent.
-However, due to the need to install an additional package (matplotlib) and how long it takes to clone and install the `open-ce` environment, we have already created an environment for you to activate.
-Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate the environment:
-
+PyTorch is not included on Frontier, so we will install it using Pip3. If you have already setup a miniconda environment in the 'Python_Conda_Basics' module, use this instruction to activate it:
 ```
-$ source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone
+$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
 ```
 
-> Note: If for some reason you end up having to log back in to Ascent during this challenge, you can get back to your cloned environment by doing: `module load python cuda` and `source activate /gpfs/wolf/world-shared/stf007/9b8/public_envs/opence_clone`.
+If you do not have this environment setup, you will need to setup miniconda and create a new environment using the instructions found in 'Python_Conda_Basics'. 
 
+Once you have source activated your conda environment, you can use this instruction to install pytorch:
+```
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.4.2
+```
+
+&nbsp;
 
 ## 2. <a name="ptorch"></a>Getting Started With PyTorch
 
 Before we jump into the PyTorch challenge script provided in this repository, let's go over some of the basics.
 The developers provide a great introduction to using PyTorch on their website under the [PyTorch Tutorials](https://pytorch.org/tutorials/beginner/basics/intro.html) section.
-We will be following a slightly modified version of that walkthrough on Ascent.
+We will be following a slightly modified version of that walkthrough on Frontier.
 
 Let's get started by importing PyTorch in a Python prompt:
 
 ```python
 $ python3
-Python 3.9.7 (default, Sep 16 2021, 16:03:39) 
-[GCC 7.3.0] :: Anaconda, Inc. on linux
+Python 3.9.13 (main, Aug 10 2022, 17:20:06) 
+[GCC 9.3.0 20200312 (Cray Inc.)] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import torch
 >>> import numpy as np
@@ -671,17 +676,17 @@ You'll be submitting a job to run on a compute node to train your network.
 However, before asking for a compute node, change into your scratch directory and copy over the relevant files.
 
 ```
-$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ cd /lustre/orion/[projid]/scratch/[userid]
 $ mkdir pytorch_test
 $ cd pytorch_test
-$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/*.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/*.lsf .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/*.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/*.sbatch .
 ```
 
 The goal of this challenge is to achieve an overall network accuracy of 60% or greater with a learning rate of 0.001 within an hour of compute time.
-After you run your job, and as your job is running, you should have a `pytorch_cnn.<JOB_ID>.out` file in the directory you submitted the job from.
+After you run your job, and as your job is running, you should have a `pytorch_cnn-<JOB_ID>.out` file in the directory you submitted the job from.
 This will print out statistics as the job runs, and print out final network accuracies once the job completes.
-If the output isn't generated or the job crashes, check `pytorch_cnn.<JOB_ID>.err` to see what went wrong.
+If the output isn't generated or the job crashes, check `pytorch_cnn-<JOB_ID>.err` to see what went wrong.
 Don't hesitate to ask questions in the Slack channel!
 
 > Note: Because of the 1 hour walltime limit, a "realistic" goal to aim for would be mid 60s in accuracy, while anything approaching 70% would be considered amazing.
@@ -692,7 +697,7 @@ More specifically:
 * `last_batch.png`: Shows you the last batch of animal images to get tested by the network. The pictures are titled by their actual classification and also include what the network guessed the animal was.
 * `overall_results.png`: Bar charts of how accurate your network was at predicting each class of animal. This includes your overall network accuracy, identification success (e.g., number of frogs correct divided by number of frog images), and prediction success (e.g., number of frogs correct divided by number of times GUESSED "frog").
 
-If you have something like [XQuartz](https://www.xquartz.org/index.html) (Mac) or [Xming](http://www.straightrunning.com/XmingNotes/) (Windows) installed on your local computer, and have enabled window forwarding, you can open the images on Ascent by doing:
+If you have something like [XQuartz](https://www.xquartz.org/index.html) (Mac) or [Xming](http://www.straightrunning.com/XmingNotes/) (Windows) installed on your local computer, and have enabled window forwarding, you can open the images on Frontier by doing:
 
 ```
 $ module load imagemagick
@@ -702,13 +707,13 @@ $ display overall_results.png
 
 Opening the images is **not required**, as all the same statistics will be printed to your `.out` file.
 
-> Note: You can only open the images if you connected to Ascent with window forwarding enabled and have X software installed (see above). Enabling window forwarding is usually done by including the `X` or `Y` SSH flags when connecting to the system. For example: `ssh -XY USER_ID@login1.ascent.olcf.ornl.gov`. PuTTY users have an "X11 Forwarding" checkbox located in their SSH settings.
+> Note: You can only open the images if you connected to Frontier with window forwarding enabled and have X software installed (see above). Enabling window forwarding is usually done by including the `X` or `Y` SSH flags when connecting to the system. For example: `ssh -XY userid@frontier.olcf.ornl.gov`. PuTTY users have an "X11 Forwarding" checkbox located in their SSH settings.
 
 After you complete the challenge, you can transfer these plots to your computer with Globus, `scp`, or `sftp` to keep as "souvenirs" from this challenge.
 
 To do this challenge:
 
-0. Make sure you copied over the scripts and are in your `$MEMBERWORK/<YOUR_PROJECT_ID>/pytorch_test` directory (see beginning of this section).
+0. Make sure you copied over the scripts and are in your `/lustre/orion/[projid]/scratch/[userid]/pytorch_test` directory (see beginning of this section).
 
 1. Run the `download_data.py` script to download the CIFAR-10 dataset. This is necessary because the compute nodes won't be able to download it during your batch job when running `cnn.py`. If successful, you'll see a directory named `data` in your current directory.
 
@@ -716,7 +721,7 @@ To do this challenge:
     $ python3 download_data.py
     ```
     > Note: You only need to run this script once.
-    > Warning: This script MUST be run in the same directory you plan to run `cnn.py` (in your `$MEMBERWORK/<YOUR_PROJECT_ID>/pytorch_test` directory)
+    > Warning: This script MUST be run in the same directory you plan to run `cnn.py` (in your `/lustre/orion/[projid]/scratch/[userid]/pytorch_test` directory)
 
 2. Use your favorite editor to change `num_epochs` and `batch_size` to tune your network (lines 119 and 120, marked by "CHANGE-ME"). For example:
 
@@ -731,14 +736,14 @@ To do this challenge:
     ```
     > Warning: You must pick a `batch_size` so that 50,000 divided by `batch_size` results in a whole number. You can get errors if this is not the case.
 
-3. Submit a job (the `-L $SHELL` flag is necessary):
+3. Submit a job:
 
     ```
-    $ bsub -L $SHELL submit_cnn.lsf
+    $ sbatch submit_cnn.sbatch
     ```
 
-4. Look at the statistics printed in your `pytorch_cnn.<JOB_ID>.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
-5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `pytorch_cnn.<JOB_ID>.out` file or PNG files should help give you ideas of how to refine your parameters.
+4. Look at the statistics printed in your `pytorch_cnn-<JOB_ID>.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
+5. If you aren't successful, write down your results based on your parameters and try again! Looking at your `pytorch_cnn-<JOB_ID>.out` file or PNG files should help give you ideas of how to refine your parameters.
 
 > Hint: It's always a balance of the number of epochs and the size of your batches -- bigger numbers aren't always optimal. Try changing only one of the parameters and look at how it affects your network's performance.
 
@@ -749,7 +754,7 @@ If you liked PyTorch I also suggest taking a loot at [PyTorch Lightning](https:/
 
 ### 5.1 <a name="leaderboard"></a>Leaderboard
 
-Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy within an hour of walltime on Ascent!
+Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy within an hour of walltime on Frontier!
 
 Top Accuracy:
 
@@ -799,3 +804,5 @@ Extra information:
 * [PyTorch's Distributed Tutorial](https://pytorch.org/tutorials/intermediate/dist_tuto.html)
 * [Distributed Deep Learning on Summit](https://code.ornl.gov/olcf-analytics/summit/distributed-deep-learning-examples/)
 * [PyTorch Lightning](https://www.pytorchlightning.ai/)
+
+
