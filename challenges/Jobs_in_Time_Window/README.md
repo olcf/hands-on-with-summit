@@ -8,12 +8,12 @@ The user environment includes interfaces to the batch scheduler, parallel job la
 
 As you may have already seen in [Basic_Workflow](../Basic_Workflow), Slurm provides the fundamental mechanisms to [submit batch jobs](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#batch-scripts) and [moderate submitted jobs](https://docs.olcf.ornl.gov/systems/frontier_user_guide.html#monitoring-and-modifying-batch-jobs) after they've been enqueued. 
 
-We won't be submitting any new jobs here, but rather looking at others that have already been run and gathering information about them. To do this, we'll primarily use the `sacct` command. 
+We won't be submitting any new jobs here, but rather looking at others that have already been run and gathering information about them. To do this, we'll primarily use the `squeue` command. 
 
-(See the `sacct` manual page by running `man sacct` for a full list of command options.)
+(See the `squeue` manual page by running `man` `squeue` for a full list of command options.)
 
 ## Let's try to answer...
-1. How many jobs were completed on Ascent between 00:00 (midnight) on June 1, 2023 and 23:59 on June 15, 2023?
+1. How many jobs were completed on Frontier between 00:00 (midnight) on June 1, 2023 and 23:59 on June 15, 2023?
 
 2. How many unique users did the jobs from question 1 belong to?
 
