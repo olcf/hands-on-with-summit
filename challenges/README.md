@@ -7,7 +7,7 @@ College Interns and staff should show evidence of progress toward completing Cha
 High School interns may show progress toward completing any 2 of challenges of, 2-8, to earn a certificate for the course. 
 
 
-To show that you have made progress toward a challenge, copy jobfiles or code files for each one attempted to /gpfs/wolf/world-shared/trn019/<your-user-id>, where <your-user-id> is a folder we have made for you named after your Ascent username.
+To show that you have made progress toward a challenge, copy jobfiles or code files for each one attempted to `/gpfs/wolf/world-shared/trn019/<your-user-id>`, where <your-user-id> is a folder we have made for you named after your Ascent username.
 
   You are welcome to try all the challegnes 
 
