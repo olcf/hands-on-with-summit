@@ -1,6 +1,6 @@
 # OpenMP Basics
 
-OpenMP is programming model that allows you to write parallel code for multi-core, shared-memory processors. Your laptop/desktop likely has a multi-core processor (e.g., 4-core). This is also true of each individual compute node on Summit - each has 42 physical CPU cores that have access to 512 GB of DDR4 memory. By shared-memory, we simply mean that all the CPU cores have access to the same memory (DRAM). 
+OpenMP is programming model that allows you to write parallel code for multi-core, shared-memory processors. Your laptop/desktop likely has a multi-core processor (e.g., 4-core). This is also true of each individual compute node on Frontier - each has 64 physical CPU cores that have access to 512 GB of DDR4 memory. By shared-memory, we simply mean that all the CPU cores have access to the same memory (DRAM). 
 
 In this challenge, we will explore the very basics of the [OpenMP Application Program Interface (OpenMP API)](https://www.openmp.org/specifications/), which consists of a collection of compiler directives, library routines, and environment variables. In the examples below, we will insert compiler directives into the code to tell the compiler how the program should be executed in parallel, and we will also use a couple of API functions and environment variables along the way.
 
@@ -52,7 +52,7 @@ virtual_core  = sched_getcpu();       // Find the virtual core the OpenMP thread
 
 `omp_get_num_threads()` and `omp_get_thread_num()` are two of the OpenMP API functions. They are used to determine the total number of OpenMP threads spawned inside the parallel region and a specific OpenMP thread's ID, respectively. In order to use these API calls, you need to include the `#include <omp.h>` header file. `sched_getcpu()` returns the ID of the virtual CPU core the OpenMP thread runs on - but this is **NOT** part of OpenMP.
 
-> CLARIFICATION: Each Summit node contains 42 physical CPU cores, and each physical CPU core has 4 virtual cores (so 168 total virtual cores per node). Everywhere else in the challenges, these virtual cores are referred to as hardware threads, but they will be referred to as virtual CPU cores here to avoid confusion with the use of the word threads in the context of OpenMP. 
+> CLARIFICATION: Each Frontier node contains 64 physical CPU cores, and each physical CPU core has 2 virtual cores for a total of 128 total virtual cores per node. Everywhere else in the challenges, these virtual cores are referred to as hardware threads, but they will be referred to as virtual CPU cores here to avoid confusion with the use of the word threads in the context of OpenMP. 
 
 Ok, great! But what about the rest of that OpenMP directive? Let's take a look at each one of the clauses individually:
 
@@ -63,7 +63,7 @@ shared(num_threads)
 The `shared` clause declares a variable to be "shared" among all threads in a parallel region - meaning that all threads access the same memory location for that variable. We can declare the variable `num_threads` (total number of OpenMP threads) as `shared` because each OpenMP thread will return the same value in the parallel region.
 
 ```c
-private(thread_id, hwthread)
+private(thread_id, virtual_core)
 ```
 
 The `private` clause declares a variable to be "private" to each thread in a parallel region - meaning that each thread has its own copy (and memory location) for that variable. We declare `thread_id` and `virtual_core` as `private` because each OpenMP thread will return its own unique value.
@@ -81,7 +81,7 @@ The `default` clause allows you to set the default value of privacy for variable
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/hands-on-with-summit/challenges/OpenMP_Basics/hello_world
+$ cd ~/hands-on-with-Frontier-/challenges/OpenMP_Basics/hello_world
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):
@@ -94,6 +94,7 @@ To compile, issue the command `make`. This uses the Makefile, which is a way of 
 
 ```
 $ make
+
 gcc -fopenmp -c hello_world.c
 gcc -fopenmp hello_world.o -o hello
 ```
@@ -103,12 +104,12 @@ The compiler flag `-fopenmp` tells the gcc compiler to act on the compiler direc
 Now we're ready to run! To do so, issue the command:
 
 ```
-bsub submit.lsf
+sbatch submit.sbatch
 ```
 
-You can view the status of your job with the `jobstat -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.lsf` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads to be spawned in the parallel region. It's currently set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
+You can view the status of your job with the `sacct -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads to be spawned in the parallel region. It's currently set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
 
-Once your job is complete, you should have a file called `hello_test.JOBID`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
+Once your job is complete, you should have a file called `hello_test-JOBID.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
 
 ```
 OpenMP thread 000 of 004 ran on virtual core 000
@@ -245,7 +246,7 @@ The version of the code included in this directory already has the directives ab
 Ok, now let's compile and run the code. First, make sure you're in the correct directory:
 
 ```
-$ cd ~/hands-on-with-summit/challenges/OpenMP_Basics/vector_addition
+$ cd ~/hands-on-with-Frontier-/challenges/OpenMP_Basics/vector_addition
 ```
 
 Then, load the gcc compiler (if it's not already in your environment):
@@ -258,6 +259,7 @@ To compile, issue the command `make`:
 
 ```
 $ make
+
 gcc -fopenmp -c vector_addition.c
 gcc -fopenmp vector_addition.o -o vec_add
 ```
@@ -265,12 +267,12 @@ gcc -fopenmp vector_addition.o -o vec_add
 Now, we're ready to run! To do so, issue the command:
 
 ```
-bsub submit.lsf
+sbatch submit.sbatch
 ```
 
-You can view the status of your job with the `jobstat -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.lsf` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads that are spawned in the parallel region. It's originally set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
+You can view the status of your job with the `sacct -u USERNAME` command. While you're waiting for the job to finish, take a look at the `submit.sbatch` script you used to submit your job. The environment variable `OMP_NUM_THREADS` can be used to set the number of OpenMP threads that are spawned in the parallel region. It's originally set to 4, but you can change it and re-run to see the results from different numbers of OpenMP threads.
 
-Once your job is complete, you should have a file called `vec_add.JOBID`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
+Once your job is complete, you should have a file called `vec_add-JOBID.out`, where `JOBID` is the unique ID assigned to your job. This file will include the date, the output from the program, and some basic information about the job itself (below the dashed horizontal line). The program output should look something like this:
 
 ```
 Number of OpenMP threads: 004

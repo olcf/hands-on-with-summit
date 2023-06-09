@@ -1,6 +1,6 @@
 # Python: Parallel HDF5
 
-Scientific simulations generate large amounts of data on Summit (about 100 Terabytes per day for some applications).
+Scientific simulations generate large amounts of data on Frontier (about 100 Terabytes per day for some applications).
 Because of how large some datafiles may be, it is important that writing and reading these files is done as fast as possible.
 Less time spent doing input/output (I/O) leaves more time for advancing a simulation or analyzing data.
 
@@ -15,7 +15,7 @@ For example, you can extract specific variables through slicing, manipulate the 
 Both HDF5 and h5py can be compiled with MPI support, which allows you to optimize your HDF5 I/O in parallel.
 MPI support in Python is accomplished through the [mpi4py](https://mpi4py.readthedocs.io/en/stable/) package, which provides complete Python bindings for MPI.
 Building h5py against mpi4py allows you to write to an HDF5 file using multiple parallel processes, which can be helpful for users handling large datasets in Python.
-h5Py is available after loading the default Python module on either Summit or Ascent, but it has not been built with parallel support.
+h5Py is available after loading the default Python module on Frontier, but it has not been built with parallel support.
 
 This hands-on challenge will teach you how to build a personal, parallel-enabled version of h5py and how to write an HDF5 file in parallel using mpi4py and h5py.
 
@@ -32,11 +32,11 @@ After successfully testing your build, you will then have the opportunity to com
 
 Building h5py from source is highly sensitive to the current environment variables set in your profile.
 Because of this, it is extremely important that all the modules and conda environments we plan to load are done in the correct order, so that all the environment variables are set correctly.
-First, we will unload all the current modules that you may have previously loaded on Ascent and then immediately load the default modules.
+First, we will unload all the current modules that you may have previously loaded on Frontier and then immediately load the default modules.
 Assuming you cloned the repository in your home directory:
 
 ```
-$ cd ~/hands-on-with-summit/challenges/Python_Parallel_HDF5
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5
 $ source deactivate_envs.sh
 $ module purge
 $ module load DefApps
@@ -45,22 +45,23 @@ $ module load DefApps
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
 The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
-Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py), and the python module (allows us to create a new conda environment):
+Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py):
 
 ```
-$ module load gcc
+$ module load PrgEnv-gnu
 $ module load hdf5
-$ module load python
 ```
 
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent python=3.8
+$ conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier python=3.9
 ```
 
+>> ---
 > NOTE: As noted in [Conda Basics](../Python_Conda_Basics), it is highly recommended to create new environments in the "Project Home" directory.
-> However, due to the limited disk quota and potential number of training participants on Ascent, we will be creating our environment in the "User Home" directory.
+> However, due to the limited disk quota and potential number of training participants on Frontier, we will be creating our environment in the "User Home" directory.
+>> ---
 
 After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
 
@@ -71,17 +72,17 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
+#     $ conda activate /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier
 #
 # To deactivate an active environment, use
 #
 #     $ conda deactivate
 ```
 
-Due to the specific nature of conda on Ascent, we will be using `source activate` instead of `conda activate` to activate our new environment:
+Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```
-$ source activate /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
+$ source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment. 
@@ -92,8 +93,8 @@ $ conda env list
 
 # conda environments:
 #
-                      *  /ccsopen/home/<YOUR_USER_ID>/.conda/envs/h5pympi-ascent
-base                     /sw/ascent/python/3.8/anaconda-base
+                      *  /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier
+base                     /sw/frontier/python/3.9/anaconda-base
 ```
 
 ## Installing mpi4py
@@ -137,27 +138,27 @@ When the installation finishes, you will see a "Successfully installed h5py" mes
 Now for the fun part, testing to see if our build was truly successful.
 We will test our build by trying to write an HDF5 file in parallel using 42 MPI tasks.
 
-First, change directories to your GPFS scratch area and copy over the python and batch scripts:
+First, change directories to your Orion scratch area and copy over the python and batch scripts:
 
 ```
-$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
 $ mkdir h5py_test
 $ cd h5py_test
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hello_mpi.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_hello.lsf .
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_h5py.lsf .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hello_mpi.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_hello.sbatch .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_h5py.sbatch .
 ```
 
 Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py".
-To do so, we will be submitting a job to the batch queue with "submit_hello.lsf":
+To do so, we will be submitting a job to the batch queue with "submit_hello.sbatch":
 
 ```
-$ bsub -L $SHELL submit_hello.lsf
+$ sbatch submit_hello.sbatch
 ```
 
 Once the batch job makes its way through the queue, it will run the "hello_mpi.py" script with 42 MPI tasks.
-If mpi4py is working properly, in `mpi4py.<JOB_ID>.out` you should see output similar to:
+If mpi4py is working properly, in `mpi4py-<JOB_ID>.out` you should see output similar to:
 
 ```
 Hello from MPI rank 21 !
@@ -198,10 +199,10 @@ if (mpi_rank == 0):
 The MPI tasks are going to write to a file named "output.h5", which contains a dataset called "test" that is of size 42 (assigned to the "dset" variable in Python).
 Each MPI task is going to assign their rank value to the "dset" array in Python, so we should end up with a dataset that contains 0-41 in ascending order.
 
-Time to execute "hdf5_parallel.py" by submitting "submit_h5py.lsf" to the batch queue:
+Time to execute "hdf5_parallel.py" by submitting "submit_h5py.sbatch" to the batch queue:
 
 ```
-$ bsub -L $SHELL submit_h5py.lsf
+$ sbatch submit_h5py.sbatch
 ```
 
 Provided there are no errors, you should see "42 MPI ranks have finished writing!" in the `h5py.<JOB_ID>.out` output file, and there should be a new file called "output.h5" in your directory.
@@ -240,12 +241,12 @@ The results of the simulation will look something like this:
 First, similar to before, change directories to your GPFS scratch area and copy over the python and batch scripts:
 
 ```
-$ cd $MEMBERWORK/<YOUR_PROJECT_ID>
+$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
 $ mkdir galaxy_challenge
 $ cd galaxy_challenge
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/galaxy.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/generate_animation.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Parallel_HDF5/submit_galaxy.lsf .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/galaxy.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/generate_animation.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_galaxy.sbatch .
 ```
 
 The two scripts of interest are called `galaxy.py` and `generate_animation.py`.
@@ -255,7 +256,7 @@ You will be dealing with `galaxy.py`.
 The goal of `galaxy.py` is to simulate an infalling galaxy made up of "particles" (stars) and a "nucleus" (the compact central region) colliding with a bigger host galaxy.
 This would require a lot of code for it to be the most accurate ("many body" problems in physics are complicated); however, we made some physical assumptions to simplify the problem so that it is less complicated but still results in a roughly accurate galactic event.
 Even with simplifying things down, this script does not run quickly when not using MPI, as the amount of stars you want to simulate over a given time period quickly slows things down.
-We will be simulating 1000 stars and it takes about 10 minutes for the script to complete on Ascent when only using 1 MPI task, while completing in about 1.5 minutes when using 8 MPI tasks.
+We will be simulating 1000 stars and it takes about 10 minutes for the script to complete on Frontier when only using 1 MPI task, while completing in about 1.5 minutes when using 8 MPI tasks.
 
 In this challenge, you will be using 8 MPI tasks to help speed up the computations by splitting up the particles across your MPI tasks (each MPI task will only simulate a subset of the total number of particles).
 The tasks will then write their subset of the data in parallel to an HDF5 file that will hold the entire final dataset.
@@ -287,7 +288,7 @@ Although you only have to deal with a small section of `galaxy.py` to complete t
 
 To do this challenge:
 
-0. Copy over the scripts into your `$MEMBERWORK` directory (as described further above in this section).
+0. Copy over the scripts into your member work directory (as described further above in this section).
 1. Determine the missing pieces of the five "TO-DO" lines.
 2. Use your favorite editor to enter the missing pieces into `galaxy.py`. For example:
 
@@ -295,13 +296,13 @@ To do this challenge:
     $ vi galaxy.py
     ```
 
-3. Submit a job (the `-L $SHELL` flag is necessary):
+3. Submit a job:
 
     ```
-    $ bsub -L $SHELL submit_galaxy.lsf
+    $ sbatch submit_galaxy.sbatch
     ```
 
-4. If you fixed the script, you should see something similar to the output below in `galaxy.<JOB_ID>.out` after the job completes:
+4. If you fixed the script, you should see something similar to the output below in `galaxy-<JOB_ID>.out` after the job completes:
 
     ```python
     MPI Rank 0 : Simulating my particles took 102.9287338256836 s

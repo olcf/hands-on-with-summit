@@ -12,7 +12,7 @@ In the following (serial) C code, we multiply two matrices of random numbers man
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <essl.h>
+#include <cblas.h>
 #include <omp.h>
 
 int main(int argc, char *argv[]){
@@ -121,8 +121,10 @@ Elapsed time library (s): 51.50926541816443
 ```
 
 Since it takes >90 minutes to perform the manual loop, you **should not run the serial version during this training**. However, the timing results above show that our matrix-multiply loop takes about 100x longer than the optimized matrix-multiply library call. 
+ 
+&nbsp;
 
-### Adding in OpenMP Offload directives
+## Adding in OpenMP Offload directives
 
 Now that we have a basic understanding of the serial code, let's try to speed up the manual matrix-multiply loop as a way to introduce the handful of OpenMP offload directives we'll cover in this challenge.
 
@@ -226,26 +228,34 @@ To truly take advantage of the GPU, we'll need to add the `teams`, `distribute`,
     }
 ```
 
+&nbsp;
+
 ### Add OpenMP directives to the serial code, compile, and run
 First, makes sure you're in the `OpenMP_Offload` challenge directory:
 
 ```bash
-$ cd ~/hands-on-with-summit/challenges/OpenMP_Offload
+$ cd ~/hands-on-with-Frontier-/challenges/OpenMP_Offload
 ```
 
 Then load the following modules:
 
 ```bash
-$ module load xl cuda essl
+$ module load PrgEnv-amd
+$ module load craype-accel-amd-gfx90a
+$ module load openblas
 ```
 
-Now add the OpenMP directives above to the serial version of the code. You'll also need to add XL compiler's `-qoffload` flag to the end of the `FLAGS` variable in the `Makefile`. Once you've done this, just issue the command `make`. Once you've successfully compiled the code, submit the job as follows:
+Now add the OpenMP directives above to the serial version of the code.
+
+After you've done this, just issue the command `make`. 
+
+Once you've successfully compiled the code, submit the job as follows:
 
 ```bash
-$ bsub submit.lsf
+$ sbatch submit.sbatch
 ```
 
-You can monitor the progress of your job by issuing the command `jobstat -u USERNAME`, where `USERNAME` should be replaced with your username. Once the job finishes, you can find the result in the output file, `mat_mul.JOBID`. If successful, the results should show the timing output of the job, which should look something similar to this:
+You can monitor the progress of your job by issuing the command `sacct -u USERNAME`, where `USERNAME` should be replaced with your username. Once the job finishes, you can find the result in the output file, `mat_mul-JOBID.out`. If successful, the results should show the timing output of the job, which should look something similar to this:
 
 ```
 Elapsed time total (s)  : 74.04765627099914
@@ -290,9 +300,8 @@ So with minimal changes to the code, we were able to get a significant speedup o
 
 It should be noted that the directives covered in this short challenge really only scratch the surface of the GPU offload functionality in the OpenMP specification. If you'd like to learn more, please visit [https://www.openmp.org/specifications/](https://www.openmp.org/specifications/).
 
-> NOTE: The OpenMP specification is "the collection of compiler directives, library routines, and environment variables" that define the OpenMP Application Program Interface (OpenMP API). A compiler can include "an implementation" of the OpenMP specification with either partial or full support. In this challenge, we used IBM's XL compiler, which has full OpenMP4.5 offload support, but other compilers might have no support or only partial support. For example, see the [OpenMP section](https://docs.olcf.ornl.gov/systems/summit_user_guide.html#openmp) of the Summit User Guide.
+> NOTE: The OpenMP specification is "the collection of compiler directives, library routines, and environment variables" that define the OpenMP Application Program Interface (OpenMP API). A compiler can include "an implementation" of the OpenMP specification with either partial or full support.
 
---
 
 
 

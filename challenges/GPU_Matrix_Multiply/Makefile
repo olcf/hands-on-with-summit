@@ -1,19 +1,16 @@
-CCOMP  = pgc++
-CFLAGS =
+COMP = hipcc
+CFLAGS = --amdgpu-target=gfx90a
 
-INCLUDES  = -I$(OLCF_ESSL_ROOT)/include -I$(OLCF_CUDA_ROOT)/include
-LIBRARIES = -L$(CUDA_DIR)/lib64 -L$(OLCF_ESSL_ROOT)/lib64 -lcublas -lessl -lcudart
+INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include
+LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas  -L${ROCM_PATH}/lib -lhipblas
 
 cpu_gpu_dgemm: cpu_gpu_dgemm.o
-	$(CCOMP) $(CFLAGS) $(LIBRARIES) cpu_gpu_dgemm.o -o cpu_gpu_dgemm
+	${COMP} ${LFLAGS} ${LIBRARIES} cpu_gpu_dgemm.o -o cpu_gpu_dgemm
 
-cpu_gpu_dgemm.o: cpu_gpu_dgemm.c
-	$(CCOMP) $(CFLAGS) $(INCLUDES) -c cpu_gpu_dgemm.c
+cpu_gpu_dgemm.o: cpu_gpu_dgemm.cpp
+	${COMP} ${CFLAGS} ${INCLUDES} -c cpu_gpu_dgemm.cpp
 
 .PHONY: clean
 
 clean:
 	rm -f cpu_gpu_dgemm *.o
-
-cleanall:
-	rm -f cpu_gpu_dgemm *.o dgemm*

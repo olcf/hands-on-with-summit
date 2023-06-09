@@ -1,8 +1,8 @@
-COMP  = xlc_r
-FLAGS = -qsmp=omp
+COMP  = cc
+FLAGS = -fopenmp
 
-INCLUDES  = -I${OLCF_ESSL_ROOT}/include
-LIBRARIES = -L${OLCF_ESSL_ROOT}/lib64 -lessl
+INCLUDES  = -I${OLCF_OPENBLAS_ROOT}/include
+LIBRARIES = -L${OLCF_OPENBLAS_ROOT}/lib -lopenblas
 
 matrix_multiply: matrix_multiply.o
 	${COMP} ${FLAGS} ${LIBRARIES} matrix_multiply.o -o matrix_multiply
@@ -10,10 +10,8 @@ matrix_multiply: matrix_multiply.o
 matrix_multiply.o: matrix_multiply.c
 	${COMP} ${FLAGS} ${INCLUDES} -c matrix_multiply.c
 
-.PHONY: clean cleanall
+.PHONY: clean
 
 clean:
 	rm -f matrix_multiply *.o
 
-cleanall:
-	rm -f matrix_multiply *.o
