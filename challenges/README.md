@@ -9,7 +9,7 @@ High School interns may show progress toward completing any 2 of challenges of, 
 
 To show that you have made progress toward a challenge, copy jobfiles or code files for each one attempted to `/gpfs/wolf/world-shared/trn019/<your-user-id>`, where <your-user-id> is a folder we have made for you named after your Ascent username.
 
-  You are welcome to try all the challegnes 
+  You are welcome to try all the challenges 
 
 1. [Access_Ascent_and_Clone_Repo](Access_Ascent_and_Clone_Repo)
 2. [Basic_Unix_Vim](Basic_Unix_Vim) (Only do this one if you have no experience with Unix or a text editor) 
@@ -18,7 +18,7 @@ To show that you have made progress toward a challenge, copy jobfiles or code fi
 5. [MPI_Basics](MPI_Basics)
 6. [Parallel_Scaling_Performance](Parallel_Scaling_Performance)
 7. [GPU_Data_Transfers](GPU_Data_Transfers)
-8. [Python_Pytorch_Basics](Python_Pytorch_Basic) -this challenge asks you to work with a Convolutional Neural network
+8. [Python_Pytorch_Basics](Python_Pytorch_Basics) -this challenge asks you to work with a Convolutional Neural network
 
 After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 - [Find_the_Compiler_Flag](Find_the_Compiler_Flag)
