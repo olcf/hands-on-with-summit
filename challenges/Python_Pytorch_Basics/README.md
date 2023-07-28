@@ -755,31 +755,32 @@ Top Accuracy:
 
 | Rank  | Name             | Program                       | Accuracy | Speed   |
 | :---  | :---             | :---------:                   | :------: | :---:   |
-| 1.    | Lily L.          | Winter HPC-CC 2022            | 66.02%   | 1247s   |
-| 2.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
-| 3.    | Ahmedur S.       | SC HPC-CC 2022                | 65.55%   | 1918s   |
-| 4.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
-| 5.    | Mike S.          | Winter HPC-CC 2022            | 65.42%   | 1121s   |
-| 6.    | Zachare L.       | Winter HPC-CC 2022            | 65.41%   | 1720s   |
-| 7.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
-| 8.    | Rich P.          | Winter HPC-CC 2022            | 64.55%   | 2422s   |
-| 9.    | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
-| 10.   | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
+| 1.    | Jihun K.         | Summer HPC-CC 2023            | 66.67%   | 2326s   |
+| 2.    | Carter E.        | Summer HPC-CC 2023            | 66.62%   | 2154s   |
+| 3.    | Dhanvi B.        | Summer HPC-CC 2023            | 66.18%   | 1695s   |
+| 4.    | Lily L.          | Winter HPC-CC 2022            | 66.02%   | 1247s   |
+| 5.    | Micah B.         | Summer HPC-CC 2023            | 65.82%   | 1334s   |
+| 6.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
+| 7.    | Ahmedur S.       | SC HPC-CC 2022                | 65.55%   | 1918s   |
+| 8.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
+| 9.    | Mike S.          | Winter HPC-CC 2022            | 65.42%   | 1121s   |
+| 10.   | Zachare L.       | Winter HPC-CC 2022            | 65.41%   | 1720s   |
+
 
 Top Speed:
 
 | Rank  | Name             | Program                       | Accuracy | Speed   |
 | :---  | :---             | :---------:                   | :------: | :---:   |
-| 1.    | Zachare L.       | Winter HPC-CC 2022            | 60.22%   | 513s    |
-| 2.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    | 
-| 3.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
-| 4.    | Ahmedur S.       | SC HPC-CC 2022                | 60.35%   | 953s    |
-| 5.    | Mike S.          | Winter HPC-CC 2022            | 65.42%   | 1121s   |
-| 6.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
-| 7.    | Lily L.          | Winter HPC-CC 2022            | 66.02%   | 1247s   |
-| 8.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
-| 9.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
-| 10.   | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
+| 1.    | Micah B.         | Summer HPC-CC 2023            | 60.08%   | 467s    |
+| 2.    | Carter E.        | Summer HPC-CC 2023            | 61.03%   | 501s    |
+| 3.    | Patrick B.       | Summer HPC-CC 2023            | 60.80%   | 508s    |
+| 4.    | Zachare L.       | Winter HPC-CC 2022            | 60.22%   | 513s    |
+| 5.    | Benjamin R.      | Summer HPC-CC 2023            | 63.73%   | 639s    |
+| 6.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    | 
+| 7.    | Shukai Y.        | Summer HPC-CC 2023            | 61.01%   | 670s    |
+| 8.    | Langalibalele L. | Summer HPC-CC 2023            | 62.29%   | 671s    |
+| 9.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 10.   | Layla M.         | Summer HPC-CC 2023            | 64.64%   | 834s    |
 
 
 ## 6. <a name="resources"></a>Additional Resources
