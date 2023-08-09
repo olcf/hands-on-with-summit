@@ -24,6 +24,7 @@ int main(int argc, char **argv)
     /* Fix the code here.                                   */
     /*------------------------------------------------------*/
 
+     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     /*------------------------------------------------------*/
     /* Print hello from each rank                           */

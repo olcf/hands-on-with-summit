@@ -1,0 +1,19 @@
+Process 1 : hello!
+
+/ccsopen/home/kevinpyx/.lsbatch/1691468343.235801.shell: line 12: /ccsopen/home/kevinpyx: Is a directory
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@login1>
+Subject: Job 235801: <ptp_hello> in cluster <ascent> Exited
+
+Job <ptp_hello> was submitted from host <login1> by user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:19:03 2023
+Job was executed on host(s) <1*login1>, in queue <batch>, as user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:19:03 2023
+                            <42*h49n18>
+</ccsopen/home/kevinpyx> was used as the home directory.
+</ccsopen/home/kevinpyx/hands-on-with-summit/challenges/MPI_Basics/ptp> was used as the working directory.
+Started at Tue Aug  8 00:19:03 2023
+Terminated at Tue Aug  8 00:19:21 2023
+Results reported at Tue Aug  8 00:19:21 2023
+
+The output (if any) is above this job summary.
+

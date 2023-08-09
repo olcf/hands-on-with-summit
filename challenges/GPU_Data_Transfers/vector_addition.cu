@@ -44,8 +44,8 @@ int main()
     /*     - copy host array A to device array d_A                       */
     /*     - copy host array B to device array d_B                       */
     /* ----------------------------------------------------------------- */
-    cudaMemcpy(?, ?, bytes, cudaMemcpyHostToDevice);
-    cudaMemcpy(?, ?, bytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_A, A, bytes, cudaMemcpyHostToDevice);
+    cudaMemcpy(d_B, B, bytes, cudaMemcpyHostToDevice);
 
     /* -------------------------------------------------------------------
     Set execution configuration parameters
@@ -64,7 +64,7 @@ int main()
     /*  arguments to                                                     */
     /*     - copy device array d_C to host array C                       */
     /* ----------------------------------------------------------------- */
-    cudaMemcpy(?, ?, bytes, cudaMemcpyDeviceToHost);
+    cudaMemcpy(C, d_C, bytes, cudaMemcpyDeviceToHost);
 
     /* Verify results -------------------------------------------------- */
     for(int i=0; i<N; i++)

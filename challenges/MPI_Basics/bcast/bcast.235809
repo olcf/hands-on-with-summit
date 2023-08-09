@@ -1,0 +1,20 @@
+Rank 3 has bcast_data = 10
+Rank 0 has bcast_data = 10
+Rank 2 has bcast_data = 10
+Rank 1 has bcast_data = 10
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@login1>
+Subject: Job 235809: <bcast> in cluster <ascent> Done
+
+Job <bcast> was submitted from host <login1> by user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:28:34 2023
+Job was executed on host(s) <1*login1>, in queue <batch>, as user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:28:35 2023
+                            <42*h49n01>
+</ccsopen/home/kevinpyx> was used as the home directory.
+</ccsopen/home/kevinpyx/hands-on-with-summit/challenges/MPI_Basics/bcast> was used as the working directory.
+Started at Tue Aug  8 00:28:35 2023
+Terminated at Tue Aug  8 00:28:53 2023
+Results reported at Tue Aug  8 00:28:53 2023
+
+The output (if any) is above this job summary.
+

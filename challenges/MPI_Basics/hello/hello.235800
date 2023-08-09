@@ -1,0 +1,26 @@
+Hello from rank 5 of 10 total 
+Hello from rank 2 of 10 total 
+Hello from rank 3 of 10 total 
+Hello from rank 6 of 10 total 
+Hello from rank 7 of 10 total 
+Hello from rank 0 of 10 total 
+Hello from rank 1 of 10 total 
+Hello from rank 8 of 10 total 
+Hello from rank 9 of 10 total 
+Hello from rank 4 of 10 total 
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@login1>
+Subject: Job 235800: <hello> in cluster <ascent> Done
+
+Job <hello> was submitted from host <login1> by user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:07:52 2023
+Job was executed on host(s) <1*login1>, in queue <batch>, as user <kevinpyx> in cluster <ascent> at Tue Aug  8 00:07:52 2023
+                            <42*h49n18>
+</ccsopen/home/kevinpyx> was used as the home directory.
+</ccsopen/home/kevinpyx/hands-on-with-summit/challenges/MPI_Basics/hello> was used as the working directory.
+Started at Tue Aug  8 00:07:52 2023
+Terminated at Tue Aug  8 00:08:10 2023
+Results reported at Tue Aug  8 00:08:10 2023
+
+The output (if any) is above this job summary.
+

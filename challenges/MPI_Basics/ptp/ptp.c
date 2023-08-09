@@ -37,7 +37,7 @@ int main(int argc, char ** argv)
   /*----------------------------------------------*/
 
   if (rank == 1 ) {
-    MPI_Recv(&message, A?, B?, C?, ntag, MPI_COMM_WORLD, &status);
+    MPI_Recv(&message, 6, MPI_CHAR, 0, ntag, MPI_COMM_WORLD, &status);
     printf("Process %d : %s\n", rank, message);
     printf("\n");
   }
