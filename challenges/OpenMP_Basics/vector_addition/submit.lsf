@@ -9,6 +9,6 @@
 date
 echo " " 
 
-export OMP_NUM_THREADS=4
+export OMP_NUM_THREADS=8
 
 jsrun -n1 -c42 -a1 -bpacked:42 ./vec_add

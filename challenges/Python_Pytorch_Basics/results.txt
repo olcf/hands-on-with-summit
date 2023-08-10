@@ -1,0 +1,288 @@
+Summary
+Epoch:2, Batch size:1
+Accuracy: 51.49
+Time: 93.41813707351685
+
+Epoch:2, Batch size:2
+Accuracy: 44.05
+Time: 42.35125803947449
+
+Epoch:2, Batch size:4
+Accuracy: 34.35
+Time: 28.036781072616577
+
+Epoch:2, Batch size:5
+Accuracy: 28.77
+Time: 25.04705810546875
+
+Epoch:2, Batch size:10
+Accuracy: 18.21
+Time: 22.443132877349854
+
+Epoch:2, Batch size:20
+Accuracy: 10.42
+Time: 32.826452016830444
+
+Epoch:2, Batch size:25
+Accuracy: 13.4
+Time: 31.15241312980652
+
+Epoch:2, Batch size:40
+Accuracy: 10.0
+Time: 30.48016905784607
+
+Epoch:2, Batch size:50
+Accuracy: 10.0
+Time: 31.58141279220581
+
+Epoch:4, Batch size:1
+Accuracy: 59.19
+Time: 199.77613997459412
+
+Epoch:4, Batch size:2
+Accuracy: 52.78
+Time: 87.0827488899231
+
+Epoch:4, Batch size:4
+Accuracy: 48.19
+Time: 60.95460295677185
+
+Epoch:4, Batch size:5
+Accuracy: 43.0
+Time: 53.95101284980774
+
+Epoch:4, Batch size:10
+Accuracy: 30.82
+Time: 44.832966804504395
+
+Epoch:4, Batch size:20
+Accuracy: 20.9
+Time: 65.89579391479492
+
+Epoch:4, Batch size:25
+Accuracy: 15.43
+Time: 65.04637002944946
+
+Epoch:4, Batch size:40
+Accuracy: 10.67
+Time: 64.79390382766724
+
+Epoch:4, Batch size:50
+Accuracy: 11.75
+Time: 64.2079348564148
+
+Epoch:6, Batch size:1
+Accuracy: 62.46
+Time: 315.89225912094116
+
+Epoch:6, Batch size:2
+Accuracy: 57.73
+Time: 137.4159951210022
+
+Epoch:6, Batch size:4
+Accuracy: 50.24
+Time: 96.01426410675049
+
+Epoch:6, Batch size:5
+Accuracy: 49.48
+Time: 85.59151697158813
+
+Epoch:6, Batch size:10
+Accuracy: 39.66
+Time: 74.6491687297821
+
+Epoch:6, Batch size:20
+Accuracy: 30.54
+Time: 105.3441059589386
+
+Epoch:6, Batch size:25
+Accuracy: 21.61
+Time: 102.06677198410034
+
+Epoch:6, Batch size:40
+Accuracy: 10.64
+Time: 98.07592177391052
+
+Epoch:6, Batch size:50
+Accuracy: 19.04
+Time: 92.89379477500916
+
+Epoch:8, Batch size:1
+Accuracy: 61.84
+Time: 410.6825370788574
+
+Epoch:8, Batch size:2
+Accuracy: 60.34
+Time: 182.62117910385132
+
+Epoch:8, Batch size:4
+Accuracy: 53.88
+Time: 119.98295497894287
+
+Epoch:8, Batch size:5
+Accuracy: 53.92
+Time: 110.09755229949951
+
+Epoch:8, Batch size:10
+Accuracy: 44.07
+Time: 93.12639713287354
+
+Epoch:8, Batch size:20
+Accuracy: 33.59
+Time: 132.02192902565002
+
+Epoch:8, Batch size:25
+Accuracy: 26.39
+Time: 125.87959504127502
+
+Epoch:8, Batch size:40
+Accuracy: 14.87
+Time: 122.22196412086487
+
+Epoch:8, Batch size:50
+Accuracy: 18.69
+Time: 125.14635801315308
+
+Epoch:10, Batch size:1
+Accuracy: 64.21
+Time: 506.48907017707825
+
+Epoch:10, Batch size:2
+Accuracy: 60.73
+Time: 226.00978565216064
+
+Epoch:10, Batch size:4
+Accuracy: 57.04
+Time: 152.577645778656
+
+Epoch:10, Batch size:5
+Accuracy: 53.23
+Time: 134.05675172805786
+
+Epoch:10, Batch size:10
+Accuracy: 47.46
+Time: 114.99394702911377
+
+Epoch:10, Batch size:20
+Accuracy: 36.71
+Time: 165.26124691963196
+
+Epoch:10, Batch size:25
+Accuracy: 33.31
+Time: 159.1295862197876
+
+Epoch:10, Batch size:40
+Accuracy: 19.86
+Time: 151.99692487716675
+
+Epoch:10, Batch size:50
+Accuracy: 21.75
+Time: 147.8806231021881
+
+Epoch:12, Batch size:1
+Accuracy: 63.09
+Time: 584.0496399402618
+
+Epoch:12, Batch size:2
+Accuracy: 64.68
+Time: 278.2520990371704
+
+Epoch:12, Batch size:4
+Accuracy: 58.37
+Time: 193.36445784568787
+
+Epoch:12, Batch size:5
+Accuracy: 58.24
+Time: 168.73182702064514
+
+Epoch:12, Batch size:10
+Accuracy: 50.88
+Time: 140.95766973495483
+
+Epoch:12, Batch size:20
+Accuracy: 34.11
+Time: 192.96769094467163
+
+Epoch:12, Batch size:25
+Accuracy: 37.33
+Time: 186.12364292144775
+
+Epoch:12, Batch size:40
+Accuracy: 29.13
+Time: 175.68816018104553
+
+Epoch:12, Batch size:50
+Accuracy: 27.81
+Time: 173.38312077522278
+
+Epoch:14, Batch size:1
+Accuracy: 62.92
+Time: 667.0617952346802
+
+Epoch:14, Batch size:2
+Accuracy: 63.07
+Time: 299.9928729534149
+
+Epoch:14, Batch size:4
+Accuracy: 60.46
+Time: 206.33093404769897
+
+Epoch:14, Batch size:5
+Accuracy: 59.16
+Time: 188.78582882881165
+
+Epoch:14, Batch size:10
+Accuracy: 52.43
+Time: 158.88006806373596
+
+Epoch:14, Batch size:20
+Accuracy: 44.71
+Time: 225.8927879333496
+
+Epoch:14, Batch size:25
+Accuracy: 35.38
+Time: 218.37564086914062
+
+Epoch:14, Batch size:40
+Accuracy: 30.01
+Time: 205.97789597511292
+
+Epoch:14, Batch size:50
+Accuracy: 26.69
+Time: 202.13582301139832
+
+Epoch:16, Batch size:1
+Accuracy: 63.84
+Time: 772.4908490180969
+
+Epoch:16, Batch size:2
+Accuracy: 62.84
+Time: 349.3979420661926
+
+Epoch:16, Batch size:4
+Accuracy: 60.57
+Time: 235.81157517433167
+
+Epoch:16, Batch size:5
+Accuracy: 58.63
+Time: 210.83132100105286
+
+Epoch:16, Batch size:10
+Accuracy: 53.05
+Time: 176.73871278762817
+
+Epoch:16, Batch size:20
+Accuracy: 45.01
+Time: 254.94800686836243
+
+Epoch:16, Batch size:25
+Accuracy: 41.7
+Time: 247.31781601905823
+
+Epoch:16, Batch size:40
+Accuracy: 29.15
+Time: 234.65792417526245
+
+Epoch:16, Batch size:50
+Accuracy: 28.0
+Time: 230.50460600852966

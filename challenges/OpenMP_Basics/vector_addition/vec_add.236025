@@ -1,0 +1,20 @@
+Wed Aug  9 00:09:17 EDT 2023
+ 
+Number of OpenMP threads: 004
+Elapsed Time (s)        : 0.418313
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@login1>
+Subject: Job 236025: <vec_add> in cluster <ascent> Done
+
+Job <vec_add> was submitted from host <login1> by user <kevinpyx> in cluster <ascent> at Wed Aug  9 00:09:04 2023
+Job was executed on host(s) <1*login1>, in queue <batch>, as user <kevinpyx> in cluster <ascent> at Wed Aug  9 00:09:05 2023
+                            <42*h49n18>
+</ccsopen/home/kevinpyx> was used as the home directory.
+</ccsopen/home/kevinpyx/hands-on-with-summit/challenges/OpenMP_Basics/vector_addition> was used as the working directory.
+Started at Wed Aug  9 00:09:05 2023
+Terminated at Wed Aug  9 00:09:25 2023
+Results reported at Wed Aug  9 00:09:25 2023
+
+The output (if any) is above this job summary.
+
