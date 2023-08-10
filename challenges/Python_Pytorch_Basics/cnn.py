@@ -114,12 +114,20 @@ class ConvNet(nn.Module):
 #################### CNN WORKFLOW ##########################
 
 # Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+'''
+device = (
+    "cuda"
+    if torch.cuda.is_available()
+    else "mps"
+    if torch.backends.mps.is_available()
+    else "cpu"
+) '''
+device = 'cpu'
 print('The device you are using is: ',device)
 
 # Hyper-parameters 
-num_epochs = 4 # CHANGE-ME
-batch_size = 4 # CHANGE-ME
+num_epochs = 10 # CHANGE-ME
+batch_size = 40 # CHANGE-ME
 learning_rate = 0.001
 
 print('')
@@ -135,13 +143,14 @@ transform = transforms.Compose(
      transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 # CIFAR10: 60000 32x32 color images in 10 classes, with 6000 images per class
-train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True,
+myMac = '/Users/kevinpyx/Documents/Datasets/CV/The CIFAR-10 dataset'
+train_dataset = torchvision.datasets.CIFAR10(root=myMac, train=True,
                                         download=False, transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
                                           shuffle=True, num_workers=0)
 
-test_dataset = torchvision.datasets.CIFAR10(root='./data', train=False,
+test_dataset = torchvision.datasets.CIFAR10(root=myMac, train=False,
                                        download=False, transform=transform)
 
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,
@@ -155,7 +164,8 @@ model = ConvNet().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
-torch.cuda.synchronize()
+if device == 'cuda':
+    torch.cuda.synchronize()
 t1=tp.time()
 
 # Training loop
@@ -179,7 +189,8 @@ for epoch in range(num_epochs):
         if (i+1) % 500 == 0:
             print (f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}')
 
-torch.cuda.synchronize()
+if device == 'cuda':
+    torch.cuda.synchronize()
 t2=tp.time()
 print('Finished Training')
 
@@ -248,7 +259,9 @@ elif ( (acc >= 60.0) and (learning_rate!=0.001)):
 else:
     print('Accuracy not 60% or above, try again!')
 
+
 # Get the last batch of images
+'''
 dataiter = iter(test_loader)
 images, labels = dataiter.next()
 for images, labels in dataiter:
@@ -261,5 +274,6 @@ imshow_grid(classes= classes, imgs= images, labels= labels, predics= predicted, 
 
 overall_results(classes= classes, num_correct= n_class_correct, num_samples= n_class_samples, \
                 num_predictions= n_class_predics, acc_network= acc, batches= batch_size, epochs= num_epochs)
-
+'''
+                
 #################### END OF ANALYSIS / STATS ###################

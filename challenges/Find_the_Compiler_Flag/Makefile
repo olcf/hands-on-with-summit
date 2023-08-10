@@ -1,5 +1,5 @@
 CCOMP = pgcc
-CFLAGS = -Minfo=all
+CFLAGS = -Minfo=all -ta=nvidia
 
 run: vector_addition.o
 	$(CCOMP) $(CFLAGS) vector_addition.o -o run
