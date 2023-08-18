@@ -674,8 +674,9 @@ However, before asking for a compute node, change into your scratch directory an
 $ cd $MEMBERWORK/<YOUR_PROJECT_ID>
 $ mkdir pytorch_test
 $ cd pytorch_test
-$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/*.py .
-$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/*.lsf .
+$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/download_data.py ./download_data.py
+$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/cnn.py ./cnn.py
+$ cp ~/hands-on-with-summit/challenges/Python_Pytorch_Basics/submit_cnn.lsf ./submit_cnn.lsf
 ```
 
 The goal of this challenge is to achieve an overall network accuracy of 60% or greater with a learning rate of 0.001 within an hour of compute time.
