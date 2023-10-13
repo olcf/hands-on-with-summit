@@ -11,6 +11,7 @@ Each challenge is a stand-alone, self-guided tutorial that includes a `README.md
 5. [MPI_Basics](MPI_Basics)
 6. [Find_the_Compiler_Flag](Find_the_Compiler_Flag)
 7. [GPU_Data_Transfers](GPU_Data_Transfers)
+8. [Python_Conda_Basics](Python_Conda_Basics)
 
 After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
@@ -22,7 +23,6 @@ After completing these challenges, feel free to "choose your own adventure" by c
 - [Python_Cupy_Basics](Python_Cupy_Basics)
 - [OpenMP_Offload](OpenMP_Offload)
 - [Parallel_Scaling_Performance](Parallel_Scaling_Performance)
-- [Python_Conda_Basics](Python_Conda_Basics)
 - [GPU_Profiling](GPU_Profiling)
 - [Jobs_in_Time_Window](Jobs_in_Time_Window)
 - [Password_in_a_Haystack](Password_in_a_Haystack)
