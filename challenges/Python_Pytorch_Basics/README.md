@@ -55,33 +55,72 @@ First, we will unload all the current modules that you may have previously loade
 Assuming you cloned the repository in your home directory:
 
 ```bash
-cd ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics
-source ~/hands-on-with-Frontier-/misc_scripts/deactivate_envs.sh
-module reset
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics
+$ source ~/hands-on-with-Frontier-/misc_scripts/deactivate_envs.sh
+$ module reset
 ```
 
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
 The script unloads all of your previously activated conda environments, and no harm will come from executing the script if that does not apply to you.
 
-Next, we will load the gnu compiler module (most Python packages assume GCC), the python module (allows us to utilize conda environments) and the GPU module (necessary for using PyTorch on the GPU):
+Next, we will load the gnu compiler module (most Python packages assume GCC) and the GPU module (necessary for using PyTorch on the GPU):
 
 ```bash
-module load PrgEnv-gnu
-module load craype-accel-amd-gfx90a
+$ module load PrgEnv-gnu
+$ module load amd-mixed/5.6.0
+$ module load craype-accel-amd-gfx90a
+$ source ~/miniconda-frontier-handson/bin/activate base
 ```
 
-PyTorch is not included on Frontier, so we will install it using Pip3. If you have already setup a miniconda environment in the 'Python_Conda_Basics' module, use this instruction to activate it:
+We loaded the "base" conda environment, but we need to create a new environment using the conda create command:
 
 ```bash
-source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
+$ conda create -p ~/.conda/envs/torch-frontier python=3.10
 ```
 
-If you do not have this environment setup, you will need to setup miniconda and create a new environment using the instructions found in 'Python_Conda_Basics'. 
+>>  ---
+> NOTE: As noted in [Conda Basics](../Python_Conda_Basics), it is highly recommended to create new environments in the "Project Home" directory.
+> However, due to the limited disk quota and potential number of training participants on Frontier, we will be creating our environment in the "User Home" directory.
+>>  ---
 
-Once you have source activated your conda environment, you can use this instruction to install pytorch:
+After following the prompts for creating your new environment, the installation should be successful, and you will see something similar to:
+
+```
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate ~/.conda/envs/torch-frontier
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+```
+
+Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```bash
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.4.2
+$ source activate ~/.conda/envs/torch-frontier
+```
+
+The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicates that you are currently using that specific conda environment.
+If you check with `conda env list`, you should see that the `*` marker is next to your new environment, which means that it is currently active:
+
+```bash
+$ conda env list
+
+# conda environments:
+#
+                      * /ccs/home/<YOUR_USER_ID>/.conda/envs/torch-frontier
+base                    /ccs/home/<YOUR_USER_ID>/miniconda-frontier-handson
+```
+
+Finally, we can install PyTorch using `pip` in our new conda environment:
+
+```bash
+$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6
 ```
 
 &nbsp;
@@ -95,7 +134,7 @@ We will be following a slightly modified version of that walkthrough on Frontier
 Let's get started by importing PyTorch in a Python prompt:
 
 ```python
-python3
+$ python3
 
 Python 3.9.13 (main, Aug 10 2022, 17:20:06) 
 [GCC 9.3.0 20200312 (Cray Inc.)] on linux
@@ -677,12 +716,12 @@ You'll be submitting a job to run on a compute node to train your network.
 However, before asking for a compute node, change into your scratch directory and copy over the relevant files.
 
 ```bash
-cd /lustre/orion/[projid]/scratch/[userid]
-mkdir pytorch_test
-cd pytorch_test
-cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/download_data.py ./download_data.py
-cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/cnn.py ./cnn.py
-cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/submit_cnn.sbatch ./submit_cnn.sbatch
+$ cd /lustre/orion/[projid]/scratch/[userid]
+$ mkdir pytorch_test
+$ cd pytorch_test
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/download_data.py ./download_data.py
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/cnn.py ./cnn.py
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Pytorch_Basics/submit_cnn.sbatch ./submit_cnn.sbatch
 ```
 
 The goal of this challenge is to achieve an overall network accuracy of 60% or greater with a learning rate of 0.001 within an hour of compute time.
@@ -702,9 +741,9 @@ More specifically:
 If you have something like [XQuartz](https://www.xquartz.org/index.html) (Mac) or [Xming](http://www.straightrunning.com/XmingNotes/) (Windows) installed on your local computer, and have enabled window forwarding, you can open the images on Frontier by doing:
 
 ```bash
-module load imagemagick
-display last_batch.png
-display overall_results.png
+$ module load imagemagick
+$ display last_batch.png
+$ display overall_results.png
 ```
 
 Opening the images is **not required**, as all the same statistics will be printed to your `.out` file.
@@ -720,7 +759,7 @@ To do this challenge:
 1. Run the `download_data.py` script to download the CIFAR-10 dataset. This is necessary because the compute nodes won't be able to download it during your batch job when running `cnn.py`. If successful, you'll see a directory named `data` in your current directory.
 
     ```bash
-    python3 download_data.py
+    $ python3 download_data.py
     ```
     > Note: You only need to run this script once.
     > Warning: This script MUST be run in the same directory you plan to run `cnn.py` (in your `/lustre/orion/[projid]/scratch/[userid]/pytorch_test` directory)
@@ -728,7 +767,7 @@ To do this challenge:
 2. Use your favorite editor to change `num_epochs` and `batch_size` to tune your network (lines 119 and 120, marked by "CHANGE-ME"). For example:
 
     ```bash
-    vi cnn.py
+    $ vi cnn.py
     ```
 
     ```python
@@ -742,7 +781,7 @@ To do this challenge:
 3. Submit a job:
 
     ```bash
-    sbatch --export=NONE submit_cnn.sbatch
+    $ sbatch --export=NONE submit_cnn.sbatch
     ```
 
 4. Look at the statistics printed in your `pytorch_cnn-<JOB_ID>.out` file after the job completes to see if you were successful or not (i.e., see "Success!" or "Try again!").
