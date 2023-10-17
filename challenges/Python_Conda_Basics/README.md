@@ -18,7 +18,7 @@ Luckily, a script was created ahead of time to do this for you!
 All you need to do is run the `install_conda_frontier.sh` script like so:
 
 ```bash
-~/hands-on-with-Frontier-/misc_scripts/install_conda_frontier.sh
+$ ~/hands-on-with-Frontier-/misc_scripts/install_conda_frontier.sh
 ```
 
 >>  ---
@@ -34,19 +34,19 @@ Provided there are no errors (there shouldn't be), you will now have access to y
 First, we will unload all the current modules that you may have previously loaded on Frontier:
 
 ```bash
-module reset
+$ module reset
 ```
 
 Next, we need to load the gnu compiler module (most Python packages assume use of GCC):
 
 ```bash
-module load PrgEnv-gnu
+$ module load PrgEnv-gnu
 ```
 
 Next, let's activate your Frontier Miniconda installation:
 
 ```bash
-~/miniconda-frontier-handson/bin/activate base
+$ source ~/miniconda-frontier-handson/bin/activate base
 ```
 
 This puts you in the "`base`" conda environment (your base-level install that came with a few packages).
@@ -54,7 +54,7 @@ Typical best practice is to not install new things into the `base` environment, 
 So, next, we will create a new environment using the `conda create` command:
 
 ```bash
-conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier python=3.9
+$ conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier python=3.9
 ```
 
 The "`-p`" flag specifies the desired path and name of your new virtual environment.
@@ -89,14 +89,14 @@ Due to the specific nature of conda on Frontier, we will be using `source activa
 Let's activate our new environment:
 
 ```bash
-source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
+$ source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/py39-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment.
 And if you check with `conda env list` again, you should see that the `*` marker has moved to your newly activated environment:
 
 ```
-conda env list
+$ conda env list
 
 # conda environments:
 #
@@ -114,6 +114,7 @@ There are a few different approaches.
 One way to install packages into your conda environment is to build packages from source using [pip](https://pip.pypa.io/en/stable/).
 This approach is useful if a specific package or package version is not available in the conda repository, or if the pre-compiled binaries don't work on the HPC resources (which is common).
 However, building from source means you need to take care of some of the dependencies yourself, especially for optimization.
+In Frontier's case, this means we need to load the `openblas` module.
 Pip is available to use after installing Python into your conda environment, which we have already done.
 
 >>  ---
@@ -123,7 +124,8 @@ Pip is available to use after installing Python into your conda environment, whi
 To build a package from source, use `pip install --no-binary=<package_name> <package_name>`:
 
 ```bash
-CC=gcc pip install --no-binary=numpy numpy
+$ module load openblas
+$ CC=gcc pip install --no-binary=numpy numpy
 ```
 
 The `CC=gcc` flag will ensure that we are using the proper compiler and wrapper.
@@ -135,7 +137,8 @@ We did not link in any additional linear algebra packages, so this version of Nu
 Let's install a more optimized version using a different method instead, but first we must uninstall the pip-installed NumPy:
 
 ```bash
-pip uninstall numpy
+$ pip uninstall numpy
+$ module unload openblas
 ```
 
 The traditional, and more basic, approach to installing/uninstalling packages into a conda environment is to use the commands `conda install` and `conda remove`.
@@ -143,7 +146,7 @@ Installing packages with this method checks the [Anaconda Distribution Repositor
 Let's do this to install NumPy:
 
 ```bash
-conda install numpy
+$ conda install numpy
 ```
 
 Conda handles dependencies when installing pre-built binaries, so  it will automatically install all of the packages NumPy needs for optimization.   
@@ -166,11 +169,11 @@ It is always highly recommended to run on the compute nodes (through the use of 
 Make sure you're in the correct directory and execute the example Python script:
 
 ```
-cd ~/hands-on-with-Frontier-/challenges/Python_Conda_Basics/
-python3 hello.py
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Conda_Basics/
+$ python3 hello.py
 
-Hello from Python 3.9!
-You are using NumPy 1.20.3
+Hello from Python 3.9.18!
+You are using NumPy 1.26.0
 ```
 
 Congratulations, you have just created your own Python environment and ran on one of the fastest computers in the world!
@@ -191,8 +194,8 @@ Congratulations, you have just created your own Python environment and ran on on
     An example for cloning the base environment into your `$HOME` directory on Frontier is provided below:
 
     ```bash
-    conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier --clone base
-    source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier
+    $ conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier --clone base
+    $ source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/baseclone-frontier
     ```
 
 * Deleting an environment:
@@ -200,7 +203,7 @@ Congratulations, you have just created your own Python environment and ran on on
     If for some reason you need to delete an environment, you can execute the following:
 
     ```bash
-    conda env remove -p /path/to/your/env
+    $ conda env remove -p /path/to/your/env
     ```
 
 * Exporting (sharing) an environment:
@@ -212,15 +215,15 @@ Congratulations, you have just created your own Python environment and ran on on
     To export your environment list:
     
     ```bash
-    source activate my_env
-    conda env export > environment.yml
+    $ source activate my_env
+    $ conda env export > environment.yml
     ```
     
     You can then email or otherwise provide the `environment.yml` file to the desired person.
     The person would then be able to create the environment like so:
     
     ```bash
-    conda env create -f environment.yml
+    $ conda env create -f environment.yml
     ```
 
 * Adding known environment locations:
@@ -229,7 +232,7 @@ Congratulations, you have just created your own Python environment and ran on on
     The list of known directories can be seen by executing:
 
     ```bash
-    conda config --show envs_dirs
+    $ conda config --show envs_dirs
     ```
 
     On Frontier, the default location is your `$HOME` directory.
@@ -237,7 +240,7 @@ Congratulations, you have just created your own Python environment and ran on on
     To do so, you must execute:
 
     ```bash
-    conda config --append envs_dirs /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier
+    $ conda config --append envs_dirs /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier
     ```
     
     This will create a `.condarc` file in your `$HOME` directory if you do not have one already, which will now contain this new envs_dirs location.
@@ -251,13 +254,13 @@ Congratulations, you have just created your own Python environment and ran on on
 * List environments:
 
     ```bash
-    conda env list
+    $ conda env list
     ```
 
 * List installed packages in current environment:
 
     ```bash
-    conda list
+    $ conda list
     ```
 
 * Creating an environment with Python version X.Y:
@@ -265,13 +268,13 @@ Congratulations, you have just created your own Python environment and ran on on
     For a **specific path**:
 
     ```bash
-    conda create -p /path/to/your/my_env python=X.Y
+    $ conda create -p /path/to/your/my_env python=X.Y
     ```
 
     For a **specific name**:
 
     ```bash
-    conda create -n my_env python=X.Y
+    $ conda create -n my_env python=X.Y
     ```
        
 * Deleting an environment:
@@ -279,13 +282,13 @@ Congratulations, you have just created your own Python environment and ran on on
     For a **specific path**:
 
     ```bash
-    conda env remove -p /path/to/your/my_env
+    $ conda env remove -p /path/to/your/my_env
     ```
 
     For a **specific name**:
 
     ```bash
-    conda env remove -n my_env
+    $ conda env remove -n my_env
     ```
 
 * Copying an environment:
@@ -293,20 +296,20 @@ Congratulations, you have just created your own Python environment and ran on on
     For a **specific path**:
 
     ```bash
-    conda create -p /path/to/new_env --clone old_env
+    $ conda create -p /path/to/new_env --clone old_env
     ```
 
     For a **specific name**:
 
     ```bash
-    conda create -n new_env --clone old_env
+    $ conda create -n new_env --clone old_env
     ```
        
 * Activating/Deactivating an environment:
 
     ```bash
-    source activate my_env
-    source deactivate # deactivates the current environment
+    $ source activate my_env
+    $ source deactivate # deactivates the current environment
     ```
 
 * Installing/Uninstalling packages:
@@ -314,16 +317,16 @@ Congratulations, you have just created your own Python environment and ran on on
     Using **conda**:
 
     ```bash
-    conda install package_name
-    conda remove package_name
+    $ conda install package_name
+    $ conda remove package_name
     ```
 
     Using **pip**:
 
     ```bash
-    pip install package_name
-    pip uninstall package_name
-    pip install --no-binary=package_name package_name # builds from source
+    $ pip install package_name
+    $ pip uninstall package_name
+    $ pip install --no-binary=package_name package_name # builds from source
     ```
 
 &nbsp;
