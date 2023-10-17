@@ -11,9 +11,15 @@ unset SLURM_EXPORT_ENV
 date
 
 module load PrgEnv-gnu
+module load amd-mixed/5.6.0
 module load craype-accel-amd-gfx90a
 
-source ~/miniconda-frontier-handson/bin/activate base
-source activate /ccs/home/${USER}/conda_envs/frontier/py39-frontier
+export MIOPEN_USER_DB_PATH="/tmp/my-miopen-cache"
+export MIOPEN_CUSTOM_CACHE_DIR=${MIOPEN_USER_DB_PATH}
+rm -rf ${MIOPEN_USER_DB_PATH}
+mkdir -p ${MIOPEN_USER_DB_PATH}
 
-srun -n1 -c21 --gpus=1 --gpu-bind=closest --threads-per-core=1 -m block:block  python3 -u cnn.py
+source ~/miniconda-frontier-handson/bin/activate base
+source activate ~/.conda/envs/torch-frontier
+
+python3 -u cnn.py
