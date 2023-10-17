@@ -35,11 +35,10 @@ Because of this, it is extremely important that all the modules and conda enviro
 First, we will unload all the current modules that you may have previously loaded on Frontier and then immediately load the default modules.
 Assuming you cloned the repository in your home directory:
 
-```
-$ cd ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5
-$ source deactivate_envs.sh
-$ module purge
-$ module load DefApps
+```bash
+cd ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5
+source ~/hands-on-with-Frontier-/misc_scripts/deactivate_envs.sh
+module reset
 ```
 
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
@@ -47,15 +46,15 @@ The script unloads all of your previously activated conda environments, and no h
 
 Next, we will load the gnu compiler module (most Python packages assume GCC), hdf5 module (necessary for h5py):
 
-```
-$ module load PrgEnv-gnu
-$ module load hdf5
+```bash
+module load PrgEnv-gnu
+module load hdf5
 ```
 
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-$ conda create -p /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier python=3.9
+conda create -p ~/.conda/envs/h5pympi-frontier python=3.9
 ```
 
 >> ---
@@ -72,7 +71,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier
+#     $ conda activate ~/.conda/envs/h5pympi-frontier
 #
 # To deactivate an active environment, use
 #
@@ -81,15 +80,15 @@ Executing transaction: done
 
 Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
-```
-$ source activate /ccs/home/<YOUR_USER_ID>/.conda/envs/h5pympi-frontier
+```bash
+source activate ~/.conda/envs/h5pympi-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicate that you are currently using that specific conda environment. 
 If you check with `conda env list`, you should see that the `*` marker is next to your new environment, which means that it is currently active:
 
-```
-$ conda env list
+```bash
+conda env list
 
 # conda environments:
 #
@@ -102,8 +101,8 @@ base                     /sw/frontier/python/3.9/anaconda-base
 Now that we have a fresh conda environment, we will next install mpi4py from source into our new environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:
 
-```
-$ MPICC="mpicc -shared" pip install --no-binary=mpi4py mpi4py
+```bash
+MPICC="mpicc -shared" pip install --no-binary=mpi4py mpi4py
 ```
 
 The `MPICC` flag ensures that you are using the correct C wrapper for MPI on the system.
@@ -115,8 +114,8 @@ If everything goes well, you should see a "Successfully installed mpi4py" messag
 Next, we will install h5py from source.
 Because h5py depends on NumPy, we will install an optimized version of the NumPy package first using `conda install`:
 
-```
-$ conda install -c defaults --override-channels numpy scipy matplotlib
+```bash
+conda install -c defaults --override-channels numpy scipy matplotlib
 ```
 
 The `-c defaults --override-channels` flags ensure that conda will search for NumPy only on the "defaults" channel.
@@ -125,8 +124,8 @@ The SciPy and Matplotlib packages aren't required for installing h5py, but we wi
 
 Next, we are finally ready to install h5py from source:
 
-```
-$ HDF5_MPI="ON" CC=mpicc pip install --no-binary=h5py h5py
+```bash
+HDF5_MPI="ON" CC=mpicc pip install --no-binary=h5py h5py
 ```
 
 The `HDF5_MPI` flag is the key to telling pip to build h5py with parallel support, while the `CC` flag makes sure that we are using the correct C wrapper for MPI.
@@ -140,21 +139,21 @@ We will test our build by trying to write an HDF5 file in parallel using 42 MPI 
 
 First, change directories to your Orion scratch area and copy over the python and batch scripts:
 
-```
-$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
-$ mkdir h5py_test
-$ cd h5py_test
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hello_mpi.py .
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_hello.sbatch .
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_h5py.sbatch .
+```bash
+cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
+mkdir h5py_test
+cd h5py_test
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hello_mpi.py .
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/hdf5_parallel.py .
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_hello.sbatch .
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_h5py.sbatch .
 ```
 
 Let's test that mpi4py is working properly first by executing the example Python script "hello_mpi.py".
 To do so, we will be submitting a job to the batch queue with "submit_hello.sbatch":
 
-```
-$ sbatch submit_hello.sbatch
+```bash
+sbatch --export=NONE submit_hello.sbatch
 ```
 
 Once the batch job makes its way through the queue, it will run the "hello_mpi.py" script with 42 MPI tasks.
@@ -201,15 +200,15 @@ Each MPI task is going to assign their rank value to the "dset" array in Python,
 
 Time to execute "hdf5_parallel.py" by submitting "submit_h5py.sbatch" to the batch queue:
 
-```
-$ sbatch submit_h5py.sbatch
+```bash
+sbatch --export=NONE submit_h5py.sbatch
 ```
 
 Provided there are no errors, you should see "42 MPI ranks have finished writing!" in the `h5py.<JOB_ID>.out` output file, and there should be a new file called "output.h5" in your directory.
 To see explicitly that the MPI tasks did their job, you can use the `h5dump` command to view the dataset named "test" in output.h5:
 
 ```
-$ h5dump output.h5
+h5dump output.h5
 
 HDF5 "output.h5" {
 GROUP "/" {
@@ -240,13 +239,13 @@ The results of the simulation will look something like this:
 
 First, similar to before, change directories to your GPFS scratch area and copy over the python and batch scripts:
 
-```
-$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
-$ mkdir galaxy_challenge
-$ cd galaxy_challenge
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/galaxy.py .
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/generate_animation.py .
-$ cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_galaxy.sbatch .
+```bash
+cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
+mkdir galaxy_challenge
+cd galaxy_challenge
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/galaxy.py .
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/generate_animation.py .
+cp ~/hands-on-with-Frontier-/challenges/Python_Parallel_HDF5/submit_galaxy.sbatch .
 ```
 
 The two scripts of interest are called `galaxy.py` and `generate_animation.py`.
@@ -292,14 +291,14 @@ To do this challenge:
 1. Determine the missing pieces of the five "TO-DO" lines.
 2. Use your favorite editor to enter the missing pieces into `galaxy.py`. For example:
 
-    ```
-    $ vi galaxy.py
+    ```bash
+    vi galaxy.py
     ```
 
 3. Submit a job:
 
-    ```
-    $ sbatch submit_galaxy.sbatch
+    ```bash
+    sbatch --export=NONE submit_galaxy.sbatch
     ```
 
 4. If you fixed the script, you should see something similar to the output below in `galaxy-<JOB_ID>.out` after the job completes:
@@ -320,8 +319,8 @@ If you got the script to successfully run, then congratulations!
 
 After you complete the challenge, you can run `generate_anmation.py` (in the same directory you ran your simulation) to generate your personal `galaxy_collision.gif` based on your simulation:
 
-```
-$ python3 generate_animation.py
+```bash
+python3 generate_animation.py
 ```
 
 This will take around a minute to complete, but will result in your own GIF.
