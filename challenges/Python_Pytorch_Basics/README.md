@@ -120,8 +120,10 @@ base                    /ccs/home/<YOUR_USER_ID>/miniconda-frontier-handson
 Finally, we can install PyTorch using `pip` in our new conda environment:
 
 ```bash
-$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6
+$ pip install matplotlib torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6
 ```
+
+Note that we also installed matplotlib as it will be needed for plotting functions in the CNN.
 
 &nbsp;
 
@@ -796,38 +798,20 @@ If you liked PyTorch I also suggest taking a loot at [PyTorch Lightning](https:/
 
 ### 5.1 <a name="leaderboard"></a>Leaderboard
 
-Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy within an hour of walltime on Frontier!
+Below is a top 10 leaderboard of peoples' best CNNs that achieved >60% accuracy within an hour of walltime on Ascent!
 
 Top Accuracy:
 
 | Rank  | Name             | Program                       | Accuracy | Speed   |
 | :---  | :---             | :---------:                   | :------: | :---:   |
-| 1.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
-| 2.    | Ahmedur S.       | SC HPC-CC 2022                | 65.55%   | 1918s   |
-| 3.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
-| 4.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
-| 5.    | Adam S.          | Summer HPC-CC 2022            | 63.87%   | 2642s   |
-| 6.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
-| 7.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
-| 8.    | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
-| 9.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    |
-| 10.   | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
+| 1.    | Michael S.       | OLCF                          | 99.99%   | 9999s   |
+
 
 Top Speed:
 
 | Rank  | Name             | Program                       | Accuracy | Speed   |
 | :---  | :---             | :---------:                   | :------: | :---:   |
-| 1.    | Mercy A.         | SIAM HPC-CC 2022              | 62.21%   | 652s    | 
-| 2.    | Justin B.        | Summer HPC-CC 2022            | 61.94%   | 804s    |
-| 3.    | Ahmedur S.       | SC HPC-CC 2022                | 60.35%   | 953s    |
-| 4.    | Madhu G.         | Summer HPC-CC 2022            | 63.86%   | 1191s   |
-| 5.    | Gavin S.         | Summer HPC-CC 2022            | 65.43%   | 1262s   |
-| 6.    | Johannes K.      | Summer HPC-CC 2022            | 65.71%   | 1389s   |
-| 7.    | Alessandro B.    | Summer HPC-CC 2022            | 62.71%   | 1659s   |
-| 8.    | Sola O.          | Summer HPC-CC 2022            | 64.87%   | 1704s   |
-| 9.    | Abigail W.       | Summer HPC-CC 2022            | 61.04%   | 2161s   |
-| 10.   | Moyi T.          | Summer HPC-CC 2022            | 62.33%   | 2164s   |
-
+| 1.    | Michael S.       | OLCF                          | 99.99%   | 9999s   |
 
 ## 6. <a name="resources"></a>Additional Resources
 
