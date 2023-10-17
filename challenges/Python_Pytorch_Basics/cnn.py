@@ -250,7 +250,7 @@ else:
 
 # Get the last batch of images
 dataiter = iter(test_loader)
-images, labels = dataiter.next()
+images, labels = next(dataiter)
 for images, labels in dataiter:
     pass
 
