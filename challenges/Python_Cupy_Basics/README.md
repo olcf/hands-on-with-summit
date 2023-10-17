@@ -38,9 +38,9 @@ First, we will unload all the current modules that you may have previously loade
 Assuming you cloned the repository in your home directory:
 
 ```bash
-cd ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics
-source ~/hands-on-with-Frontier-/misc_scripts/deactivate_envs.sh
-module reset
+$ cd ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics
+$ source ~/hands-on-with-Frontier-/misc_scripts/deactivate_envs.sh
+$ module reset
 ```
 
 The `source deactivate_envs.sh` command is only necessary if you already have the Python module loaded.
@@ -49,15 +49,16 @@ The script unloads all of your previously activated conda environments, and no h
 Next, we will load the gnu compiler module (most Python packages assume GCC), relevant GPU module (necessary for CuPy):
 
 ```bash
-module load PrgEnv-gnu
-module load rocm/5.3.0
-module load craype-accel-amd-gfx90a
+$ module load PrgEnv-gnu
+$ module load rocm/5.3.0
+$ module load craype-accel-amd-gfx90a
+$ source ~/miniconda-frontier-handson/bin/activate base
 ```
 
-Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
+We loaded the "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-conda create -p ~/.conda/envs/cupy-frontier python=3.9
+$ conda create -p ~/.conda/envs/cupy-frontier python=3.10
 ```
 
 >>  ---
@@ -84,14 +85,14 @@ Executing transaction: done
 Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```bash
-source activate ~/.conda/envs/cupy-frontier
+$ source activate ~/.conda/envs/cupy-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicates that you are currently using that specific conda environment.
 If you check with `conda env list`, you should see that the `*` marker is next to your new environment, which means that it is currently active:
 
 ```bash
-conda env list
+$ conda env list
 
 # conda environments:
 #
@@ -102,7 +103,7 @@ base                    /ccs/home/<YOUR_USER_ID>/miniconda-frontier-handson
 CuPy depends on NumPy, so let's install an optimized version of NumPy into our fresh conda environment:
 
 ```bash
-conda install -c defaults --override-channels numpy scipy
+$ conda install -c defaults --override-channels numpy scipy
 ```
 
 After following the prompts, NumPy and its linear algebra dependencies should successfully install.
@@ -113,10 +114,10 @@ Finally, we will install CuPy from source into our environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:
 
 ```bash
-export CUPY_INSTALL_USE_HIP=1
-export ROCM_HOME=/opt/rocm-5.3.0
-export HCC_AMDGPU_TARGET=gfx90a
-CC=gcc pip install --no-cache-dir --no-binary=cupy cupy
+$ export CUPY_INSTALL_USE_HIP=1
+$ export ROCM_HOME=/opt/rocm-5.3.0
+$ export HCC_AMDGPU_TARGET=gfx90a
+$ CC=gcc pip install --no-cache-dir --no-binary=cupy cupy
 ```
 
 The `CUPY_INSTALL_USE_HIP` flag makes sure that we are using HIP instead of CUDA, and the `CC` flag ensures that we are passing the correct compiler wrapper.  
@@ -272,11 +273,11 @@ Now let's apply what you've learned.
 Before asking for a compute node, let's change into our scratch directory and copy over the relevant files.
 
 ```
-cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
-mkdir cupy_test
-cd cupy_test
-cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/data_transfer.py .
-cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/submit_data.sbatch .
+$ cd /lustre/orion/<PROJECT ID>/scratch/<USER ID>
+$ mkdir cupy_test
+$ cd cupy_test
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/data_transfer.py .
+$ cp ~/hands-on-with-Frontier-/challenges/Python_Cupy_Basics/submit_data.sbatch .
 ```
 
 When a kernel call is required in CuPy, it compiles a kernel code optimized for the shapes and data types of given arguments, sends it to the GPU device, and executes the kernel. 
@@ -338,13 +339,13 @@ To do this challenge:
 2. Use your favorite editor to enter the missing functions into `data_transfer.py`. For example:
 
     ```bash
-    vi data_transfer.py
+    $ vi data_transfer.py
     ```
 
 3. Submit a job:
 
     ```bash
-    sbatch --export=NONE submit_data.sbatch
+    $ sbatch --export=NONE submit_data.sbatch
     ```
 
 4. If you fixed the script, you should see the below output in `cupy_xfer-<JOB_ID>.out` after the job completes:
