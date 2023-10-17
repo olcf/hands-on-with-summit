@@ -6,6 +6,8 @@
 #SBATCH -p batch
 #SBATCH -N 1
 
+unset SLURM_EXPORT_ENV
+
 date
 
 module load PrgEnv-gnu
@@ -16,5 +18,4 @@ source deactivate_envs.sh
 
 source activate /ccs/home/${USER}/conda_envs/frontier/cupy-frontier
 
-srun -n1 --gpus-per-task=1 --gpu-bind=closest python3 data_transfer.py
-w
+srun -n1 --gpus-per-task=3 --gpu-bind=closest python3 data_transfer.py
