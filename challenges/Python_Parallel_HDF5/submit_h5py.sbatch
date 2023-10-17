@@ -6,13 +6,13 @@
 #SBATCH -p batch
 #SBATCH -N 1
 
+unset SLURM_EXPORT_ENV
+
 date
 
 module load PrgEnv-gnu
 module load hdf5
 
-source deactivate_envs.sh
-
-source activate /ccs/home/${USER}/.conda/envs/cupy-frontier
+source activate ~/.conda/envs/h5pympi-frontier
 
 srun -n42 python3 hdf5_parallel.py

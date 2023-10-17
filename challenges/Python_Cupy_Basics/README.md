@@ -57,7 +57,7 @@ module load craype-accel-amd-gfx90a
 Loading the python module puts us in a "base" conda environment, but we need to create a new environment using the `conda create` command:
 
 ```
-conda create -p /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/cupy-frontier python=3.9
+conda create -p ~/.conda/envs/cupy-frontier python=3.9
 ```
 
 >>  ---
@@ -74,7 +74,7 @@ Executing transaction: done
 #
 # To activate this environment, use
 #
-#     $ conda activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/
+#     $ conda activate ~/.conda/envs/cupy-frontier
 #
 # To deactivate an active environment, use
 #
@@ -84,7 +84,7 @@ Executing transaction: done
 Due to the specific nature of conda on Frontier, we will be using `source activate` instead of `conda activate` to activate our new environment:
 
 ```bash
-source activate /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/
+source activate ~/.conda/envs/cupy-frontier
 ```
 
 The path to the environment should now be displayed in "( )" at the beginning of your terminal lines, which indicates that you are currently using that specific conda environment.
@@ -95,7 +95,7 @@ conda env list
 
 # conda environments:
 #
-                      * /ccs/proj/<YOUR_PROJECT_ID>/<YOUR_USER_ID>/conda_envs/frontier/cupy-frontier
+                      * /ccs/home/<YOUR_USER_ID>/.conda/envs/cupy-frontier
 base                    /ccs/home/<YOUR_USER_ID>/miniconda-frontier-handson
 ```
 
