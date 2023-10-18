@@ -11,7 +11,7 @@ Each challenge is a stand-alone, self-guided tutorial that includes a `README.md
 5. [MPI_Basics](MPI_Basics)
 6. [Find_the_Compiler_Flag](Find_the_Compiler_Flag)
 7. [GPU_Data_Transfers](GPU_Data_Transfers)
-8. [Python_Conda_Basics](Python_Conda_Basics)
+8. [Python_Conda_Basics](Python_Conda_Basics) (Required before attemping any of the Python challenges below)
 
 After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
