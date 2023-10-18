@@ -120,7 +120,8 @@ base                    /ccs/home/<YOUR_USER_ID>/miniconda-frontier-handson
 Finally, we can install PyTorch using `pip` in our new conda environment:
 
 ```bash
-$ pip install matplotlib torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6
+$ pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6
+$ pip install matplotlib
 ```
 
 Note that we also installed matplotlib as it will be needed for plotting functions in the CNN.
