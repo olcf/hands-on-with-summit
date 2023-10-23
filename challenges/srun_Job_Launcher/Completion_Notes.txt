@@ -1,3 +1,0 @@
-Module relies on Job Step Viewer, which does not exist for Frontier currently.
-
-Pausing on module to await Job Step Viewer on Frontier, or to discuss plan for restructuring. 
