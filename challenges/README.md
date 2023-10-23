@@ -20,9 +20,9 @@ pick any 7 of the challenges below. For all challenges other than the first one,
 After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
 - [Python_Parallel_HDF5](Python_Parallel_HDF5)
-- [GPU_Matrix_Multiply](GPU_Matrix_Multiply)
+- [GPU_Matrix_Multiply](GPU_Matrix_Multiply) (Frontier only) 
 - [srun_Job_Launcher](srun_Job_Launcher)
-- [Python_Cupy_Basics](Python_Cupy_Basics)
-- [GPU_Profiling](GPU_Profiling)
+- [Python_Cupy_Basics](Python_Cupy_Basics) (Frontier only) 
+- [GPU_Profiling](GPU_Profiling) (Frontier only) 
 - [Jobs_in_Time_Window](Jobs_in_Time_Window)
 - [Password_in_a_Haystack](Password_in_a_Haystack)
