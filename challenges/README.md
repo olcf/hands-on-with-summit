@@ -11,11 +11,11 @@ pick any 7 of the challenges below. For all challenges other than the first one,
 4. [srun_Job_Launcher](srun_Job_Launcher)
 5. [OpenMP_Basics](OpenMP_Basics)
 6. [MPI_Basics](MPI_Basics)
-7. [Find_the_Compiler_Flag](Find_the_Compiler_Flag)
-8. [GPU_Data_Transfers](GPU_Data_Transfers) (Frontier only)
-9. [OpenMP_Offload](OpenMP_Offload) (Frontier only) 
-10. [Python_Conda_Basics](Python_Conda_Basics) (Required before attemping any of the Python challenges below)
-11. [Python_Pytorch_Basics](Python_Pytorch_Basics)
+7. [GPU_Data_Transfers](GPU_Data_Transfers) (Frontier only)
+8. [OpenMP_Offload](OpenMP_Offload) (Frontier only) 
+9. [Python_Conda_Basics](Python_Conda_Basics) (Required before attemping any of the Python challenges below)
+10. [Python_Pytorch_Basics](Python_Pytorch_Basics)
+11. [Python_Parallel_HDF5](Python_Parallel_HDF5)
 
 After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
