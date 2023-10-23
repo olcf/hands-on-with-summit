@@ -193,6 +193,7 @@ MPI 000 - OMP 000 - HWT 001 - Node frontier035
 ```
 
 | MPI TaskID   | OpenMP process ID  | Hardware Thread ID | Node ID          |
+| :--------    |:-----------------  | :----------------- | :--------------  |
 | MPI 000      | OMP 000            | HWT 001            | Node frontier035 |
 
 This means that MPI task 000 and OpenMP process 000 ran on hardware thread 001 on node 35. 
