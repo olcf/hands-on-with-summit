@@ -23,7 +23,6 @@ After completing these challenges, feel free to "choose your own adventure" by c
 - [GPU_Matrix_Multiply](GPU_Matrix_Multiply)
 - [srun_Job_Launcher](srun_Job_Launcher)
 - [Python_Cupy_Basics](Python_Cupy_Basics)
-- [Parallel_Scaling_Performance](Parallel_Scaling_Performance)
 - [GPU_Profiling](GPU_Profiling)
 - [Jobs_in_Time_Window](Jobs_in_Time_Window)
 - [Password_in_a_Haystack](Password_in_a_Haystack)
