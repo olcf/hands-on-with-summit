@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#BSUB -P TRN016
+#BSUB -W 5
+#BSUB -nnodes 1
+#BSUB -J monte_carlo
+#BSUB -o monte_carlo.%J
+#BSUB -e monte_carlo.%J
+
+date
+
+
+jsrun -n 6 -c 6 -a 2 ./run 50

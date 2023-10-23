@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+#BSUB -nnodes 1
+#BSUB -P TRN016
+#BSUB -W 10
+#BSUB -J jacobi
+#BSUB -e jacobi.%J
+#BSUB -o jacobi.%J
+
+
+jsrun -n2 -c4 -a4 ./run

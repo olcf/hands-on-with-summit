@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#BSUB -P TRN016
+#BSUB -W 5
+#BSUB -nnodes 1
+#BSUB -J minisweep
+#BSUB -e minisweep.%J
+#BSUB -o minisweep.%J
+
+date
+
+export OMP_NUM_THREADS=4
+jsrun -n 4 -c 4 -a 1 -bpacked:4 ./sweep --ncell_x  8 --ncell_y 16 --ncell_z 32 --nproc_x 2 --nproc_y 2 --nblock_z 32  --ne 1 --nthread_e 4

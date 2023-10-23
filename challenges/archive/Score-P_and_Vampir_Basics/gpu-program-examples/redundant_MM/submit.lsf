@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#BSUB -P TRN016
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J mat_mul
+#BSUB -o mat_mul.%J
+#BSUB -e mat_mul.%J
+
+jsrun -n1 -c42 -g6 -a6 -bpacked:7 ./redundant_mm 2048 100 | sort

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#BSUB -P TRN016
+#BSUB -W 10
+#BSUB -nnodes 1
+#BSUB -J miniWeather_openacc
+#BSUB -o miniWeather_openacc.%J
+#BSUB -e miniWeather_openacc.%J
+
+date
+
+jsrun -n 6 -c 7 -a 1 -g 1 ./openacc

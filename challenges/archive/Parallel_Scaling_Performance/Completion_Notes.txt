@@ -1,0 +1,5 @@
+Module is based around OpenACC directives. 
+
+Pausing on module to determine what to do about OpenACC on Frontier, or to discuss plan for restructuring. 
+
+https://support.hpe.com/hpesc/public/docDisplay?docId=a00115296en_us&page=OpenACC_Use.html
