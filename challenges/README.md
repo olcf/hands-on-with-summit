@@ -3,7 +3,7 @@
 # Challenges
 
 Each challenge is a stand-alone, self-guided tutorial that includes a `README.md` file to walk you through the content. The first challenge is to complete [Access_Frontier_and_Clone_Repo](Access_Frontier_and_Clone_Repo), which will show you how to clone this repository. To complete the requirements for your certificate,
-Pick any 7 of the challenges below. For all challenges other than the first one, which we will do together, you will turn in your work by entering the path to one of the challenge's output file in a google sheet as directed by your instuctor.  
+pick any 7 of the challenges below. For all challenges other than the first one, which we will do together, you will turn in your work by entering the path to one of the challenge's output file in a google sheet as directed by your instuctor.  
 
 1. [Access_Frontier_and_Clone_Repo](Access_Frontier_and_Clone_Repo) 
 2. [Basic_Unix_Vim](Basic_Unix_Vim) (Only do this one if you have no experience with Unix or a text editor) 
