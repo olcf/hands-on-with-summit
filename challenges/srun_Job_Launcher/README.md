@@ -165,7 +165,7 @@ Below is a picture of the Frontier compute node.
 
 <br>
 <center>
-<img src="images/Frontier_node.jpg" style="width:80%">
+<img src="images/Frontier-Visualizer-NodeLegend.png" style="width:80%">
 </center>
 <br>
 
@@ -192,8 +192,8 @@ The output of hello_mpi_omp should look like this:
 MPI 000 - OMP 000 - HWT 001 - Node frontier035
 ```
 
-| MPI TaskID| OpenMP process ID| Hardware Thread ID | Node ID                  |
-| MPI 000      | OMP 000                  | HWT 001                     | Node frontier035 |
+| MPI TaskID   | OpenMP process ID  | Hardware Thread ID | Node ID          |
+| MPI 000      | OMP 000            | HWT 001            | Node frontier035 |
 
 This means that MPI task 000 and OpenMP process 000 ran on hardware thread 001 on node 35. 
 
