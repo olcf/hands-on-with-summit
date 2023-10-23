@@ -19,7 +19,7 @@ pick any 7 of the challenges below. For all challenges other than the first one,
 10. [Python_Pytorch_Basics](Python_Pytorch_Basics)
 11. [Python_Parallel_HDF5](Python_Parallel_HDF5)
 
-After completing these challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
+After completing 7 of the above challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
 - [Python_Parallel_HDF5](Python_Parallel_HDF5)
 - [Python_Cupy_Basics](Python_Cupy_Basics) (Frontier only) 
