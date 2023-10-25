@@ -84,7 +84,7 @@ hands-on-with-Frontier-
 
 From here, lets try using `cd` to get to the `Basic_Unix_Vim` challenge directory in the `hands-on-with-Frontier-` repository.
 ```bash
-[userid@login1.frontier ~]$ cd hands-on-with-Frontier-/challenges/Basic_Unix_Vim
+[userid@login1.frontier ~]$ cd ~/hands-on-with-Frontier-/challenges/Basic_Unix_Vim
 ```
 
 This is the path _relative to your current directory_ (which would be `/ccs/home/<userid>`). You can also use the _absolute path_ with `cd` i.e. the path string starting with `/` is called a absolute path. This will take you to the same directory.
