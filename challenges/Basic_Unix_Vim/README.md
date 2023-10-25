@@ -30,6 +30,14 @@ userid
 
 You will need to learn to navigate the filesystem in order to find and access your files. The filesystem is a collection of files and directories. 'Directory' is just the UNIX term for 'folders' on Windows.
 
+To put us all in the same starting place, we will issue the `cd` command. This will take us to our home directory. 
+
+Type
+```
+cd
+```
+Then hit `return`.
+
 The commands in a command line are always executed from the directory you are currently in. You can find out what directory you are currently in with the 'present working directory' command, `pwd`.
 ```bash
 [userid@login1.frontier ~]$ pwd
