@@ -3,11 +3,6 @@
 In order to accomplish tasks in any high-performance computing system, you need to know
 how to navigate through and issue commands in a UNIX or Linux operating system. Unix-based systems operate through the command-line rather than a graphical user interface (GUI).  In this challenge, you will learn how to see files, make directories, navigate directories, and manipulate files all without a GUI. 
 
-To begin, change to the challenge directory: 
-
-```
- cd ~/hands-on-with-Frontier-/challenges/Basic_Unix_Vim
-```
 
 &nbsp;
 
