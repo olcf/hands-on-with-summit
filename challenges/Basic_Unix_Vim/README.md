@@ -169,13 +169,13 @@ INSERT MODE --` indicator disappear as you can see in the image below.
 
 ![screenshot showing normal mode](images/screenshot_showing_normal_mode.png)
 
-Once in Normal Mode, you can save by typing on your keyboard `:w`. These characters won't
+Once in Normal Mode, you can save by typing on your keyboard `:w` followed by `return`. These characters won't
 appear in the main text but will appear in the bottom left. `:w` is the command for Vim to
 'write' the file to disk, thus saving the file. 
 
 ![screenshot showing :w](images/screenshot_showing_w.png)
 
-You can exit out of Vim and go back to the command line by typing in `:q`. If you haven't
+You can exit out of Vim and go back to the command line by typing in `:q` followed by `return`. If you haven't
 saved, you will get a warning and Vim won't exit, so make sure you save the file with `:w`
 first. 
 
