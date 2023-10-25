@@ -34,7 +34,7 @@ To put us all in the same starting place, we will issue the `cd` command. This w
 
 Type
 ```
-cd
+[userid@login1.frontier ~]$ cd
 ```
 Then hit `return`.
 
