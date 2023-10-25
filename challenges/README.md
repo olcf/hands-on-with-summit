@@ -10,7 +10,7 @@ pick any 7 of the challenges below. For all challenges other than the first one,
 1. [Access_Frontier_and_Clone_Repo](Access_Frontier_and_Clone_Repo) 
 2. [Basic_Unix_Vim](Basic_Unix_Vim) (Only do this one if you have no experience with Unix or a text editor) 
 3. [Basic_Workflow](Basic_Workflow)
-4. [srun_Job_Launcher](srun_Job_Launcher)
+4. [Srun_Job_Launcher](Srun_Job_Launcher)
 5. [OpenMP_Basics](OpenMP_Basics)
 6. [MPI_Basics](MPI_Basics)
 7. [OpenMP_Offload](OpenMP_Offload) (Frontier only)
@@ -21,7 +21,6 @@ pick any 7 of the challenges below. For all challenges other than the first one,
 
 After completing 7 of the above challenges, feel free to "choose your own adventure" by completing the rest of the challenges in any order you prefer.
 
-- [Python_Parallel_HDF5](Python_Parallel_HDF5)
 - [Python_Cupy_Basics](Python_Cupy_Basics) (Frontier only) 
 - [GPU_Profiling](GPU_Profiling) (Frontier only) 
 - [Jobs_in_Time_Window](Jobs_in_Time_Window)
