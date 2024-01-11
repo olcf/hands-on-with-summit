@@ -159,7 +159,7 @@ file needs to be copied to. Let us try to copy the file `text_file.txt` to the n
 created `mydirectory` directory. To do that, we can do the following on the command line
 
 ```
-[subil@login1.ascent Basic_Unix_Vim]$ cp test_file.txt mydirectory
+[subil@login1.ascent Basic_Unix_Vim]$ cp text_file.txt mydirectory
 ```
 
 Remember that specifying the full path for the file or directory will also work. In this
