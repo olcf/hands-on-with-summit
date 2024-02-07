@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN019
+#BSUB -P trn019
 #BSUB -J add_vec_cpu
 #BSUB -o add_vec_cpu.%J
 #BSUB -nnodes 1
@@ -8,4 +8,8 @@
 
 date
 
-jsrun -n1 -c1 -g1 -a1 ./run
+export programdir=$PWD
+
+cd /gpfs/wolf/trn019/scratch/$USER 
+
+jsrun -n1 -c1 -g1 -a1 $programdir/run

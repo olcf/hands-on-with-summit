@@ -57,6 +57,10 @@ To submit and run the job, issue the following command:
 $ bsub submit.lsf
 ```
 
+### Writing data to the filesystem
+
+Your program might also need to generate data as part of its function. Your `/ccsopen/home/username` directory is not an appropriate location to store this data, as the filesystem is not designed for the kinds of workloads an HPC program usually need to perform when reading and writing data. A more appropriate location is in `/gpfs/wolf` which is a parallel filesystem designed for heavy HPC workloads. Specifically you should be using either your scratch directory `/gpfs/wolf/trn019/<username>` (where `<username>` should be replaced by your actual username) or if you're working in a team you should create a unique directory in the project shared directory `/gpfs/wolf/trn019/proj-shared/`. In the vector addition code, you will see that it is opening a file named `output.txt` which will be created in the current directory. The program will be writing a lot of data in this file, so we need to make sure that we switch to a location in `/gpfs/wolf`. We do this by using the `cd` command in the `submit.lsf` script to make sure that the program starts running from a location in `/gpfs/wolf`. The `programdir` variable is used to store the current directory path before switching to the `/gpfs/wolf` location, so that it can find the `run` executable.
+
 ## Monitoring Your Job
 
 Now that the job has been submitted, you can monitor its progress. Is it running yet? Has it finished? To find out, you can issue the command 
