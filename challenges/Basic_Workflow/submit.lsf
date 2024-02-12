@@ -10,6 +10,7 @@ date
 
 export programdir=$PWD
 
-cd /gpfs/wolf/trn019/scratch/$USER 
+# TODO: cd to a location in /gpfs/wolf
+
 
 jsrun -n1 -c1 -g1 -a1 $programdir/run
