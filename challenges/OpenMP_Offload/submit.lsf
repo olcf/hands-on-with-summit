@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#BSUB -P TRN019
+#BSUB -P TRN022
 #BSUB -J mat_mul
 #BSUB -o matmul.%J
 #BSUB -nnodes 1
