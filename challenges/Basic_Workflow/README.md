@@ -82,5 +82,53 @@ You can confirm that it gave the correct results by looking for `__SUCCESS__` in
 
 ```
 cat add_vec_cpu.JOBID
+
+```
+Remember that your data was written to output.txt which hopefully you were able to send to /gpfs/wolf/trn022/scratch/<username> with the cd /gpfs/wolf/trn022/scratch/<username> in the batch script. 
+
+To verify that it worked lets list the file:
+
+```
+$ ls /gpfs/wolf/trn022/scratch/<username>
+
+```
+For example, my <username> is `nk8` so my command looks like:
+
+```
+[nk8@login1.ascent Basic_Workflow]$ ls /gpfs/wolf/trn022/scratch/nk8/
+output.txt
+```
+
+To see your data use the `less` command with the file path and name. 
+
+```
+$less gpfs/wolf/trn022/scratch/<username>/output.txt
+
+```
+You can hit `q` to stop `less`. 
+
+Example:
+
+```
+less /gpfs/wolf/trn022/scratch/nk8/output.txt 
+0]: 3.000000
+[1]: 3.000000
+[2]: 3.000000
+[3]: 3.000000
+[4]: 3.000000
+[5]: 3.000000
+[6]: 3.000000
+[7]: 3.000000
+[8]: 3.000000
+[9]: 3.000000
+[10]: 3.000000
+[11]: 3.000000
+[12]: 3.000000
+[13]: 3.000000
+[14]: 3.000000
+[15]: 3.000000
+[16]: 3.000000
+[17]: 3.000000
+q
 ```
 
