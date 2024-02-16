@@ -14,6 +14,7 @@ int main()
 	double *A = (double*)malloc(bytes);
 	double *B = (double*)malloc(bytes);
 	double *C = (double*)malloc(bytes);
+	FILE *fp = fopen("output.txt", "w");
 
 	// Fill arrays A and B
 	for(int i=0; i<N; i++)
@@ -36,12 +37,15 @@ int main()
 			printf("\nError: value of C[%d] = %d instead of 3.0\n\n", i, C[i]);
 			exit(-1);
 		}
+		fprintf(fp, "[%d]: %f\n", i, C[i]);
+
 	}	
 
 	// Free memory
 	free(A);
 	free(B);
 	free(C);
+	fclose(fp);
 
 	printf("\n---------------------------\n");
 	printf("__SUCCESS__\n");

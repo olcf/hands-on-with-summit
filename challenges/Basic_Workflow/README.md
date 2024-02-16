@@ -45,17 +45,25 @@ $ make
 
 Based on the commands contained in the `Makefile`, an executable named `run` will be created.
 
-## Steps 3-4: Request Access to Compute Nodes and Run the Program
+## Step 3: Set the location to write output in your submit script
+
+
+## Step 4: Specify Location to Write Data, Request Access to Compute Nodes and Run the Program
 
 In order to run the executable on Ascent's compute nodes, you need to request access to a compute node and then launch the job on the node. The request and launch can be performed using the single batch script, `submit.lsf`. If you open this script, you will see several lines starting with `#BSUB`, which are the commands that request a compute node and define your job (i.e., give me 1 compute node for 10 minutes, charge project `PROJID` for the time, and name the job and output file `add_vec_cpu`). You will also see a `jsrun` command within the script, which launches the executable (`run`) on the compute node you were given. 
 
 The flags given to `jsrun` define the resources (i.e., cpu cores, gpus) available to your program and the processes/threads you want to run on those resources (for more information on using the `jsrun` job launcher, please see challenge [jsrun\_Job\_Launcher](../jsrun_Job_Launcher)).
 
-To submit and run the job, issue the following command:
+Your program might also need to generate data as part of its function. Your `/ccsopen/home/username` directory (where you currently are) is not an appropriate location to store this data, as the filesystem is not designed for the kinds of workloads an HPC program usually need to perform when reading and writing data. A more appropriate location is in `/gpfs/wolf` which is a parallel filesystem designed for heavy HPC workloads. Specifically you should be using either your scratch directory `/gpfs/wolf/trn019/scratch/<username>` (where `<username>` should be replaced by your actual username) or if you're working in a team you should create a unique directory in the project shared directory `/gpfs/wolf/trn019/proj-shared/`. In the vector addition code, you will see that it is opening a file named `output.txt` which will be created in the current directory. The program will be writing a lot of data in this file, so we need to make sure that we switch to a location in `/gpfs/wolf`. We do this by using the `cd` command in the `submit.lsf` script to make sure that the program starts running from a location in `/gpfs/wolf`. The `programdir` variable is used to store the current directory path before switching to the `/gpfs/wolf` location, so that it can find the `run` executable which has already been created.
+
+Open up the `submit.lsf` file and fill in the `cd` command you need to switch locations to the `/gpfs/wolf` scratch directory (put this command under where it says `TODO`).
+
+Once you're back from editing the file, you can submit and run the job by issuing the following command:
 
 ```
 $ bsub submit.lsf
 ```
+
 
 ## Monitoring Your Job
 

@@ -8,4 +8,9 @@
 
 date
 
-jsrun -n1 -c1 -g1 -a1 ./run
+export programdir=$PWD
+
+# TODO: cd to a location in /gpfs/wolf
+
+
+jsrun -n1 -c1 -g1 -a1 $programdir/run
