@@ -90,9 +90,8 @@ To verify that it worked lets list the file:
 
 ```
 $ ls /gpfs/wolf/trn022/scratch/<username>
-
 ```
-For example, my <username> is `nk8` so my command looks like:
+For example, my `<username>` is `nk8` so my command looks like:
 
 ```
 [nk8@login1.ascent Basic_Workflow]$ ls /gpfs/wolf/trn022/scratch/nk8/
@@ -103,7 +102,6 @@ To see your data use the `less` command with the file path and name.
 
 ```
 $less gpfs/wolf/trn022/scratch/<username>/output.txt
-
 ```
 You can hit `q` to stop `less`. 
 
