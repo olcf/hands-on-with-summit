@@ -101,7 +101,7 @@ output.txt
 To see your data use the `less` command with the file path and name. 
 
 ```
-$less gpfs/wolf/trn022/scratch/<username>/output.txt
+$less /gpfs/wolf/trn022/scratch/<username>/output.txt
 ```
 You can hit `q` to stop `less`. 
 
