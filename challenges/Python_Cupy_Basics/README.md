@@ -103,7 +103,7 @@ Finally, we will install CuPy from source into our environment.
 To make sure that we are building from source, and not a pre-compiled binary, we will be using pip:
 
 ```
-$ CUDA_PATH="${CUDAPATH}" CC=gcc NVCC=nvcc pip install --no-binary=cupy cupy
+$ CUDA_PATH="${CUDAPATH}" CC=gcc NVCC=nvcc pip install --no-binary=cupy cupy==12.3.0
 ```
 
 The `CUDA_PATH` flag makes sure that we are using the correct path set by the `cuda/11.0.2` module, while the `CC` and `NVCC` flags ensure that we are passing the correct wrappers.
@@ -111,7 +111,7 @@ This installation takes, on average, 20 minutes to complete (due to building eve
 Eventually you should see output similar to:
 
 ```
-Successfully installed cupy-9.5.0 fastrlock-0.6
+Successfully installed cupy-12.3.0 fastrlock-0.8.2
 ```
 
 Congratulations, you just installed CuPy on Ascent!
