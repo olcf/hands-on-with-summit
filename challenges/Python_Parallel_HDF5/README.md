@@ -1,4 +1,4 @@
-# Python: Parallel HDF5
+# Python: Parallel HDF5 (Galaxy Simulation)
 
 Scientific simulations generate large amounts of data on Summit (about 100 Terabytes per day for some applications).
 Because of how large some datafiles may be, it is important that writing and reading these files is done as fast as possible.
